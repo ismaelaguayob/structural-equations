@@ -1,0 +1,22 @@
+TITLE: Tarea 2 - Matriz Policorica
+DATA:
+  FILE = "pisadse.dat";
+VARIABLE:
+    NAMES = CNT sex programming logical_solution identify_error search_info
+            evaluate_info share_content pair_collab explain_content write_text; 
+            ! Da WARNING por la longitud de los nombres, se dejan los nombres descriptivos igualmente en el archivo input.
+
+    USEVARIABLES = programming logical_solution identify_error
+                   search_info evaluate_info share_content
+                   pair_collab explain_content write_text;
+
+    CATEGORICAL ARE programming logical_solution identify_error
+                    search_info evaluate_info share_content
+                    pair_collab explain_content write_text;
+    MISSING=.;
+
+ANALYSIS:
+  TYPE = BASIC;
+
+OUTPUT:
+  SAMPSTAT;

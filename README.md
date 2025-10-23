@@ -1,0 +1,1 @@
+Este repositorio incluye todos los procedimientos realizados para el ramo Estadística Avanzada: Fundamentos y Aplicaciones de Modelos de Ecuaciones Estructurales a cargo de la profesora Karina Navarro. Se utiliza mplus (séptima versión para linux) a través del paquete de R mplus automation. 

@@ -1,0 +1,184 @@
+# Preparación del entorno de trabajo
+```{r}
+pacman::p_load(dplyr, tidyverse, haven, MplusAutomation, flextable, officer, ggplot2, purrr, table1, officer)
+
+options(scipen = 999)
+rm(list = ls()) 
+```
+
+# Carga de los datos brutos
+
+```{r}
+data <- readRDS("./pisa22_proc.rds")
+
+```
+
+# Filtrado y procesamiento de variables para el análisis
+
+```{r}
+proc_data <- data |> 
+  select(
+    CNT, 
+    -CNTRYID, 
+    -CNTSCHID, 
+    sex, 
+    -identify_app, 
+    programming, 
+    logical_solution, 
+    -develop_webpage, 
+    identify_error, 
+    search_info, 
+    evaluate_info, 
+    share_content, 
+    pair_collab, 
+    explain_content, 
+    write_text, 
+    -collect_data, 
+    -create_media, 
+    -change_settings)
+
+items_dse <- c(
+  "programming", "logical_solution", "identify_error",
+  "search_info", "evaluate_info", "share_content",
+  "pair_collab", "explain_content", "write_text"
+)
+
+proc_data <- proc_data |>
+  filter(if_any(all_of(items_dse), ~ !is.na(.)))
+
+```
+
+# Preparación de data para Mplus
+
+```{r}
+prepareMplusData(proc_data, filename="mplus_files/pisadse.dat", inpfile = FALSE)
+```
+
+# Correr los modelos con runModels
+
+```{r}
+runModels("./mplus_files/")
+```
+
+# Leer los modelos con readModels
+
+```{r}
+resultados <- readModels("./mplus_files/")
+# Matriz de pearsons
+pearsons <- resultados$pearson.out$sampstat$correlations
+# Matriz policorica
+polychoric <- resultados$polychoric.out$sampstat$correlations
+
+```
+
+# Convertir a tablas flextable y exportar como docx
+
+## Nombres descriptivos
+
+```{r}
+nombres_nuevos <- c(
+  "PROGRAMM" = "Crear programa",
+  "LOGICAL_" = "Pasos lógicos",
+  "IDENTIFY" = "Identificar error",
+  "SEARCH_I" = "Buscar información",
+  "EVALUATE" = "Evaluar información",
+  "SHARE_CO" = "Compartir información",
+  "PAIR_COL" = "Colaborar en grupo",
+  "EXPLAIN_" = "Explicar cómo compartir",
+  "WRITE_TE" = "Escribir/editar texto"
+)
+
+nombres_actuales <- rownames(pearsons)
+
+nombres_mapeados <- nombres_nuevos[nombres_actuales]
+
+rownames(pearsons) <- nombres_mapeados
+colnames(pearsons) <- nombres_mapeados
+
+rownames(polychoric) <- nombres_mapeados
+colnames(polychoric) <- nombres_mapeados
+```
+
+## Formateo apa
+
+Columna ítem y diagonal con correlación 1.
+```{r}
+# Función para preparar la matriz para flextable
+format_apa_matrix <- function(matrix) {
+  
+  # Convertir a matriz (por si acaso)
+  mat <- as.matrix(matrix)
+  
+  # 1. Poner 1.0 en la diagonal
+  diag(mat) <- 1
+  
+  # 2. Poner NA en el triángulo superior (para luego ocultarlo)
+  mat[upper.tri(mat)] <- NA
+  
+  # 3. Convertir a data.frame y mover los rownames a una columna "Ítem"
+  mat_df <- mat |>
+    as.data.frame() |>
+    rownames_to_column(var = "Ítem") # Necesita el paquete 'tibble'
+    
+  return(mat_df)
+}
+
+# Aplicar la función a tus dos matrices
+pearsons_df <- format_apa_matrix(pearsons)
+polychoric_df <- format_apa_matrix(polychoric)
+```
+
+## Función para estilizar las tablas
+
+```{r}
+style_corr_table <- function(ft) {
+  
+  num_cols <- ncol(ft$body$dataset)
+  
+  ft <- ft |>
+
+    colformat_double(j = 2:num_cols, digits = 3) |>
+        
+    border_remove() |>
+    hline_top(border = officer::fp_border(width = 2), part = "all") |>
+    hline_bottom(border = officer::fp_border(width = 2), part = "all") |>
+    hline(i = 1, border = officer::fp_border(width = 1.5), part = "header") |>
+    
+    bold(part = "header") |>
+    font(fontname = "Calibri", part = "all") |>
+    fontsize(size = 9, part = "body") |>
+    fontsize(size = 10, part = "header") |>
+    
+    padding(padding = 3, part = "all") |>
+    align(align = "center", part = "header") |>
+    align(align = "left", part = "body", j = 1) |>
+    align(align = "center", part = "body", j = 2:num_cols) |>
+    
+    width(j = 1, width = 2.0) |> # 2.0 pulgadas para la columna "Ítem"
+    width(j = 2:num_cols, width = 0.6) # 0.6 pulgadas para las 9 columnas numéricas  
+  return(ft)
+}
+```
+
+## Exportación de tablas en formato docx
+
+
+```{r}
+ft_pearsons <- flextable(pearsons_df) |>
+  style_corr_table() |> 
+  add_header_row(values = "Tabla 1: Matriz de Correlación de Pearson", colwidths = ncol(pearsons_df))
+
+ft_polychoric <- flextable(polychoric_df) |>
+  style_corr_table() |> 
+  add_header_row(values = "Tabla 2: Matriz de Correlación Policórica", colwidths = ncol(polychoric_df))
+
+save_as_docx(
+  ft_pearsons, 
+  path = "figures/tabla_pearson.docx"
+)
+
+save_as_docx(
+  ft_polychoric, 
+  path = "figures/tabla_policorica.docx"
+)
+```

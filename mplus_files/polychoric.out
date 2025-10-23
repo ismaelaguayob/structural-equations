@@ -1,0 +1,877 @@
+Mplus VERSION 7 (Linux)
+MUTHEN & MUTHEN
+10/22/2025  11:19 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Tarea 2 - Matriz Policorica
+  DATA:
+    FILE = "pisadse.dat";
+  VARIABLE:
+      NAMES = CNT sex programming logical_solution identify_error search_info
+              evaluate_info share_content pair_collab explain_content write_text;
+              ! Da WARNING por la longitud de los nombres, se dejan los nombres descriptivos
+
+      USEVARIABLES = programming logical_solution identify_error
+                     search_info evaluate_info share_content
+                     pair_collab explain_content write_text;
+
+      CATEGORICAL ARE programming logical_solution identify_error
+                      search_info evaluate_info share_content
+                      pair_collab explain_content write_text;
+      MISSING=.;
+
+  ANALYSIS:
+    TYPE = BASIC;
+
+  OUTPUT:
+    SAMPSTAT;
+
+
+
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PROGRAMMING
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: LOGICAL_SOLUTION
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: IDENTIFY_ERROR
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: SEARCH_INFO
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: EVALUATE_INFO
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: SHARE_CONTENT
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PAIR_COLLAB
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: EXPLAIN_CONTENT
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: WRITE_TEXT
+   9 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Tarea 2 - Matriz Policorica
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                      316388
+
+Number of dependent variables                                    9
+Number of independent variables                                  0
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   PROGRAMM    LOGICAL_    IDENTIFY    SEARCH_I    EVALUATE    SHARE_CO
+   PAIR_COL    EXPLAIN_    WRITE_TE
+
+
+Estimator                                                    WLSMV
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Parameterization                                             DELTA
+
+Input data file(s)
+  pisadse.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns           511
+
+
+SUMMARY OF MISSING DATA PATTERNS
+
+
+     MISSING DATA PATTERNS (x = not missing)
+
+           1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+ PROGRAMM  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ LOGICAL_  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ IDENTIFY  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ SEARCH_I  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ EVALUATE  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ SHARE_CO  x  x  x  x  x  x  x  x                          x  x  x  x
+ PAIR_COL  x  x  x  x              x  x  x  x              x  x  x  x
+ EXPLAIN_  x  x        x  x        x  x        x  x        x  x
+ WRITE_TE  x     x     x     x     x     x     x     x     x     x
+
+          21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40
+ PROGRAMM  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ LOGICAL_  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ IDENTIFY  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ SEARCH_I  x  x  x  x  x  x  x  x  x  x  x  x
+ EVALUATE                                      x  x  x  x  x  x  x  x
+ SHARE_CO  x  x  x  x                          x  x  x  x  x  x  x  x
+ PAIR_COL              x  x  x  x              x  x  x  x
+ EXPLAIN_  x  x        x  x        x  x        x  x        x  x
+ WRITE_TE  x     x     x     x     x     x     x     x     x     x
+
+          41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60
+ PROGRAMM  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ LOGICAL_  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ IDENTIFY  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ SEARCH_I
+ EVALUATE  x  x  x  x  x  x  x  x
+ SHARE_CO                          x  x  x  x  x  x  x  x
+ PAIR_COL  x  x  x  x              x  x  x  x              x  x  x  x
+ EXPLAIN_  x  x        x  x        x  x        x  x        x  x
+ WRITE_TE  x     x     x     x     x     x     x     x     x     x
+
+          61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80
+ PROGRAMM  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ LOGICAL_  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ IDENTIFY  x  x  x  x
+ SEARCH_I              x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ EVALUATE              x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ SHARE_CO              x  x  x  x  x  x  x  x
+ PAIR_COL              x  x  x  x              x  x  x  x
+ EXPLAIN_  x  x        x  x        x  x        x  x        x  x
+ WRITE_TE  x     x     x     x     x     x     x     x     x     x
+
+          81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100
+ PROGRAMM  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x   x
+ LOGICAL_  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x   x
+ IDENTIFY
+ SEARCH_I  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ EVALUATE                                                  x  x  x   x
+ SHARE_CO  x  x  x  x  x  x  x  x                          x  x  x   x
+ PAIR_COL  x  x  x  x              x  x  x  x              x  x  x   x
+ EXPLAIN_  x  x        x  x        x  x        x  x        x  x
+ WRITE_TE  x     x     x     x     x     x     x     x     x     x
+
+          101 102 103 104 105 106 107 108 109 110 111 112 113 114 115
+ PROGRAMM   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ LOGICAL_   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ IDENTIFY
+ SEARCH_I
+ EVALUATE   x   x   x   x   x   x   x   x   x   x   x   x
+ SHARE_CO   x   x   x   x                                   x   x   x
+ PAIR_COL                   x   x   x   x                   x   x   x
+ EXPLAIN_   x   x           x   x           x   x           x   x
+ WRITE_TE   x       x       x       x       x       x       x       x
+
+          116 117 118 119 120 121 122 123 124 125 126 127 128 129 130
+ PROGRAMM   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ LOGICAL_   x   x   x   x   x   x   x   x   x   x   x   x   x
+ IDENTIFY                                                       x   x
+ SEARCH_I                                                       x   x
+ EVALUATE                                                       x   x
+ SHARE_CO   x   x   x   x   x                                   x   x
+ PAIR_COL   x                   x   x   x   x                   x   x
+ EXPLAIN_       x   x           x   x           x   x           x   x
+ WRITE_TE       x       x       x       x       x       x       x
+
+          131 132 133 134 135 136 137 138 139 140 141 142 143 144 145
+ PROGRAMM   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ LOGICAL_
+ IDENTIFY   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ SEARCH_I   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ EVALUATE   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ SHARE_CO   x   x   x   x   x   x                                   x
+ PAIR_COL   x   x                   x   x   x   x                   x
+ EXPLAIN_           x   x           x   x           x   x           x
+ WRITE_TE   x       x       x       x       x       x       x       x
+
+          146 147 148 149 150 151 152 153 154 155 156 157 158 159 160
+ PROGRAMM   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ LOGICAL_
+ IDENTIFY   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ SEARCH_I   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ EVALUATE
+ SHARE_CO   x   x   x   x   x   x   x
+ PAIR_COL   x   x   x                   x   x   x   x
+ EXPLAIN_   x           x   x           x   x           x   x
+ WRITE_TE       x       x       x       x       x       x       x
+
+          161 162 163 164 165 166 167 168 169 170 171 172 173 174 175
+ PROGRAMM   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ LOGICAL_
+ IDENTIFY   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ SEARCH_I
+ EVALUATE   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ SHARE_CO   x   x   x   x   x   x   x   x
+ PAIR_COL   x   x   x   x                   x   x   x   x
+ EXPLAIN_   x   x           x   x           x   x           x   x
+ WRITE_TE   x       x       x       x       x       x       x       x
+
+          176 177 178 179 180 181 182 183 184 185 186 187 188 189 190
+ PROGRAMM   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ LOGICAL_
+ IDENTIFY   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ SEARCH_I
+ EVALUATE   x
+ SHARE_CO       x   x   x   x   x   x   x   x
+ PAIR_COL       x   x   x   x                   x   x   x   x
+ EXPLAIN_       x   x           x   x           x   x           x   x
+ WRITE_TE       x       x       x       x       x       x       x
+
+          191 192 193 194 195 196 197 198 199 200 201 202 203 204 205
+ PROGRAMM   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ LOGICAL_
+ IDENTIFY   x   x
+ SEARCH_I           x   x   x   x   x   x   x   x   x   x   x   x   x
+ EVALUATE           x   x   x   x   x   x   x   x   x   x   x   x   x
+ SHARE_CO           x   x   x   x   x   x   x   x
+ PAIR_COL           x   x   x   x                   x   x   x   x
+ EXPLAIN_           x   x           x   x           x   x           x
+ WRITE_TE   x       x       x       x       x       x       x       x
+
+          206 207 208 209 210 211 212 213 214 215 216 217 218 219 220
+ PROGRAMM   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ LOGICAL_
+ IDENTIFY
+ SEARCH_I   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ EVALUATE   x   x   x
+ SHARE_CO               x   x   x   x   x   x   x   x
+ PAIR_COL               x   x   x   x                   x   x   x   x
+ EXPLAIN_   x           x   x           x   x           x   x
+ WRITE_TE       x       x       x       x       x       x       x
+
+          221 222 223 224 225 226 227 228 229 230 231 232 233 234 235
+ PROGRAMM   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ LOGICAL_
+ IDENTIFY
+ SEARCH_I   x   x   x   x
+ EVALUATE                   x   x   x   x   x   x   x   x   x   x   x
+ SHARE_CO                   x   x   x   x   x   x   x   x
+ PAIR_COL                   x   x   x   x                   x   x   x
+ EXPLAIN_   x   x           x   x           x   x           x   x
+ WRITE_TE   x       x       x       x       x       x       x       x
+
+          236 237 238 239 240 241 242 243 244 245 246 247 248 249 250
+ PROGRAMM   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ LOGICAL_
+ IDENTIFY
+ SEARCH_I
+ EVALUATE   x   x   x   x   x
+ SHARE_CO                       x   x   x   x   x   x   x   x
+ PAIR_COL   x                   x   x   x   x                   x   x
+ EXPLAIN_       x   x           x   x           x   x           x   x
+ WRITE_TE       x       x       x       x       x       x       x
+
+          251 252 253 254 255 256 257 258 259 260 261 262 263 264 265
+ PROGRAMM   x   x   x   x   x   x
+ LOGICAL_                           x   x   x   x   x   x   x   x   x
+ IDENTIFY                           x   x   x   x   x   x   x   x   x
+ SEARCH_I                           x   x   x   x   x   x   x   x   x
+ EVALUATE                           x   x   x   x   x   x   x   x   x
+ SHARE_CO                           x   x   x   x   x   x   x   x
+ PAIR_COL   x   x                   x   x   x   x                   x
+ EXPLAIN_           x   x           x   x           x   x           x
+ WRITE_TE   x       x       x       x       x       x       x       x
+
+          266 267 268 269 270 271 272 273 274 275 276 277 278 279 280
+ PROGRAMM
+ LOGICAL_   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ IDENTIFY   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ SEARCH_I   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ EVALUATE   x   x   x   x   x   x   x
+ SHARE_CO                               x   x   x   x   x   x   x   x
+ PAIR_COL   x   x   x                   x   x   x   x
+ EXPLAIN_   x           x   x           x   x           x   x
+ WRITE_TE       x       x       x       x       x       x       x
+
+          281 282 283 284 285 286 287 288 289 290 291 292 293 294 295
+ PROGRAMM
+ LOGICAL_   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ IDENTIFY   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ SEARCH_I   x   x   x   x   x   x   x   x
+ EVALUATE                                   x   x   x   x   x   x   x
+ SHARE_CO                                   x   x   x   x   x   x   x
+ PAIR_COL   x   x   x   x                   x   x   x   x
+ EXPLAIN_   x   x           x   x           x   x           x   x
+ WRITE_TE   x       x       x       x       x       x       x       x
+
+          296 297 298 299 300 301 302 303 304 305 306 307 308 309 310
+ PROGRAMM
+ LOGICAL_   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ IDENTIFY   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ SEARCH_I
+ EVALUATE   x   x   x   x   x   x   x   x   x
+ SHARE_CO   x                                   x   x   x   x   x   x
+ PAIR_COL       x   x   x   x                   x   x   x   x
+ EXPLAIN_       x   x           x   x           x   x           x   x
+ WRITE_TE       x       x       x       x       x       x       x
+
+          311 312 313 314 315 316 317 318 319 320 321 322 323 324 325
+ PROGRAMM
+ LOGICAL_   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ IDENTIFY   x   x   x   x   x   x   x   x   x   x
+ SEARCH_I                                           x   x   x   x   x
+ EVALUATE                                           x   x   x   x   x
+ SHARE_CO   x   x                                   x   x   x   x   x
+ PAIR_COL           x   x   x   x                   x   x   x   x
+ EXPLAIN_           x   x           x   x           x   x           x
+ WRITE_TE   x       x       x       x       x       x       x       x
+
+          326 327 328 329 330 331 332 333 334 335 336 337 338 339 340
+ PROGRAMM
+ LOGICAL_   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ IDENTIFY
+ SEARCH_I   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ EVALUATE   x   x   x   x   x   x   x   x   x   x   x
+ SHARE_CO   x   x   x                                   x   x   x   x
+ PAIR_COL               x   x   x   x                   x   x   x   x
+ EXPLAIN_   x           x   x           x   x           x   x
+ WRITE_TE       x       x       x       x       x       x       x
+
+          341 342 343 344 345 346 347 348 349 350 351 352 353 354 355
+ PROGRAMM
+ LOGICAL_   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ IDENTIFY
+ SEARCH_I   x   x   x   x   x   x   x   x   x   x   x   x
+ EVALUATE                                                   x   x   x
+ SHARE_CO   x   x   x   x                                   x   x   x
+ PAIR_COL                   x   x   x   x                   x   x   x
+ EXPLAIN_   x   x           x   x           x   x           x   x
+ WRITE_TE   x       x       x       x       x       x       x       x
+
+          356 357 358 359 360 361 362 363 364 365 366 367 368 369 370
+ PROGRAMM
+ LOGICAL_   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ IDENTIFY
+ SEARCH_I
+ EVALUATE   x   x   x   x   x   x   x   x   x   x   x   x   x
+ SHARE_CO   x   x   x   x   x                                   x   x
+ PAIR_COL   x                   x   x   x   x                   x   x
+ EXPLAIN_       x   x           x   x           x   x           x   x
+ WRITE_TE       x       x       x       x       x       x       x
+
+          371 372 373 374 375 376 377 378 379 380 381 382 383 384 385
+ PROGRAMM
+ LOGICAL_   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ IDENTIFY                                                           x
+ SEARCH_I                                                           x
+ EVALUATE                                                           x
+ SHARE_CO   x   x   x   x   x   x                                   x
+ PAIR_COL   x   x                   x   x   x   x                   x
+ EXPLAIN_           x   x           x   x           x   x           x
+ WRITE_TE   x       x       x       x       x       x       x       x
+
+          386 387 388 389 390 391 392 393 394 395 396 397 398 399 400
+ PROGRAMM
+ LOGICAL_
+ IDENTIFY   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ SEARCH_I   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ EVALUATE   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ SHARE_CO   x   x   x   x   x   x   x
+ PAIR_COL   x   x   x                   x   x   x   x
+ EXPLAIN_   x           x   x           x   x           x   x
+ WRITE_TE       x       x       x       x       x       x       x
+
+          401 402 403 404 405 406 407 408 409 410 411 412 413 414 415
+ PROGRAMM
+ LOGICAL_
+ IDENTIFY   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ SEARCH_I   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ EVALUATE
+ SHARE_CO   x   x   x   x   x   x   x   x
+ PAIR_COL   x   x   x   x                   x   x   x   x
+ EXPLAIN_   x   x           x   x           x   x           x   x
+ WRITE_TE   x       x       x       x       x       x       x       x
+
+          416 417 418 419 420 421 422 423 424 425 426 427 428 429 430
+ PROGRAMM
+ LOGICAL_
+ IDENTIFY   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ SEARCH_I   x
+ EVALUATE       x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ SHARE_CO       x   x   x   x   x   x   x   x
+ PAIR_COL       x   x   x   x                   x   x   x   x
+ EXPLAIN_       x   x           x   x           x   x           x   x
+ WRITE_TE       x       x       x       x       x       x       x
+
+          431 432 433 434 435 436 437 438 439 440 441 442 443 444 445
+ PROGRAMM
+ LOGICAL_
+ IDENTIFY   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ SEARCH_I
+ EVALUATE   x   x
+ SHARE_CO           x   x   x   x   x   x   x   x
+ PAIR_COL           x   x   x   x                   x   x   x   x
+ EXPLAIN_           x   x           x   x           x   x           x
+ WRITE_TE   x       x       x       x       x       x       x       x
+
+          446 447 448 449 450 451 452 453 454 455 456 457 458 459 460
+ PROGRAMM
+ LOGICAL_
+ IDENTIFY   x   x   x
+ SEARCH_I               x   x   x   x   x   x   x   x   x   x   x   x
+ EVALUATE               x   x   x   x   x   x   x   x   x   x   x   x
+ SHARE_CO               x   x   x   x   x   x   x   x
+ PAIR_COL               x   x   x   x                   x   x   x   x
+ EXPLAIN_   x           x   x           x   x           x   x
+ WRITE_TE       x       x       x       x       x       x       x
+
+          461 462 463 464 465 466 467 468 469 470 471 472 473 474 475
+ PROGRAMM
+ LOGICAL_
+ IDENTIFY
+ SEARCH_I   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ EVALUATE   x   x   x   x
+ SHARE_CO                   x   x   x   x   x   x   x   x
+ PAIR_COL                   x   x   x   x                   x   x   x
+ EXPLAIN_   x   x           x   x           x   x           x   x
+ WRITE_TE   x       x       x       x       x       x       x       x
+
+          476 477 478 479 480 481 482 483 484 485 486 487 488 489 490
+ PROGRAMM
+ LOGICAL_
+ IDENTIFY
+ SEARCH_I   x   x   x   x   x
+ EVALUATE                       x   x   x   x   x   x   x   x   x   x
+ SHARE_CO                       x   x   x   x   x   x   x   x
+ PAIR_COL   x                   x   x   x   x                   x   x
+ EXPLAIN_       x   x           x   x           x   x           x   x
+ WRITE_TE       x       x       x       x       x       x       x
+
+          491 492 493 494 495 496 497 498 499 500 501 502 503 504 505
+ PROGRAMM
+ LOGICAL_
+ IDENTIFY
+ SEARCH_I
+ EVALUATE   x   x   x   x   x   x
+ SHARE_CO                           x   x   x   x   x   x   x   x
+ PAIR_COL   x   x                   x   x   x   x                   x
+ EXPLAIN_           x   x           x   x           x   x           x
+ WRITE_TE   x       x       x       x       x       x       x       x
+
+          506 507 508 509 510 511
+ PROGRAMM
+ LOGICAL_
+ IDENTIFY
+ SEARCH_I
+ EVALUATE
+ SHARE_CO
+ PAIR_COL   x   x   x
+ EXPLAIN_   x           x   x
+ WRITE_TE       x       x       x
+
+
+     MISSING DATA PATTERN FREQUENCIES
+
+    Pattern   Frequency     Pattern   Frequency     Pattern   Frequency
+          1      252515         172           5         343           1
+          2        3154         173           8         344           2
+          3        2322         174          17         345           7
+          4         339         175           9         346           9
+          5        2627         176           8         347           7
+          6         365         177          45         348          12
+          7         235         178          18         349           6
+          8         120         179          15         350           5
+          9        2846         180           9         351           8
+         10         260         181          19         352          14
+         11         252         182           7         353          25
+         12          56         183           8         354          11
+         13         262         184          13         355           7
+         14          61         185          22         356           5
+         15          91         186          16         357           9
+         16          99         187           9         358          12
+         17        2740         188          13         359           5
+         18         225         189          24         360           5
+         19         201         190           7         361           7
+         20          32         191          22         362           7
+         21         249         192          77         363           6
+         22          93         193        2063         364           9
+         23          38         194          87         365           8
+         24          19         195         188         366           6
+         25         173         196          45         367           9
+         26          36         197          74         368          10
+         27          47         198          25         369          16
+         28          21         199          20         370           3
+         29          42         200          16         371           3
+         30          15         201          82         372          10
+         31          24         202          13         373           6
+         32          37         203          23         374          15
+         33        2192         204          10         375           5
+         34         155         205          18         376           9
+         35         123         206          11         377          16
+         36          30         207          10         378           5
+         37         158         208          19         379           5
+         38          59         209         104         380           8
+         39          19         210          21         381           4
+         40          24         211          23         382           7
+         41         186         212          17         383          15
+         42          58         213          26         384         102
+         43          43         214          29         385        1093
+         44          26         215          15         386          89
+         45          35         216          11         387          88
+         46          34         217          16         388          27
+         47          12         218          15         389          51
+         48          39         219          22         390          27
+         49         393         220           8         391          18
+         50          64         221           9         392           4
+         51          39         222          11         393          60
+         52          23         223          14         394          24
+         53          67         224          36         395          25
+         54          23         225          67         396          16
+         55          23         226          14         397          14
+         56          19         227          18         398           6
+         57         172         228           9         399           5
+         58          29         229          10         400          11
+         59          36         230          16         401          53
+         60          27         231          12         402          20
+         61          95         232           5         403          21
+         62          44         233          20         404          13
+         63          91         234          18         405          24
+         64         388         235          16         406          43
+         65        2673         236          15         407          17
+         66         210         237           9         408          21
+         67        1605         238          21         409           8
+         68          50         239          16         410           6
+         69         179         240          20         411          18
+         70          49         241          29         412          20
+         71          36         242           8         413           8
+         72          10         243           8         414          19
+         73         147         244          13         415          10
+         74          47         245          12         416          22
+         75          40         246          20         417          45
+         76           7         247          25         418          12
+         77          22         248          20         419           9
+         78          11         249          22         420           4
+         79           9         250          14         421          20
+         80          10         251          21         422          16
+         81         160         252          30         423           3
+         82          34         253          19         424           7
+         83          39         254          36         425          22
+         84           7         255          41         426          16
+         85          36         256         229         427          22
+         86          25         257        4635         428          13
+         87          15         258         246         429          18
+         88           8         259         278         430          28
+         89          23         260          51         431           6
+         90          10         261         252         432          20
+         91          10         262          53         433          20
+         92           7         263          32         434          15
+         93           9         264          12         435           6
+         94           9         265         198         436          20
+         95           4         266          53         437          11
+         96           7         267          43         438          23
+         97          99         268          12         439          19
+         98          21         269          37         440          20
+         99          31         270          11         441          11
+        100           8         271          15         442          20
+        101          28         272          10         443          15
+        102          11         273         210         444          20
+        103          12         274          60         445          14
+        104           1         275          44         446          30
+        105          27         276          16         447          23
+        106          13         277          42         448         129
+        107          50         278          36         449        3774
+        108           8         279          18         450         505
+        109           4         280           7         451         220
+        110           9         281          35         452         510
+        111           8         282          13         453         124
+        112           8         283          14         454          83
+        113          20         284          12         455          56
+        114           6         285          11         456         435
+        115          17         286           7         457         140
+        116           5         287           5         458          65
+        117          14         288          11         459          60
+        118          14         289         130         460          98
+        119           9         290          24         461          38
+        120           4         291          31         462          43
+        121          18         292           5         463          46
+        122           8         293          21         464         600
+        123           6         294          15         465         205
+        124           9         295          12         466          61
+        125          11         296           4         467          65
+        126          12         297          34         468          72
+        127          15         298          17         469          31
+        128          65         299          15         470          75
+        129        4915         300          12         471          31
+        130         389         301          11         472         126
+        131         303         302           8         473          39
+        132         110         303           9         474          36
+        133         210         304           5         475          42
+        134          57         305          36         476         102
+        135          38         306           8         477          25
+        136          23         307          10         478          79
+        137         239         308           9         479          64
+        138          69         309          22         480        1665
+        139          68         310          18         481         126
+        140          13         311          11         482          51
+        141          31         312           6         483          22
+        142          14         313          12         484          43
+        143          10         314          10         485          40
+        144          11         315          16         486          41
+        145         208         316          11         487          28
+        146          40         317          13         488          63
+        147          35         318          15         489          28
+        148          19         319          21         490          40
+        149          38         320          60         491          43
+        150          32         321         821         492          70
+        151          14         322          60         493          33
+        152           3         323          60         494          84
+        153          25         324          27         495          60
+        154           8         325          29         496         460
+        155          13         326          16         497          72
+        156           7         327          18         498          40
+        157          10         328          10         499          35
+        158           7         329          29         500          82
+        159           6         330          18         501          33
+        160           9         331          14         502         115
+        161         189         332           4         503          63
+        162          36         333           7         504         448
+        163          31         334           6         505          66
+        164           9         335           2         506         101
+        165          25         336          16         507          94
+        166          24         337          42         508         408
+        167          11         338           9         509          77
+        168          12         339          11         510         321
+        169          41         340           8         511         289
+        170          20         341          16
+        171          15         342          12
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              PROGRAMM      LOGICAL_      IDENTIFY      SEARCH_I      EVALUATE
+              ________      ________      ________      ________      ________
+ PROGRAMM       0.923
+ LOGICAL_       0.886         0.914
+ IDENTIFY       0.892         0.890         0.922
+ SEARCH_I       0.901         0.894         0.901         0.962
+ EVALUATE       0.898         0.891         0.897         0.933         0.953
+ SHARE_CO       0.898         0.891         0.897         0.932         0.926
+ PAIR_COL       0.898         0.891         0.897         0.930         0.926
+ EXPLAIN_       0.895         0.888         0.899         0.923         0.920
+ WRITE_TE       0.896         0.889         0.895         0.923         0.919
+
+
+           Covariance Coverage
+              SHARE_CO      PAIR_COL      EXPLAIN_      WRITE_TE
+              ________      ________      ________      ________
+ SHARE_CO       0.952
+ PAIR_COL       0.926         0.951
+ EXPLAIN_       0.921         0.921         0.945
+ WRITE_TE       0.920         0.921         0.916         0.944
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    PROGRAMM
+      Category 1    0.230    67233.000
+      Category 2    0.224    65432.000
+      Category 3    0.289    84417.000
+      Category 4    0.257    74991.000
+    LOGICAL_
+      Category 1    0.189    54767.000
+      Category 2    0.199    57532.000
+      Category 3    0.316    91251.000
+      Category 4    0.296    85637.000
+    IDENTIFY
+      Category 1    0.186    54190.000
+      Category 2    0.210    61331.000
+      Category 3    0.320    93348.000
+      Category 4    0.284    82859.000
+    SEARCH_I
+      Category 1    0.083    25264.000
+      Category 2    0.071    21719.000
+      Category 3    0.231    70386.000
+      Category 4    0.614   186971.000
+    EVALUATE
+      Category 1    0.057    17341.000
+      Category 2    0.102    30681.000
+      Category 3    0.337   101669.000
+      Category 4    0.504   151916.000
+    SHARE_CO
+      Category 1    0.061    18261.000
+      Category 2    0.088    26455.000
+      Category 3    0.290    87264.000
+      Category 4    0.562   169272.000
+    PAIR_COL
+      Category 1    0.054    16312.000
+      Category 2    0.089    26876.000
+      Category 3    0.285    85862.000
+      Category 4    0.571   171940.000
+    EXPLAIN_
+      Category 1    0.065    19550.000
+      Category 2    0.103    30877.000
+      Category 3    0.316    94493.000
+      Category 4    0.516   154214.000
+    WRITE_TE
+      Category 1    0.055    16313.000
+      Category 2    0.091    27107.000
+      Category 3    0.281    84085.000
+      Category 4    0.573   171270.000
+
+
+
+
+
+RESULTS FOR BASIC ANALYSIS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              PROGRAMM      PROGRAMM      PROGRAMM      LOGICAL_      LOGICAL_
+              ________      ________      ________      ________      ________
+      1        -0.738        -0.115         0.653        -0.880        -0.284
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              LOGICAL_      IDENTIFY      IDENTIFY      IDENTIFY      SEARCH_I
+              ________      ________      ________      ________      ________
+      1         0.536        -0.894        -0.264         0.571        -1.385
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              SEARCH_I      SEARCH_I      EVALUATE      EVALUATE      EVALUATE
+              ________      ________      ________      ________      ________
+      1        -1.018        -0.291        -1.576        -0.998        -0.009
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              SHARE_CO      SHARE_CO      SHARE_CO      PAIR_COL      PAIR_COL
+              ________      ________      ________      ________      ________
+      1        -1.550        -1.043        -0.156        -1.605        -1.065
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              PAIR_COL      EXPLAIN_      EXPLAIN_      EXPLAIN_      WRITE_TE
+              ________      ________      ________      ________      ________
+      1        -0.180        -1.511        -0.960        -0.039        -1.602
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              WRITE_TE      WRITE_TE
+              ________      ________
+      1        -1.057        -0.185
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              PROGRAMM      LOGICAL_      IDENTIFY      SEARCH_I      EVALUATE
+              ________      ________      ________      ________      ________
+ PROGRAMM
+ LOGICAL_       0.788
+ IDENTIFY       0.801         0.842
+ SEARCH_I       0.203         0.287         0.315
+ EVALUATE       0.343         0.413         0.429         0.862
+ SHARE_CO       0.291         0.360         0.371         0.812         0.795
+ PAIR_COL       0.304         0.367         0.365         0.746         0.723
+ EXPLAIN_       0.387         0.442         0.455         0.736         0.719
+ WRITE_TE       0.334         0.397         0.394         0.746         0.717
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              SHARE_CO      PAIR_COL      EXPLAIN_      WRITE_TE
+              ________      ________      ________      ________
+ PAIR_COL       0.820
+ EXPLAIN_       0.786         0.802
+ WRITE_TE       0.757         0.773         0.779
+
+
+     STANDARD ERRORS FOR ESTIMATED SAMPLE STATISTICS
+
+
+           S.E. FOR MEANS/INTERCEPTS/THRESHOLDS
+              PROGRAMM      PROGRAMM      PROGRAMM      LOGICAL_      LOGICAL_
+              ________      ________      ________      ________      ________
+      1         0.003         0.002         0.003         0.003         0.002
+
+
+           S.E. FOR MEANS/INTERCEPTS/THRESHOLDS
+              LOGICAL_      IDENTIFY      IDENTIFY      IDENTIFY      SEARCH_I
+              ________      ________      ________      ________      ________
+      1         0.002         0.003         0.002         0.002         0.003
+
+
+           S.E. FOR MEANS/INTERCEPTS/THRESHOLDS
+              SEARCH_I      SEARCH_I      EVALUATE      EVALUATE      EVALUATE
+              ________      ________      ________      ________      ________
+      1         0.003         0.002         0.004         0.003         0.002
+
+
+           S.E. FOR MEANS/INTERCEPTS/THRESHOLDS
+              SHARE_CO      SHARE_CO      SHARE_CO      PAIR_COL      PAIR_COL
+              ________      ________      ________      ________      ________
+      1         0.004         0.003         0.002         0.004         0.003
+
+
+           S.E. FOR MEANS/INTERCEPTS/THRESHOLDS
+              PAIR_COL      EXPLAIN_      EXPLAIN_      EXPLAIN_      WRITE_TE
+              ________      ________      ________      ________      ________
+      1         0.002         0.004         0.003         0.002         0.004
+
+
+           S.E. FOR MEANS/INTERCEPTS/THRESHOLDS
+              WRITE_TE      WRITE_TE
+              ________      ________
+      1         0.003         0.002
+
+
+           S.E. FOR CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              PROGRAMM      LOGICAL_      IDENTIFY      SEARCH_I      EVALUATE
+              ________      ________      ________      ________      ________
+ PROGRAMM
+ LOGICAL_       0.001
+ IDENTIFY       0.001         0.000
+ SEARCH_I       0.002         0.002         0.002
+ EVALUATE       0.002         0.002         0.002         0.000
+ SHARE_CO       0.002         0.002         0.002         0.001         0.001
+ PAIR_COL       0.002         0.002         0.002         0.001         0.001
+ EXPLAIN_       0.002         0.002         0.002         0.001         0.001
+ WRITE_TE       0.002         0.002         0.002         0.001         0.001
+
+
+           S.E. FOR CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              SHARE_CO      PAIR_COL      EXPLAIN_      WRITE_TE
+              ________      ________      ________      ________
+ PAIR_COL       0.001
+ EXPLAIN_       0.001         0.001
+ WRITE_TE       0.001         0.001         0.001
+
+
+     Beginning Time:  23:19:22
+        Ending Time:  23:19:35
+       Elapsed Time:  00:00:13
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen
