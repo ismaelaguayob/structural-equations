@@ -1,4 +1,4 @@
-------Begin Mplus Model Run: 22oct2025 23:19:19------
+------Begin Mplus Model Run: 03nov2025 13:02:38------
 Run options:
 	Recursive (run models in subdirectories): FALSE
 	Show output on console: FALSE
@@ -7,4 +7,4 @@ Run options:
 Currently running model: pearson.inp
 Currently running model: polychoric.inp
 
-------End Mplus Model Run: 22oct2025 23:19:35------
+------End Mplus Model Run: 03nov2025 13:02:39------

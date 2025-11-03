@@ -1,9 +1,10 @@
 # Preparación del entorno de trabajo
 ```{r}
-pacman::p_load(dplyr, tidyverse, haven, MplusAutomation, flextable, officer, ggplot2, purrr, table1, officer)
+pacman::p_load(dplyr, tidyverse, haven, MplusAutomation, flextable, officer, ggplot2, purrr, table1, officer, psych)
 
 options(scipen = 999)
 rm(list = ls()) 
+set.seed(123)
 ```
 
 # Carga de los datos brutos
@@ -44,8 +45,49 @@ items_dse <- c(
 )
 
 proc_data <- proc_data |>
-  filter(if_any(all_of(items_dse), ~ !is.na(.)))
+  filter(if_any(all_of(items_dse), ~ !is.na(.))) |>
+  group_by(CNT) |>
+  slice_sample(n = 96) |>
+  ungroup()
+```
 
+# Creación de tabla de descriptivos
+
+```{r}
+nombres_descriptivos <- c(
+  "programming" = "Crear programa",
+  "logical_solution" = "Pasos lógicos",
+  "identify_error" = "Identificar error",
+  "search_info" = "Buscar información",
+  "evaluate_info" = "Evaluar información",
+  "share_content" = "Compartir información",
+  "pair_collab" = "Colaborar en grupo",
+  "explain_content" = "Explicar cómo compartir",
+  "write_text" = "Escribir/editar texto"
+)
+
+descriptivos <- psych::describe(proc_data[items_dse])
+
+prop_ausentes <- proc_data[items_dse] |>
+  summarise_all(~ mean(is.na(.))) |>
+  pivot_longer(everything(), names_to = "variable", values_to = "prop_na")
+
+descriptivos_df <- descriptivos |>
+  rownames_to_column(var = "variable") |>
+  left_join(prop_ausentes, by = "variable") |>
+  select(
+    variable,
+    Media = mean,
+    `D.E.` = sd,
+    Asimetría = skew,
+    Curtosis = kurtosis,
+    `% Casos perdidos` = prop_na
+  ) |>
+  mutate(`% Casos perdidos` = `% Casos perdidos` * 100) |>
+  mutate(variable = factor(variable, levels = items_dse)) |>
+  arrange(variable) |>
+  mutate(variable = recode(variable, !!!nombres_descriptivos)) |>
+  rename(Ítem = variable)
 ```
 
 # Preparación de data para Mplus
@@ -69,6 +111,23 @@ pearsons <- resultados$pearson.out$sampstat$correlations
 # Matriz policorica
 polychoric <- resultados$polychoric.out$sampstat$correlations
 
+diag(polychoric) <- 1
+par(mfrow = c(1, 1))
+corrplot::corrplot(pearsons, method = 'number', type = 'lower', tl.col = 'black')
+corrplot::corrplot(polychoric, method = 'number', type = 'lower', tl.col = 'black')
+
+png("figures/correlaciones.png", 
+    width = 3000, 
+    height = 1500, 
+    res = 300, 
+    bg = "transparent")
+
+par(mfrow = c(1, 2))
+corrplot::corrplot(pearsons, method = 'number', type = 'lower', tl.col = 'black')
+corrplot::corrplot(polychoric, method = 'number', type = 'lower', tl.col = 'black')
+
+dev.off()
+
 ```
 
 # Convertir a tablas flextable y exportar como docx
@@ -77,15 +136,15 @@ polychoric <- resultados$polychoric.out$sampstat$correlations
 
 ```{r}
 nombres_nuevos <- c(
-  "PROGRAMM" = "Crear programa",
-  "LOGICAL_" = "Pasos lógicos",
-  "IDENTIFY" = "Identificar error",
-  "SEARCH_I" = "Buscar información",
-  "EVALUATE" = "Evaluar información",
-  "SHARE_CO" = "Compartir información",
-  "PAIR_COL" = "Colaborar en grupo",
-  "EXPLAIN_" = "Explicar cómo compartir",
-  "WRITE_TE" = "Escribir/editar texto"
+  "PROGRAMM" = "Crear\nprograma",
+  "LOGICAL_" = "Pasos\nlógicos",
+  "IDENTIFY" = "Identificar\nerror",
+  "SEARCH_I" = "Buscar\ninformación",
+  "EVALUATE" = "Evaluar\ninformación",
+  "SHARE_CO" = "Compartir\ninformación",
+  "PAIR_COL" = "Colaborar\nen grupo",
+  "EXPLAIN_" = "Explicar cómo\ncompartir",
+  "WRITE_TE" = "Escribir/\neditar texto"
 )
 
 nombres_actuales <- rownames(pearsons)
@@ -101,34 +160,54 @@ colnames(polychoric) <- nombres_mapeados
 
 ## Formateo apa
 
-Columna ítem y diagonal con correlación 1.
 ```{r}
-# Función para preparar la matriz para flextable
 format_apa_matrix <- function(matrix) {
   
-  # Convertir a matriz (por si acaso)
   mat <- as.matrix(matrix)
   
-  # 1. Poner 1.0 en la diagonal
   diag(mat) <- 1
   
-  # 2. Poner NA en el triángulo superior (para luego ocultarlo)
   mat[upper.tri(mat)] <- NA
-  
-  # 3. Convertir a data.frame y mover los rownames a una columna "Ítem"
+
   mat_df <- mat |>
     as.data.frame() |>
-    rownames_to_column(var = "Ítem") # Necesita el paquete 'tibble'
+    rownames_to_column(var = "Ítem")
     
   return(mat_df)
 }
 
-# Aplicar la función a tus dos matrices
 pearsons_df <- format_apa_matrix(pearsons)
 polychoric_df <- format_apa_matrix(polychoric)
 ```
 
-## Función para estilizar las tablas
+## Funciones para estilizar las tablas
+
+```{r}
+style_desc_table <- function(ft) {
+  
+  ft <- ft |>
+    colformat_double(j = c("Media", "D.E.", "Asimetría", "Curtosis"), digits = 2) |>
+    colformat_double(j = "% Casos perdidos", digits = 1, suffix = "%") |>
+    
+    border_remove() |>
+    hline_top(border = officer::fp_border(width = 2), part = "all") |>
+    hline_bottom(border = officer::fp_border(width = 2), part = "all") |>
+    hline(i = 1, border = officer::fp_border(width = 1.5), part = "header") |>
+    
+    bold(part = "header") |>
+    font(fontname = "Calibri", part = "all") |>
+    fontsize(size = 9, part = "body") |>
+    fontsize(size = 10, part = "header") |>
+    
+    padding(padding = 3, part = "all") |>
+    align(align = "center", part = "header") |>
+    align(align = "left", part = "body", j = 1) |> 
+    align(align = "center", part = "body", j = 2:ncol(ft$body$dataset)) |> 
+    autofit() 
+
+  return(ft)
+}
+```
 
 ```{r}
 style_corr_table <- function(ft) {
@@ -138,7 +217,7 @@ style_corr_table <- function(ft) {
   ft <- ft |>
 
     colformat_double(j = 2:num_cols, digits = 3) |>
-        
+            
     border_remove() |>
     hline_top(border = officer::fp_border(width = 2), part = "all") |>
     hline_bottom(border = officer::fp_border(width = 2), part = "all") |>
@@ -153,9 +232,9 @@ style_corr_table <- function(ft) {
     align(align = "center", part = "header") |>
     align(align = "left", part = "body", j = 1) |>
     align(align = "center", part = "body", j = 2:num_cols) |>
-    
-    width(j = 1, width = 2.0) |> # 2.0 pulgadas para la columna "Ítem"
-    width(j = 2:num_cols, width = 0.6) # 0.6 pulgadas para las 9 columnas numéricas  
+
+    autofit()
+  
   return(ft)
 }
 ```
@@ -164,13 +243,24 @@ style_corr_table <- function(ft) {
 
 
 ```{r}
+
+ft_descriptivos <- flextable(descriptivos_df) |>
+  style_desc_table() |> 
+  add_header_row(values = "Tabla 2: Estadísticos Descriptivos de los Ítems", colwidths = ncol(descriptivos_df))
+
+
 ft_pearsons <- flextable(pearsons_df) |>
   style_corr_table() |> 
-  add_header_row(values = "Tabla 1: Matriz de Correlación de Pearson", colwidths = ncol(pearsons_df))
+  add_header_row(values = "Tabla 3: Matriz de Correlación de Pearson", colwidths = ncol(pearsons_df))
 
 ft_polychoric <- flextable(polychoric_df) |>
   style_corr_table() |> 
-  add_header_row(values = "Tabla 2: Matriz de Correlación Policórica", colwidths = ncol(polychoric_df))
+  add_header_row(values = "Tabla 4: Matriz de Correlación Policórica", colwidths = ncol(polychoric_df))
+
+save_as_docx(
+  ft_descriptivos, 
+  path = "figures/tabla_descriptivos.docx"
+)
 
 save_as_docx(
   ft_pearsons, 
