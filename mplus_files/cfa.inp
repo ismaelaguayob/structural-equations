@@ -1,0 +1,30 @@
+TITLE: Ejercicio 3: Análisis factorial confirmatorio
+DATA:
+    FILE = "pisadse.dat";
+    FORMAT = FREE;
+VARIABLE:
+    NAMES = CNT sex gen1-gen6 spec1-spec3;
+
+    USEVARIABLES = gen1-gen6 spec1-spec3;
+
+    CATEGORICAL = gen1-gen6 spec1-spec3;
+
+    MISSING=.;
+
+ANALYSIS:
+    ESTIMATOR = WLSMV;
+
+MODEL: 
+    gen_dse BY gen1-gen6*; ! Liberamos la carga del primer ítem gen_dse
+    spec_dse BY spec1-spec3*; ! Liberamos la carga del primer ítem spec_dse
+    gen_dse@1; spec_dse@1; ! Fijamos la varianza de ambos factores a uno
+    [gen_dse@0]; [spec_dse@0]; ! Fijamos la media de ambos factores a 0
+    gen_dse WITH spec_dse; ! Estimamos correlación entre ambos factores
+
+    gen1 WITH gen2; ! Correlación entre errores añadida
+
+PLOT: 
+    TYPE = PLOT1 PLOT2;
+
+OUTPUT:
+  SAMPSTAT; STDYX; modindices (ALL); residual;

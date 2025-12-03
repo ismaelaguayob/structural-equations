@@ -1,10 +1,9 @@
-------Begin Mplus Model Run: 03nov2025 13:02:38------
+------Begin Mplus Model Run: 22nov2025 17:57:53------
 Run options:
 	Recursive (run models in subdirectories): FALSE
 	Show output on console: FALSE
 	Replace existing outfile: always
 ------
-Currently running model: pearson.inp
-Currently running model: polychoric.inp
+Currently running model: cfa.inp
 
-------End Mplus Model Run: 03nov2025 13:02:39------
+------End Mplus Model Run: 22nov2025 17:57:54------
