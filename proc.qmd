@@ -19,8 +19,6 @@ data <- readRDS("./pisa22_proc.rds")
 ```{r}
 proc_data <- data |> 
   select(
-    -CNTRYID, 
-    -CNTSCHID,
     -collect_data, 
     -create_media, 
     -change_settings,
@@ -28,6 +26,7 @@ proc_data <- data |>
     -develop_webpage, 
     CNT, 
     sex,
+    ESCS,
     gen1 = search_info, 
     gen2 = evaluate_info, 
     gen3 = share_content, 
@@ -36,7 +35,38 @@ proc_data <- data |>
     gen6 = write_text,
     spec1 = programming, 
     spec2 = logical_solution, 
-    spec3 = identify_error
+    spec3 = identify_error,
+    sch_use1 = IC174Q01JA,
+    sch_use2 = IC174Q02JA,
+    sch_use3 = IC174Q03JA,
+    sch_use4 = IC174Q04JA,
+    sch_use5 = IC174Q05JA,
+    sch_use6 = IC174Q06JA,
+    sch_use7 = IC174Q07JA,
+    sch_use8 = IC174Q08JA,
+    sch_use9 = IC174Q09JA,
+    sch_use10 = IC174Q10JA,
+    self_ln1 = ST355Q01JA,
+    self_ln2 = ST355Q02JA,
+    self_ln3 = ST355Q03JA,
+    self_ln4 = ST355Q04JA,
+    self_ln5 = ST355Q05JA,
+    self_ln6 = ST355Q06JA,
+    self_ln7 = ST355Q07JA,
+    self_ln8 = ST355Q08JA,
+    ocio_1 = IC178Q01JA,
+    ocio_2 = IC178Q02JA,
+    ocio_3 = IC178Q03JA,
+    ocio_4 = IC178Q04JA,
+    ocio_5 = IC178Q05JA,
+    ocio_6 = IC178Q06JA,
+    ocio_7 = IC178Q07JA,
+    access_1 = IC171Q01JA,
+    access_2 = IC171Q01JA,
+    access_3 = IC171Q01JA,
+    access_4 = IC171Q01JA,
+    access_5 = IC171Q01JA,
+    access_6 = IC171Q01JA
 )
 
 items_dse <- c(
@@ -45,12 +75,50 @@ items_dse <- c(
   "spec1", "spec2", "spec3"
 )
 
+items_sch_use <- c(
+  "sch_use1", "sch_use2", "sch_use3",
+  "sch_use4", "sch_use4", "sch_use5",
+  "sch_use5", "sch_use6", "sch_use6",
+  "sch_use7", "sch_use8", "sch_use9", 
+  "sch_use10"
+)
+
+items_self_ln <- c(
+  "self_ln1", "self_ln2", "self_ln3",
+  "self_ln4", "self_ln5", "self_ln6"
+)
+
+items_ocio <- c(
+  "ocio_1", "ocio_2", "ocio_3",
+  "ocio_4", "ocio_5", "ocio_6",
+  "ocio_7"
+)
+
+items_access <- c(
+  "access_1", "access_2", "access_3",
+  "access_4", "access_5", "access_6"
+)
+
+items <- c(items_dse, items_sch_use, items_self_ln, items_ocio, items_access)
+
 proc_data <- proc_data |>
   filter(if_any(all_of(items_dse), ~ !is.na(.))) |>
+  filter(if_any(all_of(items_sch_use), ~ !is.na(.))) |>
+  filter(if_any(all_of(items_self_ln), ~ !is.na(.))) |>
+  filter(if_any(all_of(items_ocio), ~ !is.na(.))) |>
+  filter(if_any(all_of(items_access), ~ !is.na(.))) |>
   group_by(CNT) |>
-  slice_sample(n = 96) |>
+  slice_sample(n = 100) |>
   ungroup()
 ```
+
+```{r}
+countries1 <- unique(data$CNT)
+countries2 <- unique(proc_data$CNT)
+setdiff(countries1, countries2)
+```
+
+Reportar que se pierde República Checa, Dinamarca y Singapur ya que no tienen casos en las preguntas de aprendizaje autónomo.
 
 # Creación de tabla de descriptivos
 
