@@ -26,6 +26,11 @@ proc_data <- data |>
     -develop_webpage, 
     CNT, 
     sex,
+    SENWT,
+    ICTENQ,
+    ICTHOME,
+    ICTWKEND,
+    SDLEFF,
     ESCS,
     gen1 = search_info, 
     gen2 = evaluate_info, 
@@ -36,16 +41,16 @@ proc_data <- data |>
     spec1 = programming, 
     spec2 = logical_solution, 
     spec3 = identify_error,
-    sch_use1 = IC174Q01JA,
-    sch_use2 = IC174Q02JA,
-    sch_use3 = IC174Q03JA,
-    sch_use4 = IC174Q04JA,
-    sch_use5 = IC174Q05JA,
-    sch_use6 = IC174Q06JA,
-    sch_use7 = IC174Q07JA,
-    sch_use8 = IC174Q08JA,
-    sch_use9 = IC174Q09JA,
-    sch_use10 = IC174Q10JA,
+    ictsch1 = IC174Q01JA,
+    ictsch2 = IC174Q02JA,
+    ictsch3 = IC174Q03JA,
+    ictsch4 = IC174Q04JA,
+    ictsch5 = IC174Q05JA,
+    ictsch6 = IC174Q06JA,
+    ictsch7 = IC174Q07JA,
+    ictsch8 = IC174Q08JA,
+    ictsch9 = IC174Q09JA,
+    ictsch10 = IC174Q10JA,
     self_ln1 = ST355Q01JA,
     self_ln2 = ST355Q02JA,
     self_ln3 = ST355Q03JA,
@@ -62,11 +67,11 @@ proc_data <- data |>
     ocio_6 = IC178Q06JA,
     ocio_7 = IC178Q07JA,
     access_1 = IC171Q01JA,
-    access_2 = IC171Q01JA,
-    access_3 = IC171Q01JA,
-    access_4 = IC171Q01JA,
-    access_5 = IC171Q01JA,
-    access_6 = IC171Q01JA
+    access_2 = IC171Q02JA,
+    access_3 = IC171Q03JA,
+    access_4 = IC171Q04JA,
+    access_5 = IC171Q05JA,
+    access_6 = IC171Q06JA
 )
 
 items_dse <- c(
@@ -75,12 +80,12 @@ items_dse <- c(
   "spec1", "spec2", "spec3"
 )
 
-items_sch_use <- c(
-  "sch_use1", "sch_use2", "sch_use3",
-  "sch_use4", "sch_use4", "sch_use5",
-  "sch_use5", "sch_use6", "sch_use6",
-  "sch_use7", "sch_use8", "sch_use9", 
-  "sch_use10"
+items_ictsch <- c(
+  "ictsch1", "ictsch2", "ictsch3",
+  "ictsch4", "ictsch4", "ictsch5",
+  "ictsch5", "ictsch6", "ictsch6",
+  "ictsch7", "ictsch8", "ictsch9", 
+  "ictsch10"
 )
 
 items_self_ln <- c(
@@ -99,11 +104,13 @@ items_access <- c(
   "access_4", "access_5", "access_6"
 )
 
-items <- c(items_dse, items_sch_use, items_self_ln, items_ocio, items_access)
+items_mimic <- c("SENWT", "sex", "ESCS", "ICTENQ", "ICTHOME", "ICTWKEND", "SDLEFF", "gen1", "gen2", "gen3",
+  "gen4", "gen5", "gen6",
+  "spec1", "spec2", "spec3")
 
 proc_data <- proc_data |>
   filter(if_any(all_of(items_dse), ~ !is.na(.))) |>
-  filter(if_any(all_of(items_sch_use), ~ !is.na(.))) |>
+  filter(if_any(all_of(items_ictsch), ~ !is.na(.))) |>
   filter(if_any(all_of(items_self_ln), ~ !is.na(.))) |>
   filter(if_any(all_of(items_ocio), ~ !is.na(.))) |>
   filter(if_any(all_of(items_access), ~ !is.na(.))) |>
@@ -112,13 +119,15 @@ proc_data <- proc_data |>
   ungroup()
 ```
 
-```{r}
-countries1 <- unique(data$CNT)
-countries2 <- unique(proc_data$CNT)
-setdiff(countries1, countries2)
-```
+# Datos para cada subescala
 
-Reportar que se pierde República Checa, Dinamarca y Singapur ya que no tienen casos en las preguntas de aprendizaje autónomo.
+```{r}
+dse_data <- proc_data |> select(SENWT, items_dse)
+ictsch_data <- proc_data |> select(SENWT, items_ictsch)
+self_ln_data <- proc_data |> select(SENWT, items_self_ln)
+ocio_data <- proc_data |> select(SENWT, items_ocio)
+access_data <- proc_data |> select(SENWT, items_access)
+```
 
 # Creación de tabla de descriptivos
 
@@ -163,80 +172,138 @@ descriptivos_df <- desc |>
 
 ```
 
-# Preparación de data para Mplus
+# Preparación de datos para Mplus (CFA)
 
 ```{r}
-prepareMplusData(proc_data, filename="mplus_files/pisadse.dat", inpfile = FALSE)
+prepareMplusData(dse_data, filename="mplus_files/dse.dat", inpfile = FALSE)
+prepareMplusData(ictsch_data, filename="mplus_files/ictsch.dat", inpfile = FALSE)
+prepareMplusData(self_ln_data, filename="mplus_files/selfln.dat", inpfile = FALSE)
+prepareMplusData(ocio_data, filename="mplus_files/ocio.dat", inpfile = FALSE)
+prepareMplusData(access_data, filename="mplus_files/access.dat", inpfile = FALSE)
 ```
 
-# Correr los modelos con runModels
+# Correr los modelos CFA
 
 ```{r}
 runModels("./mplus_files/")
 ```
 
-```{r}
-gen_dse <- proc_data |> select(gen1,gen2,gen3,gen4,gen5,gen6)
-spec_dse <- proc_data |> select(spec1, spec2, spec3)
-psych::alpha(gen_dse)
-psych::alpha(spec_dse)
-```
-# Leer los modelos con readModels
+# Extraer indicadores de ajuste y cargas factoriales
 
 ```{r}
-resultados <- readModels("./mplus_files_first_task/")
-# Matriz de pearsons
-pearsons <- resultados$pearson.out$sampstat$correlations
-# Matriz policorica
-polychoric <- resultados$polychoric.out$sampstat$correlations
+resultados <- readModels("./mplus_files/")
+dse_model <- resultados$dse.out
+ictsch_model <- resultados$ictsch.out
+self_ln_model <- resultados$selfln.out
+ocio_model <- resultados$ocio.out
+access_model <- resultados$access.out
+```
 
-diag(polychoric) <- 1
-par(mfrow = c(1, 1))
-corrplot::corrplot(pearsons, method = 'number', type = 'lower', tl.col = 'black')
-corrplot::corrplot(polychoric, method = 'number', type = 'lower', tl.col = 'black')
+## DSE
+```{r}
 
-png("figures/correlaciones.png", 
-    width = 3000, 
-    height = 1500, 
-    res = 300, 
-    bg = "transparent")
+dse_fit <- dse_model$summaries |> 
+  select(ChiSqM_Value, ChiSqM_PValue, ChiSqM_DF, CFI, TLI, RMSEA_Estimate, RMSEA_90CI_LB, RMSEA_90CI_UB)
 
-par(mfrow = c(1, 2))
-corrplot::corrplot(pearsons, method = 'number', type = 'lower', tl.col = 'black')
-corrplot::corrplot(polychoric, method = 'number', type = 'lower', tl.col = 'black')
-
-dev.off()
+dse_loadings <- dse_model$parameters$stdyx.standardized
 
 ```
+
+
+Chi² = 482.7; p < .001; Chi²/df = 25; RMSEA = .061 [.056, .066] ; CFI = .994; TLI = .992
+
+Loadings .84-.93
+Cor = .45
+Gen1 with Gen2 = .54
+
+## Uso de ICT para el aprendizaje
+
+```{r}
+
+ictsch_fit <- ictsch_model$summaries |> 
+  select(ChiSqM_Value, ChiSqM_PValue, ChiSqM_DF, CFI, TLI, RMSEA_Estimate, RMSEA_90CI_LB, RMSEA_90CI_UB)
+
+ictsch_loadings <- ictsch_model$parameters$stdyx.standardized
+
+ictshc_modindices <- ictsch_model$mod_indices
+```
+
+
+El modelo de "Uso de TIC para el apendizaje" presenta un gran desajuste inicial debido a errores correlacionados entre recolectar y almacenar datos y analizar datos (ambas variables referenciando plataformas de hojas de cálculo como Excel) y entre planear y manejar proyectos y llevar el progreso de tus proyectos con plataformas digitales. Al liberar ambos errores, se obtuvo un modelo con un ajuste pobre (Chi² = 1965.576; p < 0.001; Chi²/df = 33; CFI = .97; TLI = .96; RMSEA = .109; IC90% RMSEA [.105, .113]). Las cargas factoriales son altas, de .67 a .85, y la fiabilidad buena ().
+
+## Aprendizaje Autónomo
+
+```{r}
+
+self_ln_fit <- self_ln_model$summaries |> 
+  select(ChiSqM_Value, ChiSqM_PValue, ChiSqM_DF, CFI, TLI, RMSEA_Estimate, RMSEA_90CI_LB, RMSEA_90CI_UB)
+
+self_ln_loadings <- self_ln_model$parameters$stdyx.standardized
+
+self_ln_modindices <- self_ln_model$mod_indices
+
+```
+
+El modelo de "Aprendizaje autónomo" presenta un fuerte desajuste inicial debido a errores correlacionados entre   . Al liberar las covarianza entre los errores se consigue un ajuste pobre (Chi² = 471.848; p < 0.001; Chi²/df = 7; CFI = .99; TLI = .978; RMSEA = .116; IC90% RMSEA [.108, .125]). Las cargas factoriales presentan una magnitud alta, entre .73 y .82, y la fiabilidad es buena ().
+
+## Uso de TIC para Ocio
+
+```{r}
+
+ocio_fit <- ocio_model$summaries |> 
+  select(ChiSqM_Value, ChiSqM_PValue, ChiSqM_DF, CFI, TLI, RMSEA_Estimate, RMSEA_90CI_LB, RMSEA_90CI_UB)
+
+ocio_loadings <- ocio_model$parameters$stdyx.standardized
+
+ocio_modindices <- ocio_model$mod_indices
+
+```
+
+El modelo de "Uso de TIC para Ocio" presenta un desajuste inicial extremo, con un RMSEA muy por encima del umbral aceptable, de .219, un TLI de .843 y un CFI de .895, debido a una gran cantidad de ítems con errores correlacionados con la utilización de redes sociales. Al eliminar este ítem el modelo mejora, sin embargo sigue considerablemente fuera de los umbrales aceptables, siendo rechazado con un RMSEA de 0.16 y un TLI de 0.929.
+
+## Acceso a TIC en el hogar
+
+```{r}
+
+access_fit <- access_model$summaries |> 
+  select(ChiSqM_Value, ChiSqM_PValue, ChiSqM_DF, CFI, TLI, RMSEA_Estimate, RMSEA_90CI_LB, RMSEA_90CI_UB)
+
+access_loadings <- access_model$parameters$stdyx.standardized
+
+access_modindices <- access_model$mod_indices
+
+```
+
+El modelo de accesso también obtiene un desajiste extremo (RMSEA = 0.212; CFI = 0.863; TLI = .772).
+
+# Modelo MIMIC SEM
+
+```{r}
+
+mimic_data <- proc_data |> 
+  select(items_mimic)
+
+mimic_data$sex <- as.integer(mimic_data$sex)
+
+mimic_data <- mimic_data |> 
+  mutate(sex = if_else(sex==1, 0, 1))
+
+mimic_data$sex <- as.integer(mimic_data$sex)
+
+
+prepareMplusData(mimic_data, filename="mplus_files/sdsa.dat", inpfile = FALSE)
+
+```
+
+```{r}
+runModels("./mplus_files/mimic.inp")
+```
+
+chi = 2126.54; chi/df = 74; p < 0.001; RMSEA = .78; IC 90% RMSEA [0.076, 0.081]; CFI = .973; TLI = .963
+
+El efecto del sexo sobre la ADE fue significativo y de .226
 
 # Convertir a tablas flextable y exportar como docx
-
-## Nombres descriptivos
-
-```{r}
-nombres_nuevos <- c(
-  "PROGRAMM" = "Crear\nprograma",
-  "LOGICAL_" = "Pasos\nlógicos",
-  "IDENTIFY" = "Identificar\nerror",
-  "SEARCH_I" = "Buscar\ninformación",
-  "EVALUATE" = "Evaluar\ninformación",
-  "SHARE_CO" = "Compartir\ninformación",
-  "PAIR_COL" = "Colaborar\nen grupo",
-  "EXPLAIN_" = "Explicar cómo\ncompartir",
-  "WRITE_TE" = "Escribir/\neditar texto"
-)
-
-nombres_actuales <- rownames(pearsons)
-
-nombres_mapeados <- nombres_nuevos[nombres_actuales]
-
-rownames(pearsons) <- nombres_mapeados
-colnames(pearsons) <- nombres_mapeados
-
-rownames(polychoric) <- nombres_mapeados
-colnames(polychoric) <- nombres_mapeados
-```
-
 
 ## Funciones para estilizar las tablas
 

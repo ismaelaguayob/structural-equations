@@ -1,0 +1,685 @@
+Mplus VERSION 7 (Linux)
+MUTHEN & MUTHEN
+12/05/2025  11:42 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: AFC autoeficacia digital bidimensional
+  DATA:
+    FILE = "mplus_files/dse.dat";
+  VARIABLE:
+  NAMES = SENWT gen1 gen2 gen3 gen4 gen5 gen6 spec1 spec2 spec3;
+  USEVARIABLES = SENWT gen1 gen2 gen3 gen4 gen5 gen6 spec1 spec2 spec3;
+  CATEGORICAL = gen1 gen2 gen3 gen4 gen5 gen6 spec1 spec2 spec3;
+  WEIGHT = SENWT;
+  MISSING=.;
+
+  ANALYSIS:
+      ESTIMATOR = WLSMV;
+
+  MODEL:
+      gen_dse BY gen1-gen6*;
+      spec_dse BY spec1-spec3*;
+      gen_dse@1; spec_dse@1;
+      [gen_dse@0]; [spec_dse@0];
+      gen_dse WITH spec_dse;
+
+      gen1 WITH gen2; ! Correlación entre errores añadida
+
+  PLOT:
+      TYPE = PLOT1 PLOT2;
+
+  OUTPUT:
+    SAMPSTAT; STDYX; modindices (ALL); residual;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+AFC autoeficacia digital bidimensional
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        4900
+
+Number of dependent variables                                    9
+Number of independent variables                                  0
+Number of continuous latent variables                            2
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   GEN1        GEN2        GEN3        GEN4        GEN5        GEN6
+   SPEC1       SPEC2       SPEC3
+
+Continuous latent variables
+   GEN_DSE     SPEC_DSE
+
+Variables with special functions
+
+  Weight variable       SENWT
+
+Estimator                                                    WLSMV
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Parameterization                                             DELTA
+
+Input data file(s)
+  mplus_files/dse.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns           200
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              GEN1          GEN2          GEN3          GEN4          GEN5
+              ________      ________      ________      ________      ________
+ GEN1           0.961
+ GEN2           0.933         0.954
+ GEN3           0.931         0.927         0.953
+ GEN4           0.933         0.930         0.929         0.956
+ GEN5           0.926         0.924         0.924         0.926         0.950
+ GEN6           0.929         0.926         0.923         0.929         0.923
+ SPEC1          0.909         0.908         0.907         0.908         0.905
+ SPEC2          0.899         0.896         0.895         0.897         0.894
+ SPEC3          0.912         0.909         0.908         0.910         0.909
+
+
+           Covariance Coverage
+              GEN6          SPEC1         SPEC2         SPEC3
+              ________      ________      ________      ________
+ GEN6           0.951
+ SPEC1          0.906         0.934
+ SPEC2          0.896         0.893         0.920
+ SPEC3          0.908         0.905         0.899         0.934
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    GEN1
+      Category 1    0.075      353.718
+      Category 2    0.078      369.319
+      Category 3    0.229     1078.134
+      Category 4    0.617     2905.601
+    GEN2
+      Category 1    0.055      255.857
+      Category 2    0.101      469.201
+      Category 3    0.332     1546.520
+      Category 4    0.513     2389.625
+    GEN3
+      Category 1    0.060      279.033
+      Category 2    0.091      425.530
+      Category 3    0.289     1348.703
+      Category 4    0.560     2612.898
+    GEN4
+      Category 1    0.052      241.955
+      Category 2    0.094      438.620
+      Category 3    0.294     1376.342
+      Category 4    0.561     2624.932
+    GEN5
+      Category 1    0.063      291.377
+      Category 2    0.101      468.827
+      Category 3    0.321     1491.718
+      Category 4    0.515     2390.005
+    GEN6
+      Category 1    0.051      238.164
+      Category 2    0.101      472.181
+      Category 3    0.288     1340.703
+      Category 4    0.560     2606.876
+    SPEC1
+      Category 1    0.233     1064.635
+      Category 2    0.215      982.075
+      Category 3    0.297     1360.549
+      Category 4    0.255     1168.865
+    SPEC2
+      Category 1    0.185      838.262
+      Category 2    0.189      854.582
+      Category 3    0.321     1453.753
+      Category 4    0.305     1378.774
+    SPEC3
+      Category 1    0.185      843.604
+      Category 2    0.203      928.768
+      Category 3    0.324     1480.379
+      Category 4    0.288     1316.916
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              GEN1$1        GEN1$2        GEN1$3        GEN2$1        GEN2$2
+              ________      ________      ________      ________      ________
+      1        -1.438        -1.021        -0.298        -1.599        -1.013
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              GEN2$3        GEN3$1        GEN3$2        GEN3$3        GEN4$1
+              ________      ________      ________      ________      ________
+      1        -0.032        -1.556        -1.032        -0.151        -1.629
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              GEN4$2        GEN4$3        GEN5$1        GEN5$2        GEN5$3
+              ________      ________      ________      ________      ________
+      1        -1.057        -0.153        -1.532        -0.979        -0.037
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              GEN6$1        GEN6$2        GEN6$3        SPEC1$1       SPEC1$2
+              ________      ________      ________      ________      ________
+      1        -1.634        -1.026        -0.150        -0.730        -0.133
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              SPEC1$3       SPEC2$1       SPEC2$2       SPEC2$3       SPEC3$1
+              ________      ________      ________      ________      ________
+      1         0.658        -0.896        -0.321         0.511        -0.898
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              SPEC3$2       SPEC3$3
+              ________      ________
+      1        -0.285         0.559
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              GEN1          GEN2          GEN3          GEN4          GEN5
+              ________      ________      ________      ________      ________
+ GEN1
+ GEN2           0.868
+ GEN3           0.800         0.798
+ GEN4           0.742         0.729         0.823
+ GEN5           0.735         0.727         0.808         0.817
+ GEN6           0.754         0.729         0.753         0.765         0.782
+ SPEC1          0.180         0.294         0.273         0.292         0.372
+ SPEC2          0.291         0.410         0.359         0.377         0.464
+ SPEC3          0.275         0.391         0.351         0.353         0.450
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              GEN6          SPEC1         SPEC2         SPEC3
+              ________      ________      ________      ________
+ SPEC1          0.314
+ SPEC2          0.394         0.792
+ SPEC3          0.395         0.793         0.845
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       38
+
+Chi-Square Test of Model Fit
+
+          Value                            482.703*
+          Degrees of Freedom                    25
+          P-Value                           0.0000
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.061
+          90 Percent C.I.                    0.056  0.066
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                0.994
+          TLI                                0.992
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                          78233.412
+          Degrees of Freedom                    36
+          P-Value                           0.0000
+
+WRMR (Weighted Root Mean Square Residual)
+
+          Value                              2.065
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ GEN_DSE  BY
+    GEN1               0.845      0.007    121.279      0.000
+    GEN2               0.844      0.007    128.765      0.000
+    GEN3               0.917      0.004    212.289      0.000
+    GEN4               0.891      0.005    168.136      0.000
+    GEN5               0.897      0.005    187.486      0.000
+    GEN6               0.862      0.006    145.347      0.000
+
+ SPEC_DSE BY
+    SPEC1              0.850      0.006    145.964      0.000
+    SPEC2              0.926      0.004    222.901      0.000
+    SPEC3              0.921      0.004    211.890      0.000
+
+ GEN_DSE  WITH
+    SPEC_DSE           0.451      0.015     30.268      0.000
+
+ GEN1     WITH
+    GEN2               0.155      0.008     19.804      0.000
+
+ Means
+    GEN_DSE            0.000      0.000    999.000    999.000
+    SPEC_DSE           0.000      0.000    999.000    999.000
+
+ Thresholds
+    GEN1$1            -1.438      0.030    -47.194      0.000
+    GEN1$2            -1.021      0.025    -40.961      0.000
+    GEN1$3            -0.298      0.021    -14.322      0.000
+    GEN2$1            -1.599      0.034    -46.555      0.000
+    GEN2$2            -1.013      0.025    -40.673      0.000
+    GEN2$3            -0.032      0.021     -1.535      0.125
+    GEN3$1            -1.556      0.033    -46.616      0.000
+    GEN3$2            -1.032      0.025    -40.977      0.000
+    GEN3$3            -0.151      0.021     -7.277      0.000
+    GEN4$1            -1.629      0.036    -45.793      0.000
+    GEN4$2            -1.057      0.025    -41.435      0.000
+    GEN4$3            -0.153      0.021     -7.365      0.000
+    GEN5$1            -1.532      0.032    -47.566      0.000
+    GEN5$2            -0.979      0.025    -39.938      0.000
+    GEN5$3            -0.037      0.021     -1.800      0.072
+    GEN6$1            -1.634      0.035    -47.190      0.000
+    GEN6$2            -1.026      0.025    -41.139      0.000
+    GEN6$3            -0.150      0.021     -7.246      0.000
+    SPEC1$1           -0.730      0.023    -31.281      0.000
+    SPEC1$2           -0.133      0.021     -6.325      0.000
+    SPEC1$3            0.658      0.023     29.030      0.000
+    SPEC2$1           -0.896      0.024    -36.599      0.000
+    SPEC2$2           -0.321      0.021    -15.002      0.000
+    SPEC2$3            0.511      0.022     22.956      0.000
+    SPEC3$1           -0.898      0.025    -36.557      0.000
+    SPEC3$2           -0.285      0.021    -13.404      0.000
+    SPEC3$3            0.559      0.022     25.158      0.000
+
+ Variances
+    GEN_DSE            1.000      0.000    999.000    999.000
+    SPEC_DSE           1.000      0.000    999.000    999.000
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ GEN_DSE  BY
+    GEN1               0.845      0.007    121.279      0.000
+    GEN2               0.844      0.007    128.765      0.000
+    GEN3               0.917      0.004    212.289      0.000
+    GEN4               0.891      0.005    168.136      0.000
+    GEN5               0.897      0.005    187.486      0.000
+    GEN6               0.862      0.006    145.347      0.000
+
+ SPEC_DSE BY
+    SPEC1              0.850      0.006    145.964      0.000
+    SPEC2              0.926      0.004    222.901      0.000
+    SPEC3              0.921      0.004    211.890      0.000
+
+ GEN_DSE  WITH
+    SPEC_DSE           0.451      0.015     30.268      0.000
+
+ GEN1     WITH
+    GEN2               0.541      0.016     34.710      0.000
+
+ Means
+    GEN_DSE            0.000      0.000    999.000    999.000
+    SPEC_DSE           0.000      0.000    999.000    999.000
+
+ Thresholds
+    GEN1$1            -1.438      0.030    -47.194      0.000
+    GEN1$2            -1.021      0.025    -40.961      0.000
+    GEN1$3            -0.298      0.021    -14.322      0.000
+    GEN2$1            -1.599      0.034    -46.555      0.000
+    GEN2$2            -1.013      0.025    -40.673      0.000
+    GEN2$3            -0.032      0.021     -1.535      0.125
+    GEN3$1            -1.556      0.033    -46.616      0.000
+    GEN3$2            -1.032      0.025    -40.977      0.000
+    GEN3$3            -0.151      0.021     -7.277      0.000
+    GEN4$1            -1.629      0.036    -45.793      0.000
+    GEN4$2            -1.057      0.025    -41.435      0.000
+    GEN4$3            -0.153      0.021     -7.365      0.000
+    GEN5$1            -1.532      0.032    -47.566      0.000
+    GEN5$2            -0.979      0.025    -39.938      0.000
+    GEN5$3            -0.037      0.021     -1.800      0.072
+    GEN6$1            -1.634      0.035    -47.190      0.000
+    GEN6$2            -1.026      0.025    -41.139      0.000
+    GEN6$3            -0.150      0.021     -7.246      0.000
+    SPEC1$1           -0.730      0.023    -31.281      0.000
+    SPEC1$2           -0.133      0.021     -6.325      0.000
+    SPEC1$3            0.658      0.023     29.030      0.000
+    SPEC2$1           -0.896      0.024    -36.599      0.000
+    SPEC2$2           -0.321      0.021    -15.002      0.000
+    SPEC2$3            0.511      0.022     22.956      0.000
+    SPEC3$1           -0.898      0.025    -36.557      0.000
+    SPEC3$2           -0.285      0.021    -13.404      0.000
+    SPEC3$3            0.559      0.022     25.158      0.000
+
+ Variances
+    GEN_DSE            1.000      0.000    999.000    999.000
+    SPEC_DSE           1.000      0.000    999.000    999.000
+
+
+R-SQUARE
+
+    Observed                                        Two-Tailed   Residual
+    Variable        Estimate       S.E.  Est./S.E.    P-Value    Variance
+
+    GEN1               0.715      0.012     60.639      0.000      0.285
+    GEN2               0.712      0.011     64.383      0.000      0.288
+    GEN3               0.841      0.008    106.144      0.000      0.159
+    GEN4               0.794      0.009     84.068      0.000      0.206
+    GEN5               0.805      0.009     93.743      0.000      0.195
+    GEN6               0.744      0.010     72.673      0.000      0.256
+    SPEC1              0.723      0.010     72.982      0.000      0.277
+    SPEC2              0.858      0.008    111.450      0.000      0.142
+    SPEC3              0.849      0.008    105.945      0.000      0.151
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.635E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+RESIDUAL OUTPUT
+
+
+     ESTIMATED MODEL AND RESIDUALS (OBSERVED - ESTIMATED)
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              GEN1$1        GEN1$2        GEN1$3        GEN2$1        GEN2$2
+              ________      ________      ________      ________      ________
+      1        -1.438        -1.021        -0.298        -1.599        -1.013
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              GEN2$3        GEN3$1        GEN3$2        GEN3$3        GEN4$1
+              ________      ________      ________      ________      ________
+      1        -0.032        -1.556        -1.032        -0.151        -1.629
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              GEN4$2        GEN4$3        GEN5$1        GEN5$2        GEN5$3
+              ________      ________      ________      ________      ________
+      1        -1.057        -0.153        -1.532        -0.979        -0.037
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              GEN6$1        GEN6$2        GEN6$3        SPEC1$1       SPEC1$2
+              ________      ________      ________      ________      ________
+      1        -1.634        -1.026        -0.150        -0.730        -0.133
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              SPEC1$3       SPEC2$1       SPEC2$2       SPEC2$3       SPEC3$1
+              ________      ________      ________      ________      ________
+      1         0.658        -0.896        -0.321         0.511        -0.898
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              SPEC3$2       SPEC3$3
+              ________      ________
+      1        -0.285         0.559
+
+
+           Residuals for Means/Intercepts/Thresholds
+              GEN1$1        GEN1$2        GEN1$3        GEN2$1        GEN2$2
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              GEN2$3        GEN3$1        GEN3$2        GEN3$3        GEN4$1
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              GEN4$2        GEN4$3        GEN5$1        GEN5$2        GEN5$3
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              GEN6$1        GEN6$2        GEN6$3        SPEC1$1       SPEC1$2
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              SPEC1$3       SPEC2$1       SPEC2$2       SPEC2$3       SPEC3$1
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              SPEC3$2       SPEC3$3
+              ________      ________
+      1         0.000         0.000
+
+
+           Model Estimated Covariances/Correlations/Residual Correlations
+              GEN1          GEN2          GEN3          GEN4          GEN5
+              ________      ________      ________      ________      ________
+ GEN1
+ GEN2           0.868
+ GEN3           0.775         0.774
+ GEN4           0.753         0.752         0.818
+ GEN5           0.758         0.757         0.823         0.800
+ GEN6           0.729         0.728         0.791         0.769         0.774
+ SPEC1          0.324         0.324         0.352         0.342         0.344
+ SPEC2          0.353         0.353         0.383         0.372         0.375
+ SPEC3          0.351         0.351         0.381         0.370         0.373
+
+
+           Model Estimated Covariances/Correlations/Residual Correlations
+              GEN6          SPEC1         SPEC2         SPEC3
+              ________      ________      ________      ________
+ SPEC1          0.331
+ SPEC2          0.360         0.787
+ SPEC3          0.358         0.783         0.853
+
+
+           Residuals for Covariances/Correlations/Residual Correlations
+              GEN1          GEN2          GEN3          GEN4          GEN5
+              ________      ________      ________      ________      ________
+ GEN1
+ GEN2           0.000
+ GEN3           0.024         0.024
+ GEN4          -0.012        -0.023         0.006
+ GEN5          -0.023        -0.030        -0.015         0.018
+ GEN6           0.025         0.001        -0.038        -0.003         0.008
+ SPEC1         -0.145        -0.029        -0.079        -0.050         0.028
+ SPEC2         -0.063         0.057        -0.024         0.004         0.089
+ SPEC3         -0.077         0.040        -0.030        -0.018         0.077
+
+
+           Residuals for Covariances/Correlations/Residual Correlations
+              GEN6          SPEC1         SPEC2         SPEC3
+              ________      ________      ________      ________
+ SPEC1         -0.017
+ SPEC2          0.034         0.005
+ SPEC3          0.036         0.010        -0.008
+
+
+MODEL MODIFICATION INDICES
+
+Minimum M.I. value for printing the modification index    10.000
+
+                            M.I.     E.P.C.  Std E.P.C.  StdYX E.P.C.
+
+ON/BY Statements
+
+GEN1     ON SPEC_DSE /
+SPEC_DSE BY GEN1          129.740    -0.150     -0.150       -0.150
+GEN2     ON SPEC_DSE /
+SPEC_DSE BY GEN2           17.389     0.048      0.048        0.048
+GEN3     ON SPEC_DSE /
+SPEC_DSE BY GEN3           35.637    -0.073     -0.073       -0.073
+GEN5     ON SPEC_DSE /
+SPEC_DSE BY GEN5          117.425     0.124      0.124        0.124
+SPEC1    ON GEN_DSE  /
+GEN_DSE  BY SPEC1          83.913    -0.093     -0.093       -0.093
+SPEC2    ON GEN_DSE  /
+GEN_DSE  BY SPEC2          33.510     0.061      0.061        0.061
+
+ON Statements
+
+GEN_DSE  ON GEN1          117.026     0.256      0.256        0.256
+GEN_DSE  ON GEN3           35.621     0.130      0.130        0.130
+GEN_DSE  ON GEN5          117.440    -0.218     -0.218       -0.218
+GEN_DSE  ON SPEC1          83.915    -0.074     -0.074       -0.074
+GEN_DSE  ON SPEC2          33.509     0.048      0.048        0.048
+SPEC_DSE ON GEN1          117.044    -0.116     -0.116       -0.116
+SPEC_DSE ON GEN3           35.636    -0.059     -0.059       -0.059
+SPEC_DSE ON GEN5          117.424     0.098      0.098        0.098
+SPEC_DSE ON SPEC1          83.909     0.164      0.164        0.164
+SPEC_DSE ON SPEC2          33.514    -0.107     -0.107       -0.107
+GEN1     ON GEN3           32.007     0.047      0.047        0.047
+GEN1     ON GEN5           15.139    -0.036     -0.036       -0.036
+GEN1     ON GEN6           20.016     0.040      0.040        0.040
+GEN1     ON SPEC1         145.679    -0.111     -0.111       -0.111
+GEN1     ON SPEC2          81.677    -0.076     -0.076       -0.076
+GEN1     ON SPEC3          91.291    -0.079     -0.079       -0.079
+GEN2     ON GEN3           32.476     0.047      0.047        0.047
+GEN2     ON GEN4           13.787    -0.035     -0.035       -0.035
+GEN2     ON GEN5           26.304    -0.047     -0.047       -0.047
+GEN2     ON SPEC2          25.667     0.037      0.037        0.037
+GEN2     ON SPEC3          18.564     0.031      0.031        0.031
+GEN3     ON GEN1           45.673     0.058      0.058        0.058
+GEN3     ON GEN2           46.213     0.058      0.058        0.058
+GEN3     ON GEN5           13.202    -0.029     -0.029       -0.029
+GEN3     ON GEN6           46.156    -0.061     -0.061       -0.061
+GEN3     ON SPEC1          46.246    -0.058     -0.058       -0.058
+GEN3     ON SPEC2          20.265    -0.035     -0.035       -0.035
+GEN3     ON SPEC3          22.594    -0.036     -0.036       -0.036
+GEN4     ON GEN2           17.064    -0.040     -0.040       -0.040
+GEN4     ON GEN5           21.055     0.036      0.036        0.036
+GEN4     ON SPEC1          13.339    -0.031     -0.031       -0.031
+GEN5     ON GEN1           22.996    -0.045     -0.045       -0.045
+GEN5     ON GEN2           34.472    -0.056     -0.056       -0.056
+GEN5     ON GEN3           13.200    -0.029     -0.029       -0.029
+GEN5     ON GEN4           21.057     0.036      0.036        0.036
+GEN5     ON SPEC1          59.360     0.061      0.061        0.061
+GEN5     ON SPEC2         111.482     0.075      0.075        0.075
+GEN5     ON SPEC3         100.126     0.071      0.071        0.071
+GEN6     ON GEN1           21.224     0.042      0.042        0.042
+GEN6     ON GEN3           46.151    -0.061     -0.061       -0.061
+GEN6     ON SPEC2          10.324     0.024      0.024        0.024
+GEN6     ON SPEC3          11.015     0.025      0.025        0.025
+SPEC1    ON GEN1          129.946    -0.095     -0.095       -0.095
+SPEC1    ON GEN2           62.314    -0.062     -0.062       -0.062
+SPEC1    ON GEN3           86.433    -0.071     -0.071       -0.071
+SPEC1    ON GEN4           66.943    -0.064     -0.064       -0.064
+SPEC1    ON GEN5           23.655    -0.036     -0.036       -0.036
+SPEC1    ON GEN6           46.421    -0.053     -0.053       -0.053
+SPEC1    ON SPEC3          33.511     0.091      0.091        0.091
+SPEC2    ON GEN2           37.511     0.048      0.048        0.048
+SPEC2    ON GEN4           16.701     0.032      0.032        0.032
+SPEC2    ON GEN5           66.783     0.061      0.061        0.061
+SPEC2    ON GEN6           28.730     0.042      0.042        0.042
+SPEC2    ON SPEC3          83.914    -0.165     -0.165       -0.165
+SPEC3    ON GEN2           11.804     0.026      0.026        0.026
+SPEC3    ON GEN5           33.814     0.043      0.043        0.043
+SPEC3    ON GEN6           12.982     0.028      0.028        0.028
+SPEC3    ON SPEC1          33.514     0.091      0.091        0.091
+SPEC3    ON SPEC2          83.907    -0.165     -0.165       -0.165
+
+WITH Statements
+
+GEN1     WITH GEN_DSE     129.744     0.266      0.266        0.497
+GEN1     WITH SPEC_DSE    129.741    -0.120     -0.120       -0.224
+GEN2     WITH GEN_DSE      17.397    -0.085     -0.085       -0.159
+GEN2     WITH SPEC_DSE     17.391     0.038      0.038        0.072
+GEN3     WITH GEN_DSE      35.631     0.130      0.130        0.326
+GEN3     WITH SPEC_DSE     35.636    -0.059     -0.059       -0.147
+GEN3     WITH GEN1         32.006     0.047      0.047        0.220
+GEN3     WITH GEN2         32.480     0.047      0.047        0.221
+GEN4     WITH GEN2         13.784    -0.035     -0.035       -0.144
+GEN5     WITH GEN_DSE     117.424    -0.218     -0.218       -0.494
+GEN5     WITH SPEC_DSE    117.425     0.098      0.098        0.223
+GEN5     WITH GEN1         15.139    -0.036     -0.036       -0.152
+GEN5     WITH GEN2         26.301    -0.047     -0.047       -0.200
+GEN5     WITH GEN3         13.201    -0.029     -0.029       -0.167
+GEN5     WITH GEN4         21.057     0.036      0.036        0.178
+GEN6     WITH GEN1         20.015     0.040      0.040        0.146
+GEN6     WITH GEN3         46.154    -0.061     -0.061       -0.302
+SPEC1    WITH GEN_DSE      83.913    -0.074     -0.074       -0.141
+SPEC1    WITH SPEC_DSE     83.910     0.164      0.164        0.311
+SPEC1    WITH GEN1         88.984    -0.152     -0.152       -0.542
+SPEC1    WITH GEN3         32.869    -0.085     -0.085       -0.404
+SPEC1    WITH GEN4         13.004    -0.053     -0.053       -0.222
+SPEC2    WITH GEN_DSE      33.511     0.048      0.048        0.128
+SPEC2    WITH SPEC_DSE     33.513    -0.107     -0.107       -0.284
+SPEC2    WITH GEN1         18.641    -0.067     -0.067       -0.333
+SPEC2    WITH GEN2         23.160     0.063      0.063        0.313
+SPEC2    WITH GEN5         60.088     0.100      0.100        0.597
+SPEC3    WITH GEN1         29.441    -0.082     -0.082       -0.397
+SPEC3    WITH GEN2         11.979     0.045      0.045        0.215
+SPEC3    WITH GEN5         46.658     0.086      0.086        0.503
+SPEC3    WITH SPEC1        33.513     0.091      0.091        0.443
+SPEC3    WITH SPEC2        83.911    -0.165     -0.165       -1.123
+
+
+PLOT INFORMATION
+
+The following plots are available:
+
+  Histograms of sample values
+  Scatterplots (sample values)
+  Sample proportions and estimated probabilities
+  Item characteristic curves
+  Information curves
+
+     Beginning Time:  23:42:08
+        Ending Time:  23:42:08
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen

@@ -1,0 +1,546 @@
+Mplus VERSION 7 (Linux)
+MUTHEN & MUTHEN
+12/05/2025  11:42 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: AFC acceso a TIC en el hogar
+  DATA:
+    FILE = "mplus_files/access.dat";
+  VARIABLE:
+  NAMES = SENWT access_1 access_2 access_3 access_4 access_5 access_6;
+  USEVARIABLES = SENWT access_1 access_2 access_3 access_4 access_5 access_6;
+  CATEGORICAL = access_1 access_2 access_3 access_4 access_5 access_6;
+  WEIGHT = SENWT;
+  MISSING=.;
+
+  ANALYSIS:
+      ESTIMATOR = WLSMV;
+
+  MODEL:
+    access BY access_1-access_6*;
+    access@1; [access@0];
+
+  OUTPUT:
+    SAMPSTAT; STDYX; modindices (ALL); residual;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+AFC acceso a TIC en el hogar
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        4900
+
+Number of dependent variables                                    6
+Number of independent variables                                  0
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   ACCESS_1    ACCESS_2    ACCESS_3    ACCESS_4    ACCESS_5    ACCESS_6
+
+Continuous latent variables
+   ACCESS
+
+Variables with special functions
+
+  Weight variable       SENWT
+
+Estimator                                                    WLSMV
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Parameterization                                             DELTA
+
+Input data file(s)
+  mplus_files/access.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            45
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              ACCESS_1      ACCESS_2      ACCESS_3      ACCESS_4      ACCESS_5
+              ________      ________      ________      ________      ________
+ ACCESS_1       0.985
+ ACCESS_2       0.968         0.977
+ ACCESS_3       0.973         0.966         0.982
+ ACCESS_4       0.965         0.958         0.963         0.972
+ ACCESS_5       0.972         0.966         0.973         0.963         0.981
+ ACCESS_6       0.976         0.969         0.976         0.967         0.976
+
+
+           Covariance Coverage
+              ACCESS_6
+              ________
+ ACCESS_6       0.984
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    ACCESS_1
+      Category 1    0.036      171.829
+      Category 2    0.134      648.410
+      Category 3    0.120      581.313
+      Category 4    0.185      892.656
+      Category 5    0.265     1278.854
+      Category 6    0.260     1254.837
+    ACCESS_2
+      Category 1    0.033      155.711
+      Category 2    0.040      191.586
+      Category 3    0.057      270.459
+      Category 4    0.078      371.259
+      Category 5    0.281     1342.906
+      Category 6    0.512     2451.148
+    ACCESS_3
+      Category 1    0.083      398.278
+      Category 2    0.359     1729.272
+      Category 3    0.110      528.423
+      Category 4    0.143      687.389
+      Category 5    0.156      748.835
+      Category 6    0.150      721.150
+    ACCESS_4
+      Category 1    0.033      155.943
+      Category 2    0.096      455.682
+      Category 3    0.067      317.186
+      Category 4    0.117      556.564
+      Category 5    0.267     1267.748
+      Category 6    0.421     1998.650
+    ACCESS_5
+      Category 1    0.046      222.761
+      Category 2    0.349     1674.219
+      Category 3    0.136      651.816
+      Category 4    0.172      824.797
+      Category 5    0.163      780.200
+      Category 6    0.134      644.237
+    ACCESS_6
+      Category 1    0.051      246.915
+      Category 2    0.242     1167.711
+      Category 3    0.116      560.562
+      Category 4    0.165      796.774
+      Category 5    0.205      988.492
+      Category 6    0.219     1055.823
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              ACCESS_1      ACCESS_1      ACCESS_1      ACCESS_1      ACCESS_1
+              ________      ________      ________      ________      ________
+      1        -1.804        -0.955        -0.553        -0.062         0.644
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              ACCESS_2      ACCESS_2      ACCESS_2      ACCESS_2      ACCESS_2
+              ________      ________      ________      ________      ________
+      1        -1.845        -1.457        -1.130        -0.818        -0.031
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              ACCESS_3      ACCESS_3      ACCESS_3      ACCESS_3      ACCESS_3
+              ________      ________      ________      ________      ________
+      1        -1.387        -0.146         0.130         0.509         1.037
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              ACCESS_4      ACCESS_4      ACCESS_4      ACCESS_4      ACCESS_4
+              ________      ________      ________      ________      ________
+      1        -1.841        -1.132        -0.858        -0.489         0.200
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              ACCESS_5      ACCESS_5      ACCESS_5      ACCESS_5      ACCESS_5
+              ________      ________      ________      ________      ________
+      1        -1.681        -0.265         0.078         0.533         1.106
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              ACCESS_6      ACCESS_6      ACCESS_6      ACCESS_6      ACCESS_6
+              ________      ________      ________      ________      ________
+      1        -1.633        -0.543        -0.227         0.190         0.775
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              ACCESS_1      ACCESS_2      ACCESS_3      ACCESS_4      ACCESS_5
+              ________      ________      ________      ________      ________
+ ACCESS_1
+ ACCESS_2       0.575
+ ACCESS_3       0.285         0.235
+ ACCESS_4       0.612         0.733         0.298
+ ACCESS_5       0.333         0.175         0.485         0.348
+ ACCESS_6       0.483         0.424         0.343         0.502         0.473
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              ACCESS_6
+              ________
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       36
+
+Chi-Square Test of Model Fit
+
+          Value                           1998.096*
+          Degrees of Freedom                     9
+          P-Value                           0.0000
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.212
+          90 Percent C.I.                    0.205  0.220
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                0.863
+          TLI                                0.772
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                          14558.534
+          Degrees of Freedom                    15
+          P-Value                           0.0000
+
+WRMR (Weighted Root Mean Square Residual)
+
+          Value                              5.051
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ ACCESS   BY
+    ACCESS_1           0.707      0.009     75.309      0.000
+    ACCESS_2           0.766      0.009     85.248      0.000
+    ACCESS_3           0.483      0.012     41.606      0.000
+    ACCESS_4           0.855      0.007    114.880      0.000
+    ACCESS_5           0.553      0.011     48.937      0.000
+    ACCESS_6           0.661      0.010     67.578      0.000
+
+ Means
+    ACCESS             0.000      0.000    999.000    999.000
+
+ Thresholds
+    ACCESS_1$1        -1.804      0.039    -46.334      0.000
+    ACCESS_1$2        -0.955      0.024    -39.083      0.000
+    ACCESS_1$3        -0.553      0.021    -25.766      0.000
+    ACCESS_1$4        -0.062      0.020     -3.054      0.002
+    ACCESS_1$5         0.644      0.022     29.267      0.000
+    ACCESS_2$1        -1.845      0.041    -45.421      0.000
+    ACCESS_2$2        -1.457      0.031    -47.225      0.000
+    ACCESS_2$3        -1.130      0.026    -43.110      0.000
+    ACCESS_2$4        -0.818      0.023    -35.385      0.000
+    ACCESS_2$5        -0.031      0.020     -1.528      0.127
+    ACCESS_3$1        -1.387      0.029    -47.802      0.000
+    ACCESS_3$2        -0.146      0.020     -7.130      0.000
+    ACCESS_3$3         0.130      0.020      6.354      0.000
+    ACCESS_3$4         0.509      0.021     23.688      0.000
+    ACCESS_3$5         1.037      0.025     40.884      0.000
+    ACCESS_4$1        -1.841      0.040    -45.510      0.000
+    ACCESS_4$2        -1.132      0.026    -43.712      0.000
+    ACCESS_4$3        -0.858      0.023    -36.716      0.000
+    ACCESS_4$4        -0.489      0.021    -22.917      0.000
+    ACCESS_4$5         0.200      0.021      9.681      0.000
+    ACCESS_5$1        -1.681      0.034    -49.088      0.000
+    ACCESS_5$2        -0.265      0.021    -12.869      0.000
+    ACCESS_5$3         0.078      0.020      3.833      0.000
+    ACCESS_5$4         0.533      0.022     24.607      0.000
+    ACCESS_5$5         1.106      0.026     43.202      0.000
+    ACCESS_6$1        -1.633      0.034    -48.090      0.000
+    ACCESS_6$2        -0.543      0.022    -25.054      0.000
+    ACCESS_6$3        -0.227      0.021    -11.015      0.000
+    ACCESS_6$4         0.190      0.020      9.309      0.000
+    ACCESS_6$5         0.775      0.023     34.227      0.000
+
+ Variances
+    ACCESS             1.000      0.000    999.000    999.000
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ ACCESS   BY
+    ACCESS_1           0.707      0.009     75.309      0.000
+    ACCESS_2           0.766      0.009     85.248      0.000
+    ACCESS_3           0.483      0.012     41.606      0.000
+    ACCESS_4           0.855      0.007    114.880      0.000
+    ACCESS_5           0.553      0.011     48.937      0.000
+    ACCESS_6           0.661      0.010     67.578      0.000
+
+ Means
+    ACCESS             0.000      0.000    999.000    999.000
+
+ Thresholds
+    ACCESS_1$1        -1.804      0.039    -46.334      0.000
+    ACCESS_1$2        -0.955      0.024    -39.083      0.000
+    ACCESS_1$3        -0.553      0.021    -25.766      0.000
+    ACCESS_1$4        -0.062      0.020     -3.054      0.002
+    ACCESS_1$5         0.644      0.022     29.267      0.000
+    ACCESS_2$1        -1.845      0.041    -45.421      0.000
+    ACCESS_2$2        -1.457      0.031    -47.225      0.000
+    ACCESS_2$3        -1.130      0.026    -43.110      0.000
+    ACCESS_2$4        -0.818      0.023    -35.385      0.000
+    ACCESS_2$5        -0.031      0.020     -1.528      0.127
+    ACCESS_3$1        -1.387      0.029    -47.802      0.000
+    ACCESS_3$2        -0.146      0.020     -7.130      0.000
+    ACCESS_3$3         0.130      0.020      6.354      0.000
+    ACCESS_3$4         0.509      0.021     23.688      0.000
+    ACCESS_3$5         1.037      0.025     40.884      0.000
+    ACCESS_4$1        -1.841      0.040    -45.510      0.000
+    ACCESS_4$2        -1.132      0.026    -43.712      0.000
+    ACCESS_4$3        -0.858      0.023    -36.716      0.000
+    ACCESS_4$4        -0.489      0.021    -22.917      0.000
+    ACCESS_4$5         0.200      0.021      9.681      0.000
+    ACCESS_5$1        -1.681      0.034    -49.088      0.000
+    ACCESS_5$2        -0.265      0.021    -12.869      0.000
+    ACCESS_5$3         0.078      0.020      3.833      0.000
+    ACCESS_5$4         0.533      0.022     24.607      0.000
+    ACCESS_5$5         1.106      0.026     43.202      0.000
+    ACCESS_6$1        -1.633      0.034    -48.090      0.000
+    ACCESS_6$2        -0.543      0.022    -25.054      0.000
+    ACCESS_6$3        -0.227      0.021    -11.015      0.000
+    ACCESS_6$4         0.190      0.020      9.309      0.000
+    ACCESS_6$5         0.775      0.023     34.227      0.000
+
+ Variances
+    ACCESS             1.000      0.000    999.000    999.000
+
+
+R-SQUARE
+
+    Observed                                        Two-Tailed   Residual
+    Variable        Estimate       S.E.  Est./S.E.    P-Value    Variance
+
+    ACCESS_1           0.500      0.013     37.655      0.000      0.500
+    ACCESS_2           0.587      0.014     42.624      0.000      0.413
+    ACCESS_3           0.233      0.011     20.803      0.000      0.767
+    ACCESS_4           0.730      0.013     57.440      0.000      0.270
+    ACCESS_5           0.305      0.012     24.468      0.000      0.695
+    ACCESS_6           0.437      0.013     33.789      0.000      0.563
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.184E-01
+       (ratio of smallest to largest eigenvalue)
+
+
+RESIDUAL OUTPUT
+
+
+     ESTIMATED MODEL AND RESIDUALS (OBSERVED - ESTIMATED)
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              ACCESS_1      ACCESS_1      ACCESS_1      ACCESS_1      ACCESS_1
+              ________      ________      ________      ________      ________
+      1        -1.804        -0.955        -0.553        -0.062         0.644
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              ACCESS_2      ACCESS_2      ACCESS_2      ACCESS_2      ACCESS_2
+              ________      ________      ________      ________      ________
+      1        -1.845        -1.457        -1.130        -0.818        -0.031
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              ACCESS_3      ACCESS_3      ACCESS_3      ACCESS_3      ACCESS_3
+              ________      ________      ________      ________      ________
+      1        -1.387        -0.146         0.130         0.509         1.037
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              ACCESS_4      ACCESS_4      ACCESS_4      ACCESS_4      ACCESS_4
+              ________      ________      ________      ________      ________
+      1        -1.841        -1.132        -0.858        -0.489         0.200
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              ACCESS_5      ACCESS_5      ACCESS_5      ACCESS_5      ACCESS_5
+              ________      ________      ________      ________      ________
+      1        -1.681        -0.265         0.078         0.533         1.106
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              ACCESS_6      ACCESS_6      ACCESS_6      ACCESS_6      ACCESS_6
+              ________      ________      ________      ________      ________
+      1        -1.633        -0.543        -0.227         0.190         0.775
+
+
+           Residuals for Means/Intercepts/Thresholds
+              ACCESS_1      ACCESS_1      ACCESS_1      ACCESS_1      ACCESS_1
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              ACCESS_2      ACCESS_2      ACCESS_2      ACCESS_2      ACCESS_2
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              ACCESS_3      ACCESS_3      ACCESS_3      ACCESS_3      ACCESS_3
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              ACCESS_4      ACCESS_4      ACCESS_4      ACCESS_4      ACCESS_4
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              ACCESS_5      ACCESS_5      ACCESS_5      ACCESS_5      ACCESS_5
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              ACCESS_6      ACCESS_6      ACCESS_6      ACCESS_6      ACCESS_6
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Model Estimated Covariances/Correlations/Residual Correlations
+              ACCESS_1      ACCESS_2      ACCESS_3      ACCESS_4      ACCESS_5
+              ________      ________      ________      ________      ________
+ ACCESS_1
+ ACCESS_2       0.541
+ ACCESS_3       0.341         0.370
+ ACCESS_4       0.604         0.655         0.412
+ ACCESS_5       0.391         0.423         0.267         0.472
+ ACCESS_6       0.467         0.506         0.319         0.565         0.365
+
+
+           Model Estimated Covariances/Correlations/Residual Correlations
+              ACCESS_6
+              ________
+
+
+           Residuals for Covariances/Correlations/Residual Correlations
+              ACCESS_1      ACCESS_2      ACCESS_3      ACCESS_4      ACCESS_5
+              ________      ________      ________      ________      ________
+ ACCESS_1
+ ACCESS_2       0.034
+ ACCESS_3      -0.056        -0.135
+ ACCESS_4       0.008         0.078        -0.114
+ ACCESS_5      -0.058        -0.248         0.218        -0.124
+ ACCESS_6       0.016        -0.082         0.024        -0.063         0.108
+
+
+           Residuals for Covariances/Correlations/Residual Correlations
+              ACCESS_6
+              ________
+
+
+MODEL MODIFICATION INDICES
+
+Minimum M.I. value for printing the modification index    10.000
+
+                            M.I.     E.P.C.  Std E.P.C.  StdYX E.P.C.
+
+ON Statements
+
+ACCESS_1 ON ACCESS_2       26.048     0.067      0.067        0.067
+ACCESS_1 ON ACCESS_3       37.054    -0.076     -0.076       -0.076
+ACCESS_1 ON ACCESS_5       44.913    -0.083     -0.083       -0.083
+ACCESS_2 ON ACCESS_1       26.040     0.067      0.067        0.067
+ACCESS_2 ON ACCESS_3      188.924    -0.184     -0.184       -0.184
+ACCESS_2 ON ACCESS_4      637.995     0.345      0.345        0.345
+ACCESS_2 ON ACCESS_5      568.667    -0.337     -0.337       -0.337
+ACCESS_2 ON ACCESS_6       80.832    -0.126     -0.126       -0.126
+ACCESS_3 ON ACCESS_1       37.059    -0.076     -0.076       -0.076
+ACCESS_3 ON ACCESS_2      188.920    -0.184     -0.184       -0.184
+ACCESS_3 ON ACCESS_4      173.203    -0.177     -0.177       -0.177
+ACCESS_3 ON ACCESS_5     1040.323     0.317      0.317        0.317
+ACCESS_4 ON ACCESS_2      638.009     0.345      0.345        0.345
+ACCESS_4 ON ACCESS_3      173.203    -0.177     -0.177       -0.177
+ACCESS_4 ON ACCESS_5      207.563    -0.199     -0.199       -0.199
+ACCESS_4 ON ACCESS_6       88.198    -0.129     -0.129       -0.129
+ACCESS_5 ON ACCESS_1       44.914    -0.083     -0.083       -0.083
+ACCESS_5 ON ACCESS_2      568.640    -0.337     -0.337       -0.337
+ACCESS_5 ON ACCESS_3     1040.334     0.317      0.317        0.317
+ACCESS_5 ON ACCESS_4      207.550    -0.199     -0.199       -0.199
+ACCESS_5 ON ACCESS_6      261.163     0.175      0.175        0.175
+ACCESS_6 ON ACCESS_2       80.831    -0.126     -0.126       -0.126
+ACCESS_6 ON ACCESS_4       88.200    -0.129     -0.129       -0.129
+ACCESS_6 ON ACCESS_5      261.152     0.175      0.175        0.175
+
+WITH Statements
+
+ACCESS_2 WITH ACCESS_1     26.044     0.067      0.067        0.148
+ACCESS_3 WITH ACCESS_1     37.057    -0.076     -0.076       -0.123
+ACCESS_3 WITH ACCESS_2    188.916    -0.184     -0.184       -0.327
+ACCESS_4 WITH ACCESS_2    638.022     0.345      0.345        1.033
+ACCESS_4 WITH ACCESS_3    173.199    -0.177     -0.177       -0.390
+ACCESS_5 WITH ACCESS_1     44.917    -0.083     -0.083       -0.140
+ACCESS_5 WITH ACCESS_2    568.650    -0.337     -0.337       -0.629
+ACCESS_5 WITH ACCESS_3   1040.328     0.317      0.317        0.434
+ACCESS_5 WITH ACCESS_4    207.557    -0.199     -0.199       -0.459
+ACCESS_6 WITH ACCESS_2     80.824    -0.126     -0.126       -0.260
+ACCESS_6 WITH ACCESS_4     88.193    -0.129     -0.129       -0.330
+ACCESS_6 WITH ACCESS_5    261.158     0.175      0.175        0.280
+
+
+     Beginning Time:  23:42:08
+        Ending Time:  23:42:08
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen

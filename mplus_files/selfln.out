@@ -1,0 +1,490 @@
+Mplus VERSION 7 (Linux)
+MUTHEN & MUTHEN
+12/05/2025  11:42 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: AFC aprendizaje autónomo
+  DATA:
+    FILE = "mplus_files/selfln.dat";
+  VARIABLE:
+  NAMES = SENWT self_ln1 self_ln2 self_ln3 self_ln4 self_ln5 self_ln6;
+  USEVARIABLES = SENWT self_ln1 self_ln2 self_ln3 self_ln4 self_ln5 self_ln6;
+  CATEGORICAL = self_ln1 self_ln2 self_ln3 self_ln4 self_ln5 self_ln6;
+  WEIGHT = SENWT;
+  MISSING=.;
+
+  ANALYSIS:
+      ESTIMATOR = WLSMV;
+
+  MODEL:
+      selfln BY self_ln1-self_ln6*;
+      selfln@1; [selfln@0];
+      self_ln1 WITH self_ln2;
+      self_ln5 WITH self_ln6;
+
+  OUTPUT:
+    SAMPSTAT; STDYX; modindices (ALL); residual;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+AFC aprendizaje autónomo
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        4900
+
+Number of dependent variables                                    6
+Number of independent variables                                  0
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   SELF_LN1    SELF_LN2    SELF_LN3    SELF_LN4    SELF_LN5    SELF_LN6
+
+Continuous latent variables
+   SELFLN
+
+Variables with special functions
+
+  Weight variable       SENWT
+
+Estimator                                                    WLSMV
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Parameterization                                             DELTA
+
+Input data file(s)
+  mplus_files/selfln.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            62
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              SELF_LN1      SELF_LN2      SELF_LN3      SELF_LN4      SELF_LN5
+              ________      ________      ________      ________      ________
+ SELF_LN1       0.624
+ SELF_LN2       0.354         0.614
+ SELF_LN3       0.348         0.349         0.613
+ SELF_LN4       0.363         0.349         0.353         0.623
+ SELF_LN5       0.357         0.347         0.344         0.357         0.619
+ SELF_LN6       0.346         0.340         0.337         0.343         0.344
+
+
+           Covariance Coverage
+              SELF_LN6
+              ________
+ SELF_LN6       0.603
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    SELF_LN1
+      Category 1    0.126      383.846
+      Category 2    0.189      575.986
+      Category 3    0.417     1272.456
+      Category 4    0.269      820.984
+    SELF_LN2
+      Category 1    0.102      304.905
+      Category 2    0.180      539.237
+      Category 3    0.420     1259.264
+      Category 4    0.299      895.261
+    SELF_LN3
+      Category 1    0.096      289.392
+      Category 2    0.217      652.534
+      Category 3    0.465     1397.328
+      Category 4    0.221      662.870
+    SELF_LN4
+      Category 1    0.083      256.497
+      Category 2    0.237      728.896
+      Category 3    0.476     1466.358
+      Category 4    0.204      629.336
+    SELF_LN5
+      Category 1    0.119      358.210
+      Category 2    0.303      916.376
+      Category 3    0.420     1268.312
+      Category 4    0.159      479.443
+    SELF_LN6
+      Category 1    0.102      301.479
+      Category 2    0.283      832.089
+      Category 3    0.449     1323.060
+      Category 4    0.166      487.862
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              SELF_LN1      SELF_LN1      SELF_LN1      SELF_LN2      SELF_LN2
+              ________      ________      ________      ________      ________
+      1        -1.147        -0.484         0.616        -1.272        -0.578
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              SELF_LN2      SELF_LN3      SELF_LN3      SELF_LN3      SELF_LN4
+              ________      ________      ________      ________      ________
+      1         0.529        -1.302        -0.485         0.769        -1.384
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              SELF_LN4      SELF_LN4      SELF_LN5      SELF_LN5      SELF_LN5
+              ________      ________      ________      ________      ________
+      1        -0.468         0.827        -1.182        -0.197         1.000
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              SELF_LN6      SELF_LN6      SELF_LN6
+              ________      ________      ________
+      1        -1.268        -0.292         0.971
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              SELF_LN1      SELF_LN2      SELF_LN3      SELF_LN4      SELF_LN5
+              ________      ________      ________      ________      ________
+ SELF_LN1
+ SELF_LN2       0.838
+ SELF_LN3       0.734         0.700
+ SELF_LN4       0.613         0.650         0.739
+ SELF_LN5       0.544         0.489         0.617         0.768
+ SELF_LN6       0.562         0.567         0.654         0.796         0.822
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              SELF_LN6
+              ________
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       26
+
+Chi-Square Test of Model Fit
+
+          Value                            471.848*
+          Degrees of Freedom                     7
+          P-Value                           0.0000
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.116
+          90 Percent C.I.                    0.108  0.125
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                0.990
+          TLI                                0.978
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                          45122.025
+          Degrees of Freedom                    15
+          P-Value                           0.0000
+
+WRMR (Weighted Root Mean Square Residual)
+
+          Value                              2.812
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ SELFLN   BY
+    SELF_LN1           0.752      0.011     71.449      0.000
+    SELF_LN2           0.728      0.012     61.178      0.000
+    SELF_LN3           0.859      0.008    102.646      0.000
+    SELF_LN4           0.927      0.007    125.323      0.000
+    SELF_LN5           0.778      0.010     80.645      0.000
+    SELF_LN6           0.820      0.009     91.649      0.000
+
+ SELF_LN1 WITH
+    SELF_LN2           0.291      0.012     23.504      0.000
+
+ SELF_LN5 WITH
+    SELF_LN6           0.183      0.012     15.775      0.000
+
+ Means
+    SELFLN             0.000      0.000    999.000    999.000
+
+ Thresholds
+    SELF_LN1$1        -1.147      0.032    -35.670      0.000
+    SELF_LN1$2        -0.484      0.027    -18.202      0.000
+    SELF_LN1$3         0.616      0.028     22.049      0.000
+    SELF_LN2$1        -1.272      0.034    -37.134      0.000
+    SELF_LN2$2        -0.578      0.027    -21.472      0.000
+    SELF_LN2$3         0.529      0.027     19.415      0.000
+    SELF_LN3$1        -1.302      0.035    -37.225      0.000
+    SELF_LN3$2        -0.485      0.027    -18.115      0.000
+    SELF_LN3$3         0.769      0.029     26.502      0.000
+    SELF_LN4$1        -1.384      0.036    -38.504      0.000
+    SELF_LN4$2        -0.468      0.026    -17.763      0.000
+    SELF_LN4$3         0.827      0.029     28.202      0.000
+    SELF_LN5$1        -1.182      0.033    -35.510      0.000
+    SELF_LN5$2        -0.197      0.026     -7.655      0.000
+    SELF_LN5$3         1.000      0.031     32.410      0.000
+    SELF_LN6$1        -1.268      0.035    -36.028      0.000
+    SELF_LN6$2        -0.292      0.026    -11.055      0.000
+    SELF_LN6$3         0.971      0.031     30.860      0.000
+
+ Variances
+    SELFLN             1.000      0.000    999.000    999.000
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ SELFLN   BY
+    SELF_LN1           0.752      0.011     71.449      0.000
+    SELF_LN2           0.728      0.012     61.178      0.000
+    SELF_LN3           0.859      0.008    102.646      0.000
+    SELF_LN4           0.927      0.007    125.323      0.000
+    SELF_LN5           0.778      0.010     80.645      0.000
+    SELF_LN6           0.820      0.009     91.649      0.000
+
+ SELF_LN1 WITH
+    SELF_LN2           0.642      0.014     44.570      0.000
+
+ SELF_LN5 WITH
+    SELF_LN6           0.510      0.021     24.001      0.000
+
+ Means
+    SELFLN             0.000      0.000    999.000    999.000
+
+ Thresholds
+    SELF_LN1$1        -1.147      0.032    -35.670      0.000
+    SELF_LN1$2        -0.484      0.027    -18.202      0.000
+    SELF_LN1$3         0.616      0.028     22.049      0.000
+    SELF_LN2$1        -1.272      0.034    -37.134      0.000
+    SELF_LN2$2        -0.578      0.027    -21.472      0.000
+    SELF_LN2$3         0.529      0.027     19.415      0.000
+    SELF_LN3$1        -1.302      0.035    -37.225      0.000
+    SELF_LN3$2        -0.485      0.027    -18.115      0.000
+    SELF_LN3$3         0.769      0.029     26.502      0.000
+    SELF_LN4$1        -1.384      0.036    -38.504      0.000
+    SELF_LN4$2        -0.468      0.026    -17.763      0.000
+    SELF_LN4$3         0.827      0.029     28.202      0.000
+    SELF_LN5$1        -1.182      0.033    -35.510      0.000
+    SELF_LN5$2        -0.197      0.026     -7.655      0.000
+    SELF_LN5$3         1.000      0.031     32.410      0.000
+    SELF_LN6$1        -1.268      0.035    -36.028      0.000
+    SELF_LN6$2        -0.292      0.026    -11.055      0.000
+    SELF_LN6$3         0.971      0.031     30.860      0.000
+
+ Variances
+    SELFLN             1.000      0.000    999.000    999.000
+
+
+R-SQUARE
+
+    Observed                                        Two-Tailed   Residual
+    Variable        Estimate       S.E.  Est./S.E.    P-Value    Variance
+
+    SELF_LN1           0.565      0.016     35.724      0.000      0.435
+    SELF_LN2           0.530      0.017     30.589      0.000      0.470
+    SELF_LN3           0.738      0.014     51.323      0.000      0.262
+    SELF_LN4           0.859      0.014     62.662      0.000      0.141
+    SELF_LN5           0.606      0.015     40.322      0.000      0.394
+    SELF_LN6           0.673      0.015     45.824      0.000      0.327
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.128E-01
+       (ratio of smallest to largest eigenvalue)
+
+
+RESIDUAL OUTPUT
+
+
+     ESTIMATED MODEL AND RESIDUALS (OBSERVED - ESTIMATED)
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              SELF_LN1      SELF_LN1      SELF_LN1      SELF_LN2      SELF_LN2
+              ________      ________      ________      ________      ________
+      1        -1.147        -0.484         0.616        -1.272        -0.578
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              SELF_LN2      SELF_LN3      SELF_LN3      SELF_LN3      SELF_LN4
+              ________      ________      ________      ________      ________
+      1         0.529        -1.302        -0.485         0.769        -1.384
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              SELF_LN4      SELF_LN4      SELF_LN5      SELF_LN5      SELF_LN5
+              ________      ________      ________      ________      ________
+      1        -0.468         0.827        -1.182        -0.197         1.000
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              SELF_LN6      SELF_LN6      SELF_LN6
+              ________      ________      ________
+      1        -1.268        -0.292         0.971
+
+
+           Residuals for Means/Intercepts/Thresholds
+              SELF_LN1      SELF_LN1      SELF_LN1      SELF_LN2      SELF_LN2
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              SELF_LN2      SELF_LN3      SELF_LN3      SELF_LN3      SELF_LN4
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              SELF_LN4      SELF_LN4      SELF_LN5      SELF_LN5      SELF_LN5
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              SELF_LN6      SELF_LN6      SELF_LN6
+              ________      ________      ________
+      1         0.000         0.000         0.000
+
+
+           Model Estimated Covariances/Correlations/Residual Correlations
+              SELF_LN1      SELF_LN2      SELF_LN3      SELF_LN4      SELF_LN5
+              ________      ________      ________      ________      ________
+ SELF_LN1
+ SELF_LN2       0.838
+ SELF_LN3       0.646         0.625
+ SELF_LN4       0.697         0.674         0.796
+ SELF_LN5       0.585         0.566         0.669         0.721
+ SELF_LN6       0.617         0.597         0.705         0.760         0.822
+
+
+           Model Estimated Covariances/Correlations/Residual Correlations
+              SELF_LN6
+              ________
+
+
+           Residuals for Covariances/Correlations/Residual Correlations
+              SELF_LN1      SELF_LN2      SELF_LN3      SELF_LN4      SELF_LN5
+              ________      ________      ________      ________      ________
+ SELF_LN1
+ SELF_LN2       0.000
+ SELF_LN3       0.088         0.075
+ SELF_LN4      -0.084        -0.025        -0.057
+ SELF_LN5      -0.041        -0.078        -0.051         0.047
+ SELF_LN6      -0.055        -0.030        -0.051         0.036         0.000
+
+
+           Residuals for Covariances/Correlations/Residual Correlations
+              SELF_LN6
+              ________
+
+
+MODEL MODIFICATION INDICES
+
+Minimum M.I. value for printing the modification index    10.000
+
+                            M.I.     E.P.C.  Std E.P.C.  StdYX E.P.C.
+
+ON Statements
+
+SELF_LN1 ON SELF_LN3      252.444     0.193      0.193        0.193
+SELF_LN1 ON SELF_LN4      100.758    -0.149     -0.149       -0.149
+SELF_LN1 ON SELF_LN5       24.414    -0.077     -0.077       -0.077
+SELF_LN1 ON SELF_LN6       39.170    -0.095     -0.095       -0.095
+SELF_LN2 ON SELF_LN3      103.735     0.134      0.134        0.134
+SELF_LN2 ON SELF_LN4       10.586    -0.048     -0.048       -0.048
+SELF_LN2 ON SELF_LN5       50.524    -0.119     -0.119       -0.119
+SELF_LN2 ON SELF_LN6       16.509    -0.063     -0.063       -0.063
+SELF_LN3 ON SELF_LN1      365.389     0.239      0.239        0.239
+SELF_LN3 ON SELF_LN2      241.254     0.209      0.209        0.209
+SELF_LN3 ON SELF_LN4      153.257    -0.173     -0.173       -0.173
+SELF_LN3 ON SELF_LN5       58.138    -0.115     -0.115       -0.115
+SELF_LN3 ON SELF_LN6       66.300    -0.118     -0.118       -0.118
+SELF_LN4 ON SELF_LN1      132.456    -0.179     -0.179       -0.179
+SELF_LN4 ON SELF_LN2       41.350    -0.099     -0.099       -0.099
+SELF_LN4 ON SELF_LN3      153.251    -0.173     -0.173       -0.173
+SELF_LN4 ON SELF_LN5      213.218     0.201      0.201        0.201
+SELF_LN4 ON SELF_LN6      197.885     0.187      0.187        0.187
+SELF_LN5 ON SELF_LN1       30.679    -0.084     -0.084       -0.084
+SELF_LN5 ON SELF_LN2       56.941    -0.123     -0.123       -0.123
+SELF_LN5 ON SELF_LN3       35.392    -0.085     -0.085       -0.085
+SELF_LN5 ON SELF_LN4      133.052     0.148      0.148        0.148
+SELF_LN6 ON SELF_LN1       39.389    -0.094     -0.094       -0.094
+SELF_LN6 ON SELF_LN2       20.400    -0.069     -0.069       -0.069
+SELF_LN6 ON SELF_LN3       44.452    -0.092     -0.092       -0.092
+SELF_LN6 ON SELF_LN4      124.007     0.139      0.139        0.139
+
+WITH Statements
+
+SELF_LN3 WITH SELF_LN1    252.436     0.193      0.193        0.573
+SELF_LN3 WITH SELF_LN2    103.734     0.134      0.134        0.382
+SELF_LN4 WITH SELF_LN1    100.765    -0.149     -0.149       -0.603
+SELF_LN4 WITH SELF_LN2     10.586    -0.048     -0.048       -0.186
+SELF_LN4 WITH SELF_LN3    153.252    -0.173     -0.173       -0.899
+SELF_LN5 WITH SELF_LN1     14.307    -0.057     -0.057       -0.137
+SELF_LN5 WITH SELF_LN2     40.060    -0.103     -0.103       -0.238
+SELF_LN5 WITH SELF_LN3     35.386    -0.085     -0.085       -0.264
+SELF_LN5 WITH SELF_LN4    133.063     0.148      0.148        0.629
+SELF_LN6 WITH SELF_LN1     29.009    -0.080     -0.080       -0.211
+SELF_LN6 WITH SELF_LN3     44.464    -0.092     -0.092       -0.314
+SELF_LN6 WITH SELF_LN4    123.988     0.139      0.139        0.646
+
+
+     Beginning Time:  23:42:09
+        Ending Time:  23:42:09
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen

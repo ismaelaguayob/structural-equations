@@ -1,0 +1,24 @@
+TITLE: AFC uso de TIC para el aprendizaje
+DATA:
+  FILE = "mplus_files/ictsch.dat";
+VARIABLE: 
+NAMES = SENWT ictsch1 ictsch2 ictsch3 ictsch4 ictsch5 ictsch6 ictsch7 ictsch8
+     ictsch9 ictsch10;
+USEVARIABLES = SENWT ictsch1 ictsch2 ictsch3 ictsch4 ictsch5 ictsch6 ictsch7 ictsch8
+     ictsch9 ictsch10;
+CATEGORICAL = ictsch1 ictsch2 ictsch3 ictsch4 ictsch5 ictsch6 ictsch7 ictsch8
+     ictsch9 ictsch10;
+WEIGHT = SENWT;
+MISSING=.;
+
+ANALYSIS:
+    ESTIMATOR = WLSMV;
+
+MODEL:
+    ictsch BY ictsch1-ictsch10*;
+    ictsch@1; [ictsch@0];
+    ictsch4 WITH ictsch5; ! Correlacion entre errores
+    ictsch7 WITH ictsch8; ! Correlacion entre errores
+    
+OUTPUT:
+  SAMPSTAT; STDYX; modindices (ALL); residual;

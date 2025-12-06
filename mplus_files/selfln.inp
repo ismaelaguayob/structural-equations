@@ -1,0 +1,21 @@
+TITLE: AFC aprendizaje autónomo
+DATA:
+  FILE = "mplus_files/selfln.dat";
+VARIABLE: 
+NAMES = SENWT self_ln1 self_ln2 self_ln3 self_ln4 self_ln5 self_ln6; 
+USEVARIABLES = SENWT self_ln1 self_ln2 self_ln3 self_ln4 self_ln5 self_ln6;
+CATEGORICAL = self_ln1 self_ln2 self_ln3 self_ln4 self_ln5 self_ln6;
+WEIGHT = SENWT;
+MISSING=.;
+
+ANALYSIS:
+    ESTIMATOR = WLSMV;
+
+MODEL:
+    selfln BY self_ln1-self_ln6*;
+    selfln@1; [selfln@0];
+    self_ln1 WITH self_ln2;
+    self_ln5 WITH self_ln6;
+
+OUTPUT:
+  SAMPSTAT; STDYX; modindices (ALL); residual;

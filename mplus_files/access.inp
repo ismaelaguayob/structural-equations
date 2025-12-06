@@ -1,0 +1,19 @@
+TITLE: AFC acceso a TIC en el hogar
+DATA:
+  FILE = "mplus_files/access.dat";
+VARIABLE: 
+NAMES = SENWT access_1 access_2 access_3 access_4 access_5 access_6;
+USEVARIABLES = SENWT access_1 access_2 access_3 access_4 access_5 access_6;
+CATEGORICAL = access_1 access_2 access_3 access_4 access_5 access_6;
+WEIGHT = SENWT;
+MISSING=.;
+
+ANALYSIS:
+    ESTIMATOR = WLSMV;
+
+MODEL:
+  access BY access_1-access_6*;
+  access@1; [access@0];
+
+OUTPUT:
+  SAMPSTAT; STDYX; modindices (ALL); residual;

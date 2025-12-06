@@ -1,0 +1,736 @@
+Mplus VERSION 7 (Linux)
+MUTHEN & MUTHEN
+12/05/2025  11:42 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: AFC uso de TIC para el aprendizaje
+  DATA:
+    FILE = "mplus_files/ictsch.dat";
+  VARIABLE:
+  NAMES = SENWT ictsch1 ictsch2 ictsch3 ictsch4 ictsch5 ictsch6 ictsch7 ictsch8
+       ictsch9 ictsch10;
+  USEVARIABLES = SENWT ictsch1 ictsch2 ictsch3 ictsch4 ictsch5 ictsch6 ictsch7 ictsch8
+       ictsch9 ictsch10;
+  CATEGORICAL = ictsch1 ictsch2 ictsch3 ictsch4 ictsch5 ictsch6 ictsch7 ictsch8
+       ictsch9 ictsch10;
+  WEIGHT = SENWT;
+  MISSING=.;
+
+  ANALYSIS:
+      ESTIMATOR = WLSMV;
+
+  MODEL:
+      ictsch BY ictsch1-ictsch10*;
+      ictsch@1; [ictsch@0];
+      ictsch4 WITH ictsch5; ! Correlacion entre errores
+      ictsch7 WITH ictsch8; ! Correlacion entre errores
+
+  OUTPUT:
+    SAMPSTAT; STDYX; modindices (ALL); residual;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+AFC uso de TIC para el aprendizaje
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        4900
+
+Number of dependent variables                                   10
+Number of independent variables                                  0
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   ICTSCH1     ICTSCH2     ICTSCH3     ICTSCH4     ICTSCH5     ICTSCH6
+   ICTSCH7     ICTSCH8     ICTSCH9     ICTSCH10
+
+Continuous latent variables
+   ICTSCH
+
+Variables with special functions
+
+  Weight variable       SENWT
+
+Estimator                                                    WLSMV
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Parameterization                                             DELTA
+
+Input data file(s)
+  mplus_files/ictsch.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns           124
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              ICTSCH1       ICTSCH2       ICTSCH3       ICTSCH4       ICTSCH5
+              ________      ________      ________      ________      ________
+ ICTSCH1        0.982
+ ICTSCH2        0.969         0.979
+ ICTSCH3        0.971         0.967         0.981
+ ICTSCH4        0.971         0.970         0.969         0.982
+ ICTSCH5        0.966         0.962         0.964         0.964         0.973
+ ICTSCH6        0.963         0.961         0.962         0.964         0.957
+ ICTSCH7        0.969         0.966         0.968         0.969         0.963
+ ICTSCH8        0.965         0.962         0.963         0.964         0.961
+ ICTSCH9        0.971         0.969         0.970         0.972         0.965
+ ICTSCH10       0.970         0.966         0.967         0.968         0.962
+
+
+           Covariance Coverage
+              ICTSCH6       ICTSCH7       ICTSCH8       ICTSCH9       ICTSCH10
+              ________      ________      ________      ________      ________
+ ICTSCH6        0.972
+ ICTSCH7        0.962         0.978
+ ICTSCH8        0.958         0.964         0.973
+ ICTSCH9        0.966         0.970         0.967         0.981
+ ICTSCH10       0.961         0.967         0.964         0.970         0.977
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    ICTSCH1
+      Category 1    0.243     1171.300
+      Category 2    0.225     1083.427
+      Category 3    0.323     1556.819
+      Category 4    0.153      737.637
+      Category 5    0.055      264.010
+    ICTSCH2
+      Category 1    0.154      738.756
+      Category 2    0.161      772.737
+      Category 3    0.335     1603.848
+      Category 4    0.258     1238.756
+      Category 5    0.092      440.173
+    ICTSCH3
+      Category 1    0.165      795.675
+      Category 2    0.164      790.534
+      Category 3    0.324     1559.318
+      Category 4    0.247     1189.089
+      Category 5    0.099      474.622
+    ICTSCH4
+      Category 1    0.261     1255.461
+      Category 2    0.190      913.616
+      Category 3    0.284     1363.210
+      Category 4    0.201      967.001
+      Category 5    0.064      308.728
+    ICTSCH5
+      Category 1    0.307     1463.325
+      Category 2    0.200      955.489
+      Category 3    0.265     1262.042
+      Category 4    0.171      815.776
+      Category 5    0.057      269.991
+    ICTSCH6
+      Category 1    0.277     1319.083
+      Category 2    0.207      986.682
+      Category 3    0.294     1398.528
+      Category 4    0.174      830.559
+      Category 5    0.048      228.227
+    ICTSCH7
+      Category 1    0.240     1151.120
+      Category 2    0.183      878.501
+      Category 3    0.310     1482.840
+      Category 4    0.197      941.700
+      Category 5    0.070      335.057
+    ICTSCH8
+      Category 1    0.258     1229.151
+      Category 2    0.170      809.998
+      Category 3    0.283     1348.470
+      Category 4    0.211     1006.561
+      Category 5    0.078      373.307
+    ICTSCH9
+      Category 1    0.211     1015.175
+      Category 2    0.172      828.874
+      Category 3    0.327     1575.108
+      Category 4    0.223     1071.452
+      Category 5    0.066      319.382
+    ICTSCH10
+      Category 1    0.347     1662.719
+      Category 2    0.166      792.675
+      Category 3    0.243     1161.544
+      Category 4    0.170      814.626
+      Category 5    0.075      357.929
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              ICTSCH1$      ICTSCH1$      ICTSCH1$      ICTSCH1$      ICTSCH2$
+              ________      ________      ________      ________      ________
+      1        -0.696        -0.079         0.813         1.600        -1.019
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              ICTSCH2$      ICTSCH2$      ICTSCH2$      ICTSCH3$      ICTSCH3$
+              ________      ________      ________      ________      ________
+      1        -0.481         0.385         1.330        -0.972        -0.440
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              ICTSCH3$      ICTSCH3$      ICTSCH4$      ICTSCH4$      ICTSCH4$
+              ________      ________      ________      ________      ________
+      1         0.396         1.289        -0.640        -0.123         0.627
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              ICTSCH4$      ICTSCH5$      ICTSCH5$      ICTSCH5$      ICTSCH5$
+              ________      ________      ________      ________      ________
+      1         1.520        -0.504         0.019         0.746         1.584
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              ICTSCH6$      ICTSCH6$      ICTSCH6$      ICTSCH6$      ICTSCH7$
+              ________      ________      ________      ________      ________
+      1        -0.592        -0.040         0.764         1.665        -0.705
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              ICTSCH7$      ICTSCH7$      ICTSCH7$      ICTSCH8$      ICTSCH8$
+              ________      ________      ________      ________      ________
+      1        -0.192         0.623         1.476        -0.650        -0.182
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              ICTSCH8$      ICTSCH8$      ICTSCH9$      ICTSCH9$      ICTSCH9$
+              ________      ________      ________      ________      ________
+      1         0.555         1.417        -0.803        -0.297         0.556
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              ICTSCH9$      ICTSCH10      ICTSCH10      ICTSCH10      ICTSCH10
+              ________      ________      ________      ________      ________
+      1         1.503        -0.393         0.032         0.691         1.441
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              ICTSCH1       ICTSCH2       ICTSCH3       ICTSCH4       ICTSCH5
+              ________      ________      ________      ________      ________
+ ICTSCH1
+ ICTSCH2        0.616
+ ICTSCH3        0.549         0.615
+ ICTSCH4        0.560         0.603         0.648
+ ICTSCH5        0.516         0.517         0.556         0.777
+ ICTSCH6        0.542         0.527         0.563         0.708         0.754
+ ICTSCH7        0.550         0.579         0.585         0.658         0.682
+ ICTSCH8        0.545         0.570         0.588         0.650         0.664
+ ICTSCH9        0.597         0.587         0.603         0.646         0.617
+ ICTSCH10       0.458         0.409         0.439         0.534         0.553
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              ICTSCH6       ICTSCH7       ICTSCH8       ICTSCH9       ICTSCH10
+              ________      ________      ________      ________      ________
+ ICTSCH7        0.715
+ ICTSCH8        0.702         0.800
+ ICTSCH9        0.668         0.708         0.718
+ ICTSCH10       0.577         0.568         0.594         0.589
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       52
+
+Chi-Square Test of Model Fit
+
+          Value                           1965.576*
+          Degrees of Freedom                    33
+          P-Value                           0.0000
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.109
+          90 Percent C.I.                    0.105  0.113
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                0.970
+          TLI                                0.960
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                          65292.086
+          Degrees of Freedom                    45
+          P-Value                           0.0000
+
+WRMR (Weighted Root Mean Square Residual)
+
+          Value                              2.941
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ ICTSCH   BY
+    ICTSCH1            0.700      0.009     81.651      0.000
+    ICTSCH2            0.723      0.008     92.952      0.000
+    ICTSCH3            0.736      0.008     98.057      0.000
+    ICTSCH4            0.814      0.006    137.650      0.000
+    ICTSCH5            0.809      0.006    132.544      0.000
+    ICTSCH6            0.850      0.005    168.000      0.000
+    ICTSCH7            0.829      0.005    154.680      0.000
+    ICTSCH8            0.826      0.006    146.273      0.000
+    ICTSCH9            0.826      0.006    149.955      0.000
+    ICTSCH10           0.674      0.009     72.574      0.000
+
+ ICTSCH4  WITH
+    ICTSCH5            0.118      0.006     19.390      0.000
+
+ ICTSCH7  WITH
+    ICTSCH8            0.115      0.006     19.688      0.000
+
+ Means
+    ICTSCH             0.000      0.000    999.000    999.000
+
+ Thresholds
+    ICTSCH1$1         -0.696      0.023    -30.870      0.000
+    ICTSCH1$2         -0.079      0.020     -3.877      0.000
+    ICTSCH1$3          0.813      0.023     35.434      0.000
+    ICTSCH1$4          1.600      0.033     48.827      0.000
+    ICTSCH2$1         -1.019      0.025    -40.398      0.000
+    ICTSCH2$2         -0.481      0.021    -22.579      0.000
+    ICTSCH2$3          0.385      0.021     18.304      0.000
+    ICTSCH2$4          1.330      0.029     45.229      0.000
+    ICTSCH3$1         -0.972      0.024    -39.835      0.000
+    ICTSCH3$2         -0.440      0.021    -20.920      0.000
+    ICTSCH3$3          0.396      0.021     18.730      0.000
+    ICTSCH3$4          1.289      0.029     44.297      0.000
+    ICTSCH4$1         -0.640      0.022    -28.910      0.000
+    ICTSCH4$2         -0.123      0.020     -6.000      0.000
+    ICTSCH4$3          0.627      0.022     28.674      0.000
+    ICTSCH4$4          1.520      0.031     48.280      0.000
+    ICTSCH5$1         -0.504      0.021    -23.468      0.000
+    ICTSCH5$2          0.019      0.020      0.912      0.362
+    ICTSCH5$3          0.746      0.023     32.930      0.000
+    ICTSCH5$4          1.584      0.033     48.292      0.000
+    ICTSCH6$1         -0.592      0.022    -27.058      0.000
+    ICTSCH6$2         -0.040      0.020     -1.946      0.052
+    ICTSCH6$3          0.764      0.023     33.820      0.000
+    ICTSCH6$4          1.665      0.034     48.648      0.000
+    ICTSCH7$1         -0.705      0.022    -31.392      0.000
+    ICTSCH7$2         -0.192      0.021     -9.369      0.000
+    ICTSCH7$3          0.623      0.022     28.515      0.000
+    ICTSCH7$4          1.476      0.031     47.893      0.000
+    ICTSCH8$1         -0.650      0.022    -29.286      0.000
+    ICTSCH8$2         -0.182      0.021     -8.848      0.000
+    ICTSCH8$3          0.555      0.022     25.449      0.000
+    ICTSCH8$4          1.417      0.031     46.332      0.000
+    ICTSCH9$1         -0.803      0.023    -34.346      0.000
+    ICTSCH9$2         -0.297      0.021    -14.304      0.000
+    ICTSCH9$3          0.556      0.022     25.510      0.000
+    ICTSCH9$4          1.503      0.031     47.853      0.000
+    ICTSCH10$1        -0.393      0.021    -18.642      0.000
+    ICTSCH10$2         0.032      0.020      1.553      0.120
+    ICTSCH10$3         0.691      0.022     30.950      0.000
+    ICTSCH10$4         1.441      0.030     47.326      0.000
+
+ Variances
+    ICTSCH             1.000      0.000    999.000    999.000
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ ICTSCH   BY
+    ICTSCH1            0.700      0.009     81.651      0.000
+    ICTSCH2            0.723      0.008     92.952      0.000
+    ICTSCH3            0.736      0.008     98.057      0.000
+    ICTSCH4            0.814      0.006    137.650      0.000
+    ICTSCH5            0.809      0.006    132.544      0.000
+    ICTSCH6            0.850      0.005    168.000      0.000
+    ICTSCH7            0.829      0.005    154.680      0.000
+    ICTSCH8            0.826      0.006    146.273      0.000
+    ICTSCH9            0.826      0.006    149.955      0.000
+    ICTSCH10           0.674      0.009     72.574      0.000
+
+ ICTSCH4  WITH
+    ICTSCH5            0.347      0.013     25.887      0.000
+
+ ICTSCH7  WITH
+    ICTSCH8            0.365      0.014     26.770      0.000
+
+ Means
+    ICTSCH             0.000      0.000    999.000    999.000
+
+ Thresholds
+    ICTSCH1$1         -0.696      0.023    -30.870      0.000
+    ICTSCH1$2         -0.079      0.020     -3.877      0.000
+    ICTSCH1$3          0.813      0.023     35.434      0.000
+    ICTSCH1$4          1.600      0.033     48.827      0.000
+    ICTSCH2$1         -1.019      0.025    -40.398      0.000
+    ICTSCH2$2         -0.481      0.021    -22.579      0.000
+    ICTSCH2$3          0.385      0.021     18.304      0.000
+    ICTSCH2$4          1.330      0.029     45.229      0.000
+    ICTSCH3$1         -0.972      0.024    -39.835      0.000
+    ICTSCH3$2         -0.440      0.021    -20.920      0.000
+    ICTSCH3$3          0.396      0.021     18.730      0.000
+    ICTSCH3$4          1.289      0.029     44.297      0.000
+    ICTSCH4$1         -0.640      0.022    -28.910      0.000
+    ICTSCH4$2         -0.123      0.020     -6.000      0.000
+    ICTSCH4$3          0.627      0.022     28.674      0.000
+    ICTSCH4$4          1.520      0.031     48.280      0.000
+    ICTSCH5$1         -0.504      0.021    -23.468      0.000
+    ICTSCH5$2          0.019      0.020      0.912      0.362
+    ICTSCH5$3          0.746      0.023     32.930      0.000
+    ICTSCH5$4          1.584      0.033     48.292      0.000
+    ICTSCH6$1         -0.592      0.022    -27.058      0.000
+    ICTSCH6$2         -0.040      0.020     -1.946      0.052
+    ICTSCH6$3          0.764      0.023     33.820      0.000
+    ICTSCH6$4          1.665      0.034     48.648      0.000
+    ICTSCH7$1         -0.705      0.022    -31.392      0.000
+    ICTSCH7$2         -0.192      0.021     -9.369      0.000
+    ICTSCH7$3          0.623      0.022     28.515      0.000
+    ICTSCH7$4          1.476      0.031     47.893      0.000
+    ICTSCH8$1         -0.650      0.022    -29.286      0.000
+    ICTSCH8$2         -0.182      0.021     -8.848      0.000
+    ICTSCH8$3          0.555      0.022     25.449      0.000
+    ICTSCH8$4          1.417      0.031     46.332      0.000
+    ICTSCH9$1         -0.803      0.023    -34.346      0.000
+    ICTSCH9$2         -0.297      0.021    -14.304      0.000
+    ICTSCH9$3          0.556      0.022     25.510      0.000
+    ICTSCH9$4          1.503      0.031     47.853      0.000
+    ICTSCH10$1        -0.393      0.021    -18.642      0.000
+    ICTSCH10$2         0.032      0.020      1.553      0.120
+    ICTSCH10$3         0.691      0.022     30.950      0.000
+    ICTSCH10$4         1.441      0.030     47.326      0.000
+
+ Variances
+    ICTSCH             1.000      0.000    999.000    999.000
+
+
+R-SQUARE
+
+    Observed                                        Two-Tailed   Residual
+    Variable        Estimate       S.E.  Est./S.E.    P-Value    Variance
+
+    ICTSCH1            0.490      0.012     40.826      0.000      0.510
+    ICTSCH2            0.522      0.011     46.476      0.000      0.478
+    ICTSCH3            0.542      0.011     49.028      0.000      0.458
+    ICTSCH4            0.662      0.010     68.825      0.000      0.338
+    ICTSCH5            0.654      0.010     66.272      0.000      0.346
+    ICTSCH6            0.722      0.009     84.000      0.000      0.278
+    ICTSCH7            0.688      0.009     77.340      0.000      0.312
+    ICTSCH8            0.683      0.009     73.137      0.000      0.317
+    ICTSCH9            0.682      0.009     74.978      0.000      0.318
+    ICTSCH10           0.454      0.013     36.287      0.000      0.546
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.588E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+RESIDUAL OUTPUT
+
+
+     ESTIMATED MODEL AND RESIDUALS (OBSERVED - ESTIMATED)
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              ICTSCH1$      ICTSCH1$      ICTSCH1$      ICTSCH1$      ICTSCH2$
+              ________      ________      ________      ________      ________
+      1        -0.696        -0.079         0.813         1.600        -1.019
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              ICTSCH2$      ICTSCH2$      ICTSCH2$      ICTSCH3$      ICTSCH3$
+              ________      ________      ________      ________      ________
+      1        -0.481         0.385         1.330        -0.972        -0.440
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              ICTSCH3$      ICTSCH3$      ICTSCH4$      ICTSCH4$      ICTSCH4$
+              ________      ________      ________      ________      ________
+      1         0.396         1.289        -0.640        -0.123         0.627
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              ICTSCH4$      ICTSCH5$      ICTSCH5$      ICTSCH5$      ICTSCH5$
+              ________      ________      ________      ________      ________
+      1         1.520        -0.504         0.019         0.746         1.584
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              ICTSCH6$      ICTSCH6$      ICTSCH6$      ICTSCH6$      ICTSCH7$
+              ________      ________      ________      ________      ________
+      1        -0.592        -0.040         0.764         1.665        -0.705
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              ICTSCH7$      ICTSCH7$      ICTSCH7$      ICTSCH8$      ICTSCH8$
+              ________      ________      ________      ________      ________
+      1        -0.192         0.623         1.476        -0.650        -0.182
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              ICTSCH8$      ICTSCH8$      ICTSCH9$      ICTSCH9$      ICTSCH9$
+              ________      ________      ________      ________      ________
+      1         0.555         1.417        -0.803        -0.297         0.556
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              ICTSCH9$      ICTSCH10      ICTSCH10      ICTSCH10      ICTSCH10
+              ________      ________      ________      ________      ________
+      1         1.503        -0.393         0.032         0.691         1.441
+
+
+           Residuals for Means/Intercepts/Thresholds
+              ICTSCH1$      ICTSCH1$      ICTSCH1$      ICTSCH1$      ICTSCH2$
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              ICTSCH2$      ICTSCH2$      ICTSCH2$      ICTSCH3$      ICTSCH3$
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              ICTSCH3$      ICTSCH3$      ICTSCH4$      ICTSCH4$      ICTSCH4$
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              ICTSCH4$      ICTSCH5$      ICTSCH5$      ICTSCH5$      ICTSCH5$
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              ICTSCH6$      ICTSCH6$      ICTSCH6$      ICTSCH6$      ICTSCH7$
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              ICTSCH7$      ICTSCH7$      ICTSCH7$      ICTSCH8$      ICTSCH8$
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              ICTSCH8$      ICTSCH8$      ICTSCH9$      ICTSCH9$      ICTSCH9$
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              ICTSCH9$      ICTSCH10      ICTSCH10      ICTSCH10      ICTSCH10
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Model Estimated Covariances/Correlations/Residual Correlations
+              ICTSCH1       ICTSCH2       ICTSCH3       ICTSCH4       ICTSCH5
+              ________      ________      ________      ________      ________
+ ICTSCH1
+ ICTSCH2        0.506
+ ICTSCH3        0.515         0.532
+ ICTSCH4        0.570         0.588         0.599
+ ICTSCH5        0.566         0.585         0.595         0.777
+ ICTSCH6        0.595         0.614         0.626         0.692         0.688
+ ICTSCH7        0.580         0.599         0.610         0.675         0.671
+ ICTSCH8        0.578         0.597         0.608         0.673         0.668
+ ICTSCH9        0.578         0.597         0.608         0.672         0.668
+ ICTSCH10       0.472         0.487         0.496         0.548         0.545
+
+
+           Model Estimated Covariances/Correlations/Residual Correlations
+              ICTSCH6       ICTSCH7       ICTSCH8       ICTSCH9       ICTSCH10
+              ________      ________      ________      ________      ________
+ ICTSCH7        0.705
+ ICTSCH8        0.702         0.800
+ ICTSCH9        0.702         0.685         0.682
+ ICTSCH10       0.573         0.559         0.557         0.556
+
+
+           Residuals for Covariances/Correlations/Residual Correlations
+              ICTSCH1       ICTSCH2       ICTSCH3       ICTSCH4       ICTSCH5
+              ________      ________      ________      ________      ________
+ ICTSCH1
+ ICTSCH2        0.110
+ ICTSCH3        0.034         0.084
+ ICTSCH4       -0.010         0.015         0.049
+ ICTSCH5       -0.050        -0.068        -0.040         0.000
+ ICTSCH6       -0.053        -0.087        -0.062         0.017         0.066
+ ICTSCH7       -0.030        -0.020        -0.026        -0.017         0.011
+ ICTSCH8       -0.033        -0.028        -0.020        -0.023        -0.004
+ ICTSCH9        0.019        -0.010        -0.005        -0.026        -0.052
+ ICTSCH10      -0.014        -0.078        -0.057        -0.015         0.008
+
+
+           Residuals for Covariances/Correlations/Residual Correlations
+              ICTSCH6       ICTSCH7       ICTSCH8       ICTSCH9       ICTSCH10
+              ________      ________      ________      ________      ________
+ ICTSCH7        0.011
+ ICTSCH8        0.000         0.000
+ ICTSCH9       -0.034         0.024         0.036
+ ICTSCH10       0.005         0.009         0.037         0.033
+
+
+MODEL MODIFICATION INDICES
+
+Minimum M.I. value for printing the modification index    10.000
+
+                            M.I.     E.P.C.  Std E.P.C.  StdYX E.P.C.
+
+ON Statements
+
+ICTSCH1  ON ICTSCH2       441.722     0.141      0.141        0.141
+ICTSCH1  ON ICTSCH3        29.354     0.041      0.041        0.041
+ICTSCH1  ON ICTSCH5        68.004    -0.064     -0.064       -0.064
+ICTSCH1  ON ICTSCH6        73.254    -0.065     -0.065       -0.065
+ICTSCH1  ON ICTSCH7        31.894    -0.043     -0.043       -0.043
+ICTSCH1  ON ICTSCH8        35.055    -0.046     -0.046       -0.046
+ICTSCH1  ON ICTSCH9        13.042     0.025      0.025        0.025
+ICTSCH2  ON ICTSCH1       441.737     0.141      0.141        0.141
+ICTSCH2  ON ICTSCH3       261.239     0.108      0.108        0.108
+ICTSCH2  ON ICTSCH5        95.937    -0.080     -0.080       -0.080
+ICTSCH2  ON ICTSCH6       181.997    -0.106     -0.106       -0.106
+ICTSCH2  ON ICTSCH7        16.824    -0.030     -0.030       -0.030
+ICTSCH2  ON ICTSCH8        25.435    -0.038     -0.038       -0.038
+ICTSCH2  ON ICTSCH10       94.151    -0.088     -0.088       -0.088
+ICTSCH3  ON ICTSCH1        29.354     0.041      0.041        0.041
+ICTSCH3  ON ICTSCH2       261.227     0.108      0.108        0.108
+ICTSCH3  ON ICTSCH4        99.298     0.065      0.065        0.065
+ICTSCH3  ON ICTSCH5        26.329    -0.039     -0.039       -0.039
+ICTSCH3  ON ICTSCH6       111.015    -0.077     -0.077       -0.077
+ICTSCH3  ON ICTSCH7        26.981    -0.037     -0.037       -0.037
+ICTSCH3  ON ICTSCH8        17.408    -0.030     -0.030       -0.030
+ICTSCH3  ON ICTSCH10       57.199    -0.065     -0.065       -0.065
+ICTSCH4  ON ICTSCH3       110.438     0.068      0.068        0.068
+ICTSCH4  ON ICTSCH6        18.149     0.025      0.025        0.025
+ICTSCH4  ON ICTSCH7        18.783    -0.028     -0.028       -0.028
+ICTSCH4  ON ICTSCH8        28.024    -0.036     -0.036       -0.036
+ICTSCH4  ON ICTSCH9        29.738    -0.036     -0.036       -0.036
+ICTSCH5  ON ICTSCH1        63.448    -0.061     -0.061       -0.061
+ICTSCH5  ON ICTSCH2       101.524    -0.081     -0.081       -0.081
+ICTSCH5  ON ICTSCH3        42.485    -0.049     -0.049       -0.049
+ICTSCH5  ON ICTSCH6       424.273     0.115      0.115        0.115
+ICTSCH5  ON ICTSCH9       101.371    -0.069     -0.069       -0.069
+ICTSCH6  ON ICTSCH1        73.251    -0.065     -0.065       -0.065
+ICTSCH6  ON ICTSCH2       182.006    -0.106     -0.106       -0.106
+ICTSCH6  ON ICTSCH3       111.012    -0.077     -0.077       -0.077
+ICTSCH6  ON ICTSCH4        49.196     0.043      0.043        0.043
+ICTSCH6  ON ICTSCH5       462.369     0.122      0.122        0.122
+ICTSCH6  ON ICTSCH9        55.052    -0.047     -0.047       -0.047
+ICTSCH7  ON ICTSCH1        25.018    -0.037     -0.037       -0.037
+ICTSCH7  ON ICTSCH2        12.585    -0.026     -0.026       -0.026
+ICTSCH7  ON ICTSCH3        22.394    -0.033     -0.033       -0.033
+ICTSCH7  ON ICTSCH4        12.074    -0.023     -0.023       -0.023
+ICTSCH7  ON ICTSCH9        38.253     0.036      0.036        0.036
+ICTSCH8  ON ICTSCH1        27.727    -0.041     -0.041       -0.041
+ICTSCH8  ON ICTSCH2        20.829    -0.034     -0.034       -0.034
+ICTSCH8  ON ICTSCH3        12.686    -0.026     -0.026       -0.026
+ICTSCH8  ON ICTSCH4        24.481    -0.033     -0.033       -0.033
+ICTSCH8  ON ICTSCH9        92.900     0.056      0.056        0.056
+ICTSCH8  ON ICTSCH10       43.982     0.048      0.048        0.048
+ICTSCH9  ON ICTSCH1        13.043     0.025      0.025        0.025
+ICTSCH9  ON ICTSCH4        44.743    -0.045     -0.045       -0.045
+ICTSCH9  ON ICTSCH5       118.169    -0.075     -0.075       -0.075
+ICTSCH9  ON ICTSCH6        55.052    -0.047     -0.047       -0.047
+ICTSCH9  ON ICTSCH7        55.486     0.044      0.044        0.044
+ICTSCH9  ON ICTSCH8       111.743     0.063      0.063        0.063
+ICTSCH9  ON ICTSCH10       32.264     0.041      0.041        0.041
+ICTSCH10 ON ICTSCH2        94.156    -0.088     -0.088       -0.088
+ICTSCH10 ON ICTSCH3        57.196    -0.065     -0.065       -0.065
+ICTSCH10 ON ICTSCH8        47.591     0.050      0.050        0.050
+ICTSCH10 ON ICTSCH9        32.264     0.041      0.041        0.041
+
+WITH Statements
+
+ICTSCH2  WITH ICTSCH1     441.729     0.141      0.141        0.285
+ICTSCH3  WITH ICTSCH1      29.356     0.041      0.041        0.084
+ICTSCH3  WITH ICTSCH2     261.232     0.108      0.108        0.230
+ICTSCH4  WITH ICTSCH3     110.440     0.068      0.068        0.172
+ICTSCH5  WITH ICTSCH1      63.449    -0.061     -0.061       -0.146
+ICTSCH5  WITH ICTSCH2     101.525    -0.081     -0.081       -0.200
+ICTSCH5  WITH ICTSCH3      42.486    -0.049     -0.049       -0.123
+ICTSCH6  WITH ICTSCH1      73.250    -0.065     -0.065       -0.173
+ICTSCH6  WITH ICTSCH2     182.004    -0.106     -0.106       -0.290
+ICTSCH6  WITH ICTSCH3     111.011    -0.077     -0.077       -0.217
+ICTSCH6  WITH ICTSCH4      18.150     0.025      0.025        0.083
+ICTSCH6  WITH ICTSCH5     424.270     0.115      0.115        0.371
+ICTSCH7  WITH ICTSCH1      25.018    -0.037     -0.037       -0.094
+ICTSCH7  WITH ICTSCH2      12.584    -0.026     -0.026       -0.067
+ICTSCH7  WITH ICTSCH3      22.394    -0.033     -0.033       -0.088
+ICTSCH7  WITH ICTSCH4      13.903    -0.024     -0.024       -0.074
+ICTSCH8  WITH ICTSCH1      27.726    -0.041     -0.041       -0.101
+ICTSCH8  WITH ICTSCH2      20.828    -0.034     -0.034       -0.088
+ICTSCH8  WITH ICTSCH3      12.686    -0.026     -0.026       -0.067
+ICTSCH8  WITH ICTSCH4      22.638    -0.032     -0.032       -0.097
+ICTSCH9  WITH ICTSCH1      13.043     0.025      0.025        0.061
+ICTSCH9  WITH ICTSCH4      29.737    -0.036     -0.036       -0.110
+ICTSCH9  WITH ICTSCH5     101.373    -0.069     -0.069       -0.207
+ICTSCH9  WITH ICTSCH6      55.051    -0.047     -0.047       -0.158
+ICTSCH9  WITH ICTSCH7      38.253     0.036      0.036        0.115
+ICTSCH9  WITH ICTSCH8      92.901     0.056      0.056        0.177
+ICTSCH10 WITH ICTSCH2      94.156    -0.088     -0.088       -0.172
+ICTSCH10 WITH ICTSCH3      57.196    -0.065     -0.065       -0.131
+ICTSCH10 WITH ICTSCH8      43.982     0.048      0.048        0.114
+ICTSCH10 WITH ICTSCH9      32.264     0.041      0.041        0.099
+
+
+     Beginning Time:  23:42:08
+        Ending Time:  23:42:09
+       Elapsed Time:  00:00:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen

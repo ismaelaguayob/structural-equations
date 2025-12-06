@@ -1,0 +1,803 @@
+Mplus VERSION 7 (Linux)
+MUTHEN & MUTHEN
+12/06/2025  12:25 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Modelo MIMIC determinantes de Autoeficacia General y Especializada
+
+  DATA:
+    FILE = "mplus_files/mimic.dat";
+
+  VARIABLE:
+    NAMES = SENWT sex ESCS ICTENQ ICTHOME ICTWKEND SDLEFF
+            gen1 gen2 gen3 gen4 gen5 gen6
+            spec1 spec2 spec3;
+
+    USEVARIABLES = SENWT sex ESCS ICTENQ ICTHOME ICTWKEND SDLEFF
+                   gen1-gen6 spec1-spec3;
+
+    CATEGORICAL = gen1-gen6 spec1-spec3;
+
+    WEIGHT = SENWT;
+
+    MISSING = .;
+
+  ANALYSIS:
+    ESTIMATOR = WLSMV;
+
+  MODEL:
+    ! ------------------------------------------------------------------
+    ! 1. MODELO DE MEDIDA
+    ! ------------------------------------------------------------------
+    gen_dse BY gen1* gen2
+               gen3@1  ! Métrica al ítem con mayor loading
+               gen4-gen6;
+
+    spec_dse BY spec1* spec2@1 ! Métrica al ítem con mayor loading
+                spec3;
+
+    gen1 WITH gen2;
+
+    gen_dse WITH spec_dse;
+
+    ! ------------------------------------------------------------------
+    ! 2. MODELO ESTRUCTURAL
+    ! ------------------------------------------------------------------
+
+    ICTWKEND ON sex; ! efecto sexo en el ocio
+    SDLEFF ON ESCS; ! efecto estatus en autonomía
+
+    ! (Opcional: Controlar mediadores por otras variables si tu teoría lo pide,
+    ! por ahora dejamos lo estricto de tus hipótesis)
+
+    gen_dse ON SDLEFF; ! efecto autonomía en ADG
+    spec_dse ON ICTWKEND; ! efecto ocio en ADE
+    gen_dse spec_dse ON ICTHOME; ! efecto acceso en AD
+    gen_dse spec_dse ON ICTENQ; ! efecto aprendizaje en ambos (hipótesis no significancia)
+    gen_dse ON ESCS sex; ! efecto directo sexo y estatus en ADG
+    spec_dse ON sex ESCS; ! efecto directo sexo y estatus en ADE
+  ! controles (no relacionados con las hipótesis)
+    gen_dse ON ICTWKEND;
+    spec_dse ON SDLEFF;
+
+    ! ------------------------------------------------------------------
+    ! 3. EFECTOS INDIRECTOS
+    ! ------------------------------------------------------------------
+  MODEL INDIRECT:
+
+    spec_dse IND sex; ! h1
+    gen_dse IND ESCS; ! h2
+
+  OUTPUT:
+    SAMPSTAT;
+    STDY;
+    MODINDICES (10);
+    RESIDUAL;
+
+
+
+*** WARNING
+  Data set contains cases with missing on x-variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on x-variables:  386
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Modelo MIMIC determinantes de Autoeficacia General y Especializada
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        4514
+
+Number of dependent variables                                   11
+Number of independent variables                                  4
+Number of continuous latent variables                            2
+
+Observed dependent variables
+
+  Continuous
+   ICTWKEND    SDLEFF
+
+  Binary and ordered categorical (ordinal)
+   GEN1        GEN2        GEN3        GEN4        GEN5        GEN6
+   SPEC1       SPEC2       SPEC3
+
+Observed independent variables
+   SEX         ESCS        ICTENQ      ICTHOME
+
+Continuous latent variables
+   GEN_DSE     SPEC_DSE
+
+Variables with special functions
+
+  Weight variable       SENWT
+
+Estimator                                                    WLSMV
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Parameterization                                             DELTA
+
+Input data file(s)
+  mplus_files/mimic.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns           221
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              ICTWKEND      SDLEFF        GEN1          GEN2          GEN3
+              ________      ________      ________      ________      ________
+ ICTWKEND       0.954
+ SDLEFF         0.950         0.995
+ GEN1           0.922         0.962         0.966
+ GEN2           0.919         0.958         0.942         0.962
+ GEN3           0.916         0.955         0.938         0.935         0.958
+ GEN4           0.921         0.959         0.940         0.938         0.936
+ GEN5           0.912         0.951         0.932         0.932         0.930
+ GEN6           0.915         0.954         0.936         0.934         0.930
+ SPEC1          0.899         0.938         0.916         0.915         0.914
+ SPEC2          0.887         0.925         0.907         0.904         0.902
+ SPEC3          0.901         0.938         0.919         0.917         0.914
+
+
+           Covariance Coverage
+              GEN4          GEN5          GEN6          SPEC1         SPEC2
+              ________      ________      ________      ________      ________
+ GEN4           0.963
+ GEN5           0.933         0.955
+ GEN6           0.936         0.930         0.958
+ SPEC1          0.916         0.911         0.914         0.941
+ SPEC2          0.904         0.901         0.903         0.900         0.927
+ SPEC3          0.917         0.915         0.915         0.912         0.905
+
+
+           Covariance Coverage
+              SPEC3
+              ________
+ SPEC3          0.942
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    GEN1
+      Category 1    0.074      321.412
+      Category 2    0.079      343.764
+      Category 3    0.234     1020.626
+      Category 4    0.613     2671.094
+    GEN2
+      Category 1    0.053      231.287
+      Category 2    0.101      439.817
+      Category 3    0.339     1467.997
+      Category 4    0.507     2197.244
+    GEN3
+      Category 1    0.058      252.490
+      Category 2    0.091      392.129
+      Category 3    0.293     1267.708
+      Category 4    0.558     2412.767
+    GEN4
+      Category 1    0.051      221.527
+      Category 2    0.094      408.456
+      Category 3    0.296     1286.917
+      Category 4    0.559     2429.956
+    GEN5
+      Category 1    0.062      267.249
+      Category 2    0.102      437.382
+      Category 3    0.323     1388.342
+      Category 4    0.514     2211.658
+    GEN6
+      Category 1    0.050      217.257
+      Category 2    0.103      443.206
+      Category 3    0.291     1256.054
+      Category 4    0.557     2406.743
+    SPEC1
+      Category 1    0.233      988.800
+      Category 2    0.214      909.595
+      Category 3    0.300     1274.659
+      Category 4    0.253     1075.461
+    SPEC2
+      Category 1    0.184      772.012
+      Category 2    0.187      785.737
+      Category 3    0.325     1367.941
+      Category 4    0.304     1278.100
+    SPEC3
+      Category 1    0.182      771.467
+      Category 2    0.202      855.444
+      Category 3    0.326     1384.632
+      Category 4    0.291     1233.432
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              ICTWKEND      SDLEFF        GEN1$1        GEN1$2        GEN1$3
+              ________      ________      ________      ________      ________
+      1         0.103        -0.002        -1.550        -1.110        -0.348
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              GEN2$1        GEN2$2        GEN2$3        GEN3$1        GEN3$2
+              ________      ________      ________      ________      ________
+      1        -1.678        -1.054        -0.025        -1.716        -1.161
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              GEN3$3        GEN4$1        GEN4$2        GEN4$3        GEN5$1
+              ________      ________      ________      ________      ________
+      1        -0.234        -1.785        -1.180        -0.239        -1.648
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              GEN5$2        GEN5$3        GEN6$1        GEN6$2        GEN6$3
+              ________      ________      ________      ________      ________
+      1        -1.057        -0.074        -1.812        -1.159        -0.238
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              SPEC1$1       SPEC1$2       SPEC1$3       SPEC2$1       SPEC2$2
+              ________      ________      ________      ________      ________
+      1        -0.659        -0.041         0.785        -0.795        -0.200
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              SPEC2$3       SPEC3$1       SPEC3$2       SPEC3$3
+              ________      ________      ________      ________
+      1         0.675        -0.822        -0.189         0.684
+
+
+           SLOPES
+              SEX           ESCS          ICTENQ        ICTHOME
+              ________      ________      ________      ________
+ ICTWKEND      -0.021        -0.043         0.304        -0.070
+ SDLEFF        -0.029         0.083         0.227        -0.027
+ GEN1          -0.070         0.195         0.122         0.054
+ GEN2          -0.001         0.153         0.181         0.013
+ GEN3          -0.144         0.188         0.157         0.030
+ GEN4          -0.154         0.169         0.172         0.015
+ GEN5          -0.069         0.160         0.226         0.002
+ GEN6          -0.160         0.194         0.192        -0.010
+ SPEC1          0.170        -0.018         0.249        -0.018
+ SPEC2          0.268         0.007         0.241        -0.031
+ SPEC3          0.215         0.005         0.221        -0.017
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              ICTWKEND      SDLEFF        GEN1          GEN2          GEN3
+              ________      ________      ________      ________      ________
+ ICTWKEND       0.992
+ SDLEFF         0.002         0.967
+ GEN1           0.022         0.213
+ GEN2           0.079         0.229         0.859
+ GEN3           0.052         0.217         0.790         0.786
+ GEN4           0.047         0.195         0.730         0.712         0.809
+ GEN5           0.068         0.200         0.729         0.709         0.798
+ GEN6           0.052         0.210         0.732         0.704         0.732
+ SPEC1          0.190         0.081         0.150         0.264         0.255
+ SPEC2          0.176         0.137         0.268         0.387         0.352
+ SPEC3          0.181         0.113         0.259         0.372         0.343
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              GEN4          GEN5          GEN6          SPEC1         SPEC2
+              ________      ________      ________      ________      ________
+ GEN5           0.802
+ GEN6           0.746         0.765
+ SPEC1          0.274         0.343         0.285
+ SPEC2          0.363         0.441         0.373         0.779
+ SPEC3          0.345         0.431         0.380         0.780         0.836
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              SPEC3
+              ________
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       56
+
+Chi-Square Test of Model Fit
+
+          Value                           2126.547*
+          Degrees of Freedom                    74
+          P-Value                           0.0000
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.078
+          90 Percent C.I.                    0.076  0.081
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                0.973
+          TLI                                0.963
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                          75105.563
+          Degrees of Freedom                    99
+          P-Value                           0.0000
+
+WRMR (Weighted Root Mean Square Residual)
+
+          Value                              2.929
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ GEN_DSE  BY
+    GEN1               0.919      0.008    111.022      0.000
+    GEN2               0.913      0.008    117.363      0.000
+    GEN3               1.000      0.000    999.000    999.000
+    GEN4               0.965      0.007    138.519      0.000
+    GEN5               0.976      0.006    151.754      0.000
+    GEN6               0.929      0.007    126.583      0.000
+
+ SPEC_DSE BY
+    SPEC1              0.911      0.007    121.975      0.000
+    SPEC2              1.000      0.000    999.000    999.000
+    SPEC3              0.995      0.007    133.342      0.000
+
+ GEN_DSE  ON
+    SDLEFF             0.225      0.016     13.948      0.000
+    ESCS               0.167      0.017      9.879      0.000
+    SEX               -0.104      0.035     -2.964      0.003
+    ICTWKEND           0.057      0.016      3.544      0.000
+    ICTHOME            0.018      0.017      1.098      0.272
+    ICTENQ             0.186      0.017     11.184      0.000
+
+ SPEC_DSE ON
+    ICTWKEND           0.188      0.016     11.847      0.000
+    SEX                0.229      0.035      6.484      0.000
+    ESCS              -0.011      0.018     -0.619      0.536
+    SDLEFF             0.116      0.017      6.823      0.000
+    ICTHOME           -0.023      0.016     -1.446      0.148
+    ICTENQ             0.244      0.018     13.465      0.000
+
+ ICTWKEND ON
+    SEX               -0.021      0.034     -0.606      0.545
+
+ SDLEFF   ON
+    ESCS               0.083      0.016      5.153      0.000
+
+ GEN_DSE  WITH
+    SPEC_DSE           0.329      0.015     22.245      0.000
+
+ GEN1     WITH
+    GEN2               0.161      0.008     18.989      0.000
+
+ Intercepts
+    ICTWKEND           0.103      0.026      3.985      0.000
+    SDLEFF            -0.002      0.024     -0.082      0.935
+
+ Thresholds
+    GEN1$1            -1.545      0.039    -40.015      0.000
+    GEN1$2            -1.105      0.033    -33.495      0.000
+    GEN1$3            -0.343      0.030    -11.610      0.000
+    GEN2$1            -1.673      0.043    -38.630      0.000
+    GEN2$2            -1.049      0.033    -31.792      0.000
+    GEN2$3            -0.020      0.029     -0.695      0.487
+    GEN3$1            -1.711      0.042    -40.426      0.000
+    GEN3$2            -1.155      0.033    -34.660      0.000
+    GEN3$3            -0.229      0.029     -7.837      0.000
+    GEN4$1            -1.780      0.044    -40.523      0.000
+    GEN4$2            -1.174      0.033    -35.102      0.000
+    GEN4$3            -0.233      0.029     -7.971      0.000
+    GEN5$1            -1.643      0.041    -40.225      0.000
+    GEN5$2            -1.052      0.032    -32.500      0.000
+    GEN5$3            -0.069      0.029     -2.384      0.017
+    GEN6$1            -1.807      0.044    -41.539      0.000
+    GEN6$2            -1.154      0.033    -35.166      0.000
+    GEN6$3            -0.233      0.029     -8.011      0.000
+    SPEC1$1           -0.641      0.031    -20.955      0.000
+    SPEC1$2           -0.023      0.029     -0.798      0.425
+    SPEC1$3            0.803      0.031     25.796      0.000
+    SPEC2$1           -0.776      0.032    -24.518      0.000
+    SPEC2$2           -0.180      0.029     -6.168      0.000
+    SPEC2$3            0.695      0.031     22.547      0.000
+    SPEC3$1           -0.803      0.031    -25.585      0.000
+    SPEC3$2           -0.169      0.029     -5.803      0.000
+    SPEC3$3            0.704      0.031     22.936      0.000
+
+ Residual Variances
+    ICTWKEND           0.992      0.015     67.631      0.000
+    SDLEFF             0.967      0.022     43.062      0.000
+    GEN_DSE            0.780      0.010     76.239      0.000
+    SPEC_DSE           0.801      0.010     77.561      0.000
+
+
+STANDARDIZED MODEL RESULTS
+
+
+R-SQUARE
+
+    Observed                   Residual
+    Variable        Estimate   Variance
+
+    ICTWKEND           0.000
+    SDLEFF             0.007
+    GEN1               0.723      0.297
+    GEN2               0.714      0.306
+    GEN3               0.846      0.167
+    GEN4               0.793      0.224
+    GEN5               0.809      0.207
+    GEN6               0.739      0.281
+    SPEC1              0.722      0.296
+    SPEC2              0.860      0.151
+    SPEC3              0.852      0.159
+
+     Latent
+    Variable        Estimate
+
+    GEN_DSE            0.150
+    SPEC_DSE           0.135
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.174E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+TOTAL, TOTAL INDIRECT, SPECIFIC INDIRECT, AND DIRECT EFFECTS
+
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Effects from SEX to SPEC_DSE
+
+  Total                0.226      0.036      6.284      0.000
+  Total indirect      -0.004      0.006     -0.605      0.545
+
+  Specific indirect
+
+    SPEC_DSE
+    ICTWKEND
+    SEX               -0.004      0.006     -0.605      0.545
+
+  Direct
+    SPEC_DSE
+    SEX                0.229      0.035      6.484      0.000
+
+
+Effects from ESCS to GEN_DSE
+
+  Total                0.185      0.017     10.672      0.000
+  Total indirect       0.019      0.004      4.824      0.000
+
+  Specific indirect
+
+    GEN_DSE
+    SDLEFF
+    ESCS               0.019      0.004      4.824      0.000
+
+  Direct
+    GEN_DSE
+    ESCS               0.167      0.017      9.879      0.000
+
+
+STANDARDIZED TOTAL, TOTAL INDIRECT, SPECIFIC INDIRECT, AND DIRECT EFFECTS
+
+
+                        Std
+                    Estimate
+
+Effects from SEX to SPEC_DSE
+
+  Total                0.234
+  Total indirect       0.234
+
+  Specific indirect
+
+    SPEC_DSE
+    ICTWKEND
+    SEX               -0.004
+
+  Direct
+    SPEC_DSE
+    SEX                0.238
+
+
+Effects from ESCS to GEN_DSE
+
+  Total                0.193
+  Total indirect       0.193
+
+  Specific indirect
+
+    GEN_DSE
+    SDLEFF
+    ESCS               0.019
+
+  Direct
+    GEN_DSE
+    ESCS               0.174
+
+
+
+RESIDUAL OUTPUT
+
+
+     ESTIMATED MODEL AND RESIDUALS (OBSERVED - ESTIMATED)
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              ICTWKEND      SDLEFF        GEN1$1        GEN1$2        GEN1$3
+              ________      ________      ________      ________      ________
+      1         0.103        -0.002        -1.550        -1.110        -0.348
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              GEN2$1        GEN2$2        GEN2$3        GEN3$1        GEN3$2
+              ________      ________      ________      ________      ________
+      1        -1.678        -1.054        -0.025        -1.716        -1.161
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              GEN3$3        GEN4$1        GEN4$2        GEN4$3        GEN5$1
+              ________      ________      ________      ________      ________
+      1        -0.234        -1.785        -1.180        -0.239        -1.648
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              GEN5$2        GEN5$3        GEN6$1        GEN6$2        GEN6$3
+              ________      ________      ________      ________      ________
+      1        -1.057        -0.074        -1.812        -1.159        -0.238
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              SPEC1$1       SPEC1$2       SPEC1$3       SPEC2$1       SPEC2$2
+              ________      ________      ________      ________      ________
+      1        -0.659        -0.041         0.785        -0.795        -0.200
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              SPEC2$3       SPEC3$1       SPEC3$2       SPEC3$3
+              ________      ________      ________      ________
+      1         0.675        -0.822        -0.189         0.684
+
+
+           Residuals for Means/Intercepts/Thresholds
+              ICTWKEND      SDLEFF        GEN1$1        GEN1$2        GEN1$3
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              GEN2$1        GEN2$2        GEN2$3        GEN3$1        GEN3$2
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              GEN3$3        GEN4$1        GEN4$2        GEN4$3        GEN5$1
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              GEN5$2        GEN5$3        GEN6$1        GEN6$2        GEN6$3
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              SPEC1$1       SPEC1$2       SPEC1$3       SPEC2$1       SPEC2$2
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              SPEC2$3       SPEC3$1       SPEC3$2       SPEC3$3
+              ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000
+
+
+           Model Estimated Slopes
+              SEX           ESCS          ICTENQ        ICTHOME
+              ________      ________      ________      ________
+ ICTWKEND      -0.021         0.000         0.000         0.000
+ SDLEFF         0.000         0.083         0.000         0.000
+ GEN1          -0.097         0.170         0.170         0.017
+ GEN2          -0.096         0.169         0.169         0.017
+ GEN3          -0.105         0.185         0.186         0.018
+ GEN4          -0.102         0.179         0.179         0.018
+ GEN5          -0.103         0.181         0.181         0.018
+ GEN6          -0.098         0.172         0.172         0.017
+ SPEC1          0.205        -0.001         0.222        -0.021
+ SPEC2          0.226        -0.001         0.244        -0.023
+ SPEC3          0.224        -0.001         0.243        -0.023
+
+
+           Residuals for Slopes
+              SEX           ESCS          ICTENQ        ICTHOME
+              ________      ________      ________      ________
+ ICTWKEND       0.000        -0.043         0.304        -0.070
+ SDLEFF        -0.029         0.000         0.227        -0.027
+ GEN1           0.027         0.025        -0.049         0.038
+ GEN2           0.095        -0.016         0.012        -0.004
+ GEN3          -0.039         0.003        -0.029         0.011
+ GEN4          -0.052        -0.010        -0.008        -0.002
+ GEN5           0.034        -0.021         0.045        -0.016
+ GEN6          -0.062         0.022         0.020        -0.027
+ SPEC1         -0.035        -0.016         0.027         0.003
+ SPEC2          0.042         0.009        -0.003        -0.008
+ SPEC3         -0.010         0.006        -0.022         0.006
+
+
+           Model Estimated Covariances/Correlations/Residual Correlations
+              ICTWKEND      SDLEFF        GEN1          GEN2          GEN3
+              ________      ________      ________      ________      ________
+ ICTWKEND       0.992
+ SDLEFF         0.000         0.967
+ GEN1           0.052         0.200
+ GEN2           0.052         0.199         0.859
+ GEN3           0.057         0.218         0.765         0.760
+ GEN4           0.055         0.210         0.738         0.734         0.804
+ GEN5           0.055         0.213         0.747         0.742         0.813
+ GEN6           0.053         0.203         0.711         0.706         0.774
+ SPEC1          0.170         0.102         0.305         0.303         0.332
+ SPEC2          0.187         0.112         0.335         0.333         0.365
+ SPEC3          0.186         0.112         0.333         0.331         0.363
+
+
+           Model Estimated Covariances/Correlations/Residual Correlations
+              GEN4          GEN5          GEN6          SPEC1         SPEC2
+              ________      ________      ________      ________      ________
+ GEN5           0.785
+ GEN6           0.747         0.755
+ SPEC1          0.321         0.324         0.309
+ SPEC2          0.352         0.356         0.339         0.773
+ SPEC3          0.350         0.354         0.337         0.769         0.845
+
+
+           Model Estimated Covariances/Correlations/Residual Correlations
+              SPEC3
+              ________
+
+
+           Residuals for Covariances/Correlations/Residual Correlations
+              ICTWKEND      SDLEFF        GEN1          GEN2          GEN3
+              ________      ________      ________      ________      ________
+ ICTWKEND       0.000
+ SDLEFF         0.002         0.000
+ GEN1          -0.030         0.009
+ GEN2           0.027         0.026         0.000
+ GEN3          -0.004        -0.004         0.025         0.026
+ GEN4          -0.008        -0.019        -0.009        -0.022         0.005
+ GEN5           0.013        -0.016        -0.017        -0.033        -0.015
+ GEN6           0.000         0.004         0.022        -0.002        -0.042
+ SPEC1          0.019        -0.023        -0.154        -0.039        -0.077
+ SPEC2         -0.012         0.022        -0.067         0.055        -0.012
+ SPEC3         -0.006        -0.001        -0.074         0.041        -0.020
+
+
+           Residuals for Covariances/Correlations/Residual Correlations
+              GEN4          GEN5          GEN6          SPEC1         SPEC2
+              ________      ________      ________      ________      ________
+ GEN5           0.017
+ GEN6          -0.001         0.010
+ SPEC1         -0.047         0.019        -0.023
+ SPEC2          0.011         0.085         0.035         0.006
+ SPEC3         -0.006         0.077         0.042         0.010        -0.009
+
+
+           Residuals for Covariances/Correlations/Residual Correlations
+              SPEC3
+              ________
+
+
+MODEL MODIFICATION INDICES
+
+NOTE:  Modification indices for direct effects of observed dependent variables
+regressed on covariates and residual covariances among observed dependent
+variables may not be included.  To include these, request MODINDICES (ALL).
+
+Minimum M.I. value for printing the modification index    10.000
+
+                            M.I.     E.P.C.  Std E.P.C.  StdYX E.P.C.
+
+BY Statements
+
+GEN_DSE  BY SPEC1         103.164    -0.113     -0.108       -0.105
+GEN_DSE  BY SPEC2          32.425     0.066      0.063        0.061
+GEN_DSE  BY SPEC3          15.498     0.045      0.043        0.042
+SPEC_DSE BY GEN1          153.371    -0.173     -0.166       -0.160
+SPEC_DSE BY GEN2           19.091     0.055      0.052        0.051
+SPEC_DSE BY GEN3           26.601    -0.068     -0.066       -0.063
+SPEC_DSE BY GEN5          110.269     0.130      0.125        0.120
+
+ON/BY Statements
+
+ICTWKEND ON GEN_DSE  /
+GEN_DSE  BY ICTWKEND      288.099     0.518      0.497        0.499
+ICTWKEND ON SPEC_DSE /
+SPEC_DSE BY ICTWKEND      909.458     1.082      1.041        1.045
+SDLEFF   ON GEN_DSE  /
+GEN_DSE  BY SDLEFF        379.514     1.048      1.005        1.018
+SDLEFF   ON SPEC_DSE /
+SPEC_DSE BY SDLEFF        246.048     0.520      0.500        0.507
+
+ON Statements
+
+ICTWKEND ON ESCS           14.031    -0.043     -0.043       -0.044
+ICTWKEND ON ICTENQ       1024.836     0.304      0.304        0.315
+ICTWKEND ON ICTHOME        48.980    -0.070     -0.070       -0.078
+SDLEFF   ON ICTENQ        442.304     0.227      0.227        0.237
+
+WITH Statements
+
+GEN3     WITH GEN1         30.846     0.049      0.049        0.219
+GEN3     WITH GEN2         33.801     0.052      0.052        0.228
+GEN4     WITH GEN2         11.134    -0.033     -0.033       -0.127
+GEN5     WITH GEN2         26.865    -0.051     -0.051       -0.203
+GEN5     WITH GEN3         11.938    -0.030     -0.030       -0.160
+GEN5     WITH GEN4         15.202     0.033      0.033        0.152
+GEN6     WITH GEN1         12.545     0.034      0.034        0.116
+GEN6     WITH GEN3         46.613    -0.066     -0.066       -0.304
+SPEC1    WITH GEN1         99.477    -0.163     -0.163       -0.549
+SPEC1    WITH GEN3         29.962    -0.083     -0.083       -0.371
+SPEC1    WITH GEN4         11.067    -0.050     -0.050       -0.194
+SPEC2    WITH GEN1         20.893    -0.072     -0.072       -0.340
+SPEC2    WITH GEN2         19.270     0.060      0.060        0.279
+SPEC2    WITH GEN5         49.250     0.095      0.095        0.537
+SPEC3    WITH GEN1         26.168    -0.080     -0.080       -0.366
+SPEC3    WITH GEN2         11.140     0.045      0.045        0.203
+SPEC3    WITH GEN5         43.576     0.086      0.086        0.476
+SPEC3    WITH GEN6         11.208     0.047      0.047        0.220
+SPEC3    WITH SPEC1        28.931     0.084      0.084        0.388
+SPEC3    WITH SPEC2        74.943    -0.155     -0.155       -1.002
+
+
+     Beginning Time:  00:25:36
+        Ending Time:  00:25:36
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen

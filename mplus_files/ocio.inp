@@ -1,0 +1,19 @@
+TITLE: AFC uso de TIC para el ocio en el fin de semana
+DATA:
+  FILE = "mplus_files/ocio.dat";
+VARIABLE: 
+NAMES = SENWT ocio_1 ocio_2 ocio_3 ocio_4 ocio_5 ocio_6 ocio_7;
+USEVARIABLES = SENWT ocio_1 ocio_3 ocio_4 ocio_5 ocio_6 ocio_7;
+CATEGORICAL = ocio_1 ocio_3 ocio_4 ocio_5 ocio_6 ocio_7;
+WEIGHT = SENWT;
+MISSING=.;
+
+ANALYSIS:
+    ESTIMATOR = WLSMV;
+
+MODEL:
+    ocio BY ocio_1* ocio_3 ocio_4 ocio_5 ocio_6 ocio_7;
+    ocio@1; [ocio@0];
+
+OUTPUT:
+  SAMPSTAT; STDYX; modindices (ALL); residual;

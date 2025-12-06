@@ -1,0 +1,27 @@
+TITLE: AFC autoeficacia digital bidimensional
+DATA:
+  FILE = "mplus_files/dse.dat";
+VARIABLE: 
+NAMES = SENWT gen1 gen2 gen3 gen4 gen5 gen6 spec1 spec2 spec3; 
+USEVARIABLES = SENWT gen1 gen2 gen3 gen4 gen5 gen6 spec1 spec2 spec3;
+CATEGORICAL = gen1 gen2 gen3 gen4 gen5 gen6 spec1 spec2 spec3;
+WEIGHT = SENWT;
+MISSING=.;
+
+ANALYSIS:
+    ESTIMATOR = WLSMV;
+
+MODEL: 
+    gen_dse BY gen1-gen6*;
+    spec_dse BY spec1-spec3*;
+    gen_dse@1; spec_dse@1;
+    [gen_dse@0]; [spec_dse@0];
+    gen_dse WITH spec_dse;
+
+    gen1 WITH gen2; ! Correlación entre errores añadida
+
+PLOT: 
+    TYPE = PLOT1 PLOT2;
+
+OUTPUT:
+  SAMPSTAT; STDYX; modindices (ALL); residual;

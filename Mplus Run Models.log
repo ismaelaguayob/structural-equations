@@ -1,10 +1,9 @@
-------Begin Mplus Model Run: 03dic2025 02:26:49------
+------Begin Mplus Model Run: 06dic2025 00:25:36------
 Run options:
 	Recursive (run models in subdirectories): FALSE
 	Show output on console: FALSE
 	Replace existing outfile: always
 ------
-Currently running model: cfa.inp
-Currently running model: efa.inp
+Currently running model: mimic.inp
 
-------End Mplus Model Run: 03dic2025 02:27:32------
+------End Mplus Model Run: 06dic2025 00:25:36------

@@ -19,9 +19,9 @@ saveRDS(pisa22, "input/data/proc_data/pisa22ict.rds")
 library(pacman)
 pacman::p_load(dplyr, haven)
 rm(list = ls())
-pisa22 <- readRDS("input/data/proc_data/pisa22ict.rds")
+pisa22 <- readRDS("./pisa22ict.rds")
 pisa22_proc <- pisa22 %>%
-  select(CNT, sex = ST004D01T, ESCS, SDLEFF, ICTWKEND, ICTHOME, IC183Q01JA, IC183Q02JA, IC183Q03JA, IC183Q04JA,
+  select(CNT, sex = ST004D01T, SENWT, ESCS, SDLEFF, ICTWKEND, ICTHOME, ICTENQ, IC183Q01JA, IC183Q02JA, IC183Q03JA, IC183Q04JA,
          IC183Q05JA, IC183Q07JA, IC183Q08JA, IC183Q09JA, IC183Q10JA,
          IC183Q12JA, IC183Q13JA, IC183Q14JA, IC183Q15JA, IC183Q16JA, starts_with("IC174"), starts_with("ST355"), starts_with("IC178"), starts_with("IC171"))
 
@@ -67,5 +67,5 @@ pisa22_proc <- pisa22_proc %>% rename("search_info"=IC183Q01JA,
 
 pisa22_proc$sex <- haven::as_factor(pisa22_proc$sex)
 
-saveRDS(pisa22_proc, "input/data/proc_data/pisa22_proc_2.rds")
+saveRDS(pisa22_proc, "pisa22_proc.rds")
 

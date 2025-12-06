@@ -1,0 +1,553 @@
+Mplus VERSION 7 (Linux)
+MUTHEN & MUTHEN
+12/05/2025  11:42 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: AFC uso de TIC para el ocio en el fin de semana
+  DATA:
+    FILE = "mplus_files/ocio.dat";
+  VARIABLE:
+  NAMES = SENWT ocio_1 ocio_2 ocio_3 ocio_4 ocio_5 ocio_6 ocio_7;
+  USEVARIABLES = SENWT ocio_1 ocio_3 ocio_4 ocio_5 ocio_6 ocio_7;
+  CATEGORICAL = ocio_1 ocio_3 ocio_4 ocio_5 ocio_6 ocio_7;
+  WEIGHT = SENWT;
+  MISSING=.;
+
+  ANALYSIS:
+      ESTIMATOR = WLSMV;
+
+  MODEL:
+      ocio BY ocio_1* ocio_3 ocio_4 ocio_5 ocio_6 ocio_7;
+      ocio@1; [ocio@0];
+
+  OUTPUT:
+    SAMPSTAT; STDYX; modindices (ALL); residual;
+
+
+
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  4
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+AFC uso de TIC para el ocio en el fin de semana
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        4896
+
+Number of dependent variables                                    6
+Number of independent variables                                  0
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   OCIO_1      OCIO_3      OCIO_4      OCIO_5      OCIO_6      OCIO_7
+
+Continuous latent variables
+   OCIO
+
+Variables with special functions
+
+  Weight variable       SENWT
+
+Estimator                                                    WLSMV
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Parameterization                                             DELTA
+
+Input data file(s)
+  mplus_files/ocio.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            44
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              OCIO_1        OCIO_3        OCIO_4        OCIO_5        OCIO_6
+              ________      ________      ________      ________      ________
+ OCIO_1         0.987
+ OCIO_3         0.975         0.982
+ OCIO_4         0.971         0.968         0.979
+ OCIO_5         0.977         0.975         0.971         0.985
+ OCIO_6         0.976         0.974         0.970         0.976         0.983
+ OCIO_7         0.975         0.971         0.968         0.975         0.974
+
+
+           Covariance Coverage
+              OCIO_7
+              ________
+ OCIO_7         0.980
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    OCIO_1
+      Category 1    0.192      925.810
+      Category 2    0.181      874.881
+      Category 3    0.245     1182.559
+      Category 4    0.187      903.949
+      Category 5    0.098      475.450
+      Category 6    0.097      466.827
+    OCIO_3
+      Category 1    0.088      423.822
+      Category 2    0.228     1095.558
+      Category 3    0.308     1478.826
+      Category 4    0.208     1000.989
+      Category 5    0.091      437.435
+      Category 6    0.076      364.612
+    OCIO_4
+      Category 1    0.217     1038.544
+      Category 2    0.346     1658.828
+      Category 3    0.212     1017.259
+      Category 4    0.132      630.146
+      Category 5    0.055      262.917
+      Category 6    0.038      181.198
+    OCIO_5
+      Category 1    0.138      666.328
+      Category 2    0.249     1201.575
+      Category 3    0.275     1328.006
+      Category 4    0.178      858.722
+      Category 5    0.094      455.648
+      Category 6    0.065      314.954
+    OCIO_6
+      Category 1    0.253     1216.719
+      Category 2    0.289     1391.152
+      Category 3    0.206      993.481
+      Category 4    0.135      650.341
+      Category 5    0.069      334.234
+      Category 6    0.048      229.438
+    OCIO_7
+      Category 1    0.325     1559.593
+      Category 2    0.250     1200.257
+      Category 3    0.182      875.586
+      Category 4    0.121      578.314
+      Category 5    0.066      316.394
+      Category 6    0.056      268.825
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              OCIO_1$1      OCIO_1$2      OCIO_1$3      OCIO_1$4      OCIO_1$5
+              ________      ________      ________      ________      ________
+      1        -0.872        -0.324         0.299         0.859         1.301
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              OCIO_3$1      OCIO_3$2      OCIO_3$3      OCIO_3$4      OCIO_3$5
+              ________      ________      ________      ________      ________
+      1        -1.351        -0.478         0.317         0.966         1.433
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              OCIO_4$1      OCIO_4$2      OCIO_4$3      OCIO_4$4      OCIO_4$5
+              ________      ________      ________      ________      ________
+      1        -0.783         0.159         0.758         1.324         1.776
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              OCIO_5$1      OCIO_5$2      OCIO_5$3      OCIO_5$4      OCIO_5$5
+              ________      ________      ________      ________      ________
+      1        -1.089        -0.287         0.419         0.996         1.512
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              OCIO_6$1      OCIO_6$2      OCIO_6$3      OCIO_6$4      OCIO_6$5
+              ________      ________      ________      ________      ________
+      1        -0.666         0.104         0.668         1.190         1.668
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              OCIO_7$1      OCIO_7$2      OCIO_7$3      OCIO_7$4      OCIO_7$5
+              ________      ________      ________      ________      ________
+      1        -0.454         0.189         0.698         1.165         1.589
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              OCIO_1        OCIO_3        OCIO_4        OCIO_5        OCIO_6
+              ________      ________      ________      ________      ________
+ OCIO_1
+ OCIO_3         0.450
+ OCIO_4         0.312         0.543
+ OCIO_5         0.325         0.566         0.578
+ OCIO_6         0.291         0.485         0.728         0.566
+ OCIO_7         0.301         0.445         0.671         0.580         0.710
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              OCIO_7
+              ________
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       36
+
+Chi-Square Test of Model Fit
+
+          Value                           1138.032*
+          Degrees of Freedom                     9
+          P-Value                           0.0000
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.160
+          90 Percent C.I.                    0.152  0.168
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                0.958
+          TLI                                0.929
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                          26673.237
+          Degrees of Freedom                    15
+          P-Value                           0.0000
+
+WRMR (Weighted Root Mean Square Residual)
+
+          Value                              3.321
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ OCIO     BY
+    OCIO_1             0.441      0.012     36.418      0.000
+    OCIO_3             0.672      0.008     81.973      0.000
+    OCIO_4             0.834      0.006    150.909      0.000
+    OCIO_5             0.723      0.007     99.781      0.000
+    OCIO_6             0.840      0.005    152.922      0.000
+    OCIO_7             0.803      0.007    118.669      0.000
+
+ Means
+    OCIO               0.000      0.000    999.000    999.000
+
+ Thresholds
+    OCIO_1$1          -0.872      0.023    -37.093      0.000
+    OCIO_1$2          -0.324      0.021    -15.596      0.000
+    OCIO_1$3           0.299      0.021     14.495      0.000
+    OCIO_1$4           0.859      0.023     36.680      0.000
+    OCIO_1$5           1.301      0.028     45.848      0.000
+    OCIO_3$1          -1.351      0.029    -47.317      0.000
+    OCIO_3$2          -0.478      0.021    -22.427      0.000
+    OCIO_3$3           0.317      0.021     15.289      0.000
+    OCIO_3$4           0.966      0.024     39.918      0.000
+    OCIO_3$5           1.433      0.030     47.553      0.000
+    OCIO_4$1          -0.783      0.023    -33.692      0.000
+    OCIO_4$2           0.159      0.020      7.770      0.000
+    OCIO_4$3           0.758      0.023     33.491      0.000
+    OCIO_4$4           1.324      0.028     47.006      0.000
+    OCIO_4$5           1.776      0.038     46.851      0.000
+    OCIO_5$1          -1.089      0.025    -43.375      0.000
+    OCIO_5$2          -0.287      0.021    -13.900      0.000
+    OCIO_5$3           0.419      0.021     19.932      0.000
+    OCIO_5$4           0.996      0.024     40.962      0.000
+    OCIO_5$5           1.512      0.031     48.418      0.000
+    OCIO_6$1          -0.666      0.022    -29.852      0.000
+    OCIO_6$2           0.104      0.020      5.119      0.000
+    OCIO_6$3           0.668      0.022     30.374      0.000
+    OCIO_6$4           1.190      0.026     45.452      0.000
+    OCIO_6$5           1.668      0.035     48.234      0.000
+    OCIO_7$1          -0.454      0.021    -21.217      0.000
+    OCIO_7$2           0.189      0.021      9.227      0.000
+    OCIO_7$3           0.698      0.022     31.620      0.000
+    OCIO_7$4           1.165      0.026     44.669      0.000
+    OCIO_7$5           1.589      0.033     48.139      0.000
+
+ Variances
+    OCIO               1.000      0.000    999.000    999.000
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ OCIO     BY
+    OCIO_1             0.441      0.012     36.418      0.000
+    OCIO_3             0.672      0.008     81.973      0.000
+    OCIO_4             0.834      0.006    150.909      0.000
+    OCIO_5             0.723      0.007     99.781      0.000
+    OCIO_6             0.840      0.005    152.922      0.000
+    OCIO_7             0.803      0.007    118.669      0.000
+
+ Means
+    OCIO               0.000      0.000    999.000    999.000
+
+ Thresholds
+    OCIO_1$1          -0.872      0.023    -37.093      0.000
+    OCIO_1$2          -0.324      0.021    -15.596      0.000
+    OCIO_1$3           0.299      0.021     14.495      0.000
+    OCIO_1$4           0.859      0.023     36.680      0.000
+    OCIO_1$5           1.301      0.028     45.848      0.000
+    OCIO_3$1          -1.351      0.029    -47.317      0.000
+    OCIO_3$2          -0.478      0.021    -22.427      0.000
+    OCIO_3$3           0.317      0.021     15.289      0.000
+    OCIO_3$4           0.966      0.024     39.918      0.000
+    OCIO_3$5           1.433      0.030     47.553      0.000
+    OCIO_4$1          -0.783      0.023    -33.692      0.000
+    OCIO_4$2           0.159      0.020      7.770      0.000
+    OCIO_4$3           0.758      0.023     33.491      0.000
+    OCIO_4$4           1.324      0.028     47.006      0.000
+    OCIO_4$5           1.776      0.038     46.851      0.000
+    OCIO_5$1          -1.089      0.025    -43.375      0.000
+    OCIO_5$2          -0.287      0.021    -13.900      0.000
+    OCIO_5$3           0.419      0.021     19.932      0.000
+    OCIO_5$4           0.996      0.024     40.962      0.000
+    OCIO_5$5           1.512      0.031     48.418      0.000
+    OCIO_6$1          -0.666      0.022    -29.852      0.000
+    OCIO_6$2           0.104      0.020      5.119      0.000
+    OCIO_6$3           0.668      0.022     30.374      0.000
+    OCIO_6$4           1.190      0.026     45.452      0.000
+    OCIO_6$5           1.668      0.035     48.234      0.000
+    OCIO_7$1          -0.454      0.021    -21.217      0.000
+    OCIO_7$2           0.189      0.021      9.227      0.000
+    OCIO_7$3           0.698      0.022     31.620      0.000
+    OCIO_7$4           1.165      0.026     44.669      0.000
+    OCIO_7$5           1.589      0.033     48.139      0.000
+
+ Variances
+    OCIO               1.000      0.000    999.000    999.000
+
+
+R-SQUARE
+
+    Observed                                        Two-Tailed   Residual
+    Variable        Estimate       S.E.  Est./S.E.    P-Value    Variance
+
+    OCIO_1             0.194      0.011     18.209      0.000      0.806
+    OCIO_3             0.452      0.011     40.986      0.000      0.548
+    OCIO_4             0.696      0.009     75.454      0.000      0.304
+    OCIO_5             0.523      0.010     49.890      0.000      0.477
+    OCIO_6             0.705      0.009     76.461      0.000      0.295
+    OCIO_7             0.645      0.011     59.335      0.000      0.355
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.108E-01
+       (ratio of smallest to largest eigenvalue)
+
+
+RESIDUAL OUTPUT
+
+
+     ESTIMATED MODEL AND RESIDUALS (OBSERVED - ESTIMATED)
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              OCIO_1$1      OCIO_1$2      OCIO_1$3      OCIO_1$4      OCIO_1$5
+              ________      ________      ________      ________      ________
+      1        -0.872        -0.324         0.299         0.859         1.301
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              OCIO_3$1      OCIO_3$2      OCIO_3$3      OCIO_3$4      OCIO_3$5
+              ________      ________      ________      ________      ________
+      1        -1.351        -0.478         0.317         0.966         1.433
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              OCIO_4$1      OCIO_4$2      OCIO_4$3      OCIO_4$4      OCIO_4$5
+              ________      ________      ________      ________      ________
+      1        -0.783         0.159         0.758         1.324         1.776
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              OCIO_5$1      OCIO_5$2      OCIO_5$3      OCIO_5$4      OCIO_5$5
+              ________      ________      ________      ________      ________
+      1        -1.089        -0.287         0.419         0.996         1.512
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              OCIO_6$1      OCIO_6$2      OCIO_6$3      OCIO_6$4      OCIO_6$5
+              ________      ________      ________      ________      ________
+      1        -0.666         0.104         0.668         1.190         1.668
+
+
+           Model Estimated Means/Intercepts/Thresholds
+              OCIO_7$1      OCIO_7$2      OCIO_7$3      OCIO_7$4      OCIO_7$5
+              ________      ________      ________      ________      ________
+      1        -0.454         0.189         0.698         1.165         1.589
+
+
+           Residuals for Means/Intercepts/Thresholds
+              OCIO_1$1      OCIO_1$2      OCIO_1$3      OCIO_1$4      OCIO_1$5
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              OCIO_3$1      OCIO_3$2      OCIO_3$3      OCIO_3$4      OCIO_3$5
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              OCIO_4$1      OCIO_4$2      OCIO_4$3      OCIO_4$4      OCIO_4$5
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              OCIO_5$1      OCIO_5$2      OCIO_5$3      OCIO_5$4      OCIO_5$5
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              OCIO_6$1      OCIO_6$2      OCIO_6$3      OCIO_6$4      OCIO_6$5
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Residuals for Means/Intercepts/Thresholds
+              OCIO_7$1      OCIO_7$2      OCIO_7$3      OCIO_7$4      OCIO_7$5
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           Model Estimated Covariances/Correlations/Residual Correlations
+              OCIO_1        OCIO_3        OCIO_4        OCIO_5        OCIO_6
+              ________      ________      ________      ________      ________
+ OCIO_1
+ OCIO_3         0.296
+ OCIO_4         0.368         0.561
+ OCIO_5         0.319         0.486         0.603
+ OCIO_6         0.370         0.565         0.701         0.607
+ OCIO_7         0.354         0.540         0.670         0.581         0.675
+
+
+           Model Estimated Covariances/Correlations/Residual Correlations
+              OCIO_7
+              ________
+
+
+           Residuals for Covariances/Correlations/Residual Correlations
+              OCIO_1        OCIO_3        OCIO_4        OCIO_5        OCIO_6
+              ________      ________      ________      ________      ________
+ OCIO_1
+ OCIO_3         0.154
+ OCIO_4        -0.055        -0.018
+ OCIO_5         0.006         0.080        -0.025
+ OCIO_6        -0.079        -0.080         0.027        -0.042
+ OCIO_7        -0.053        -0.095         0.001        -0.001         0.036
+
+
+           Residuals for Covariances/Correlations/Residual Correlations
+              OCIO_7
+              ________
+
+
+MODEL MODIFICATION INDICES
+
+Minimum M.I. value for printing the modification index    10.000
+
+                            M.I.     E.P.C.  Std E.P.C.  StdYX E.P.C.
+
+ON Statements
+
+OCIO     ON OCIO_4        999.000     0.000      0.000        0.000
+OCIO     ON OCIO_6        999.000     0.000      0.000        0.000
+OCIO     ON OCIO_7        999.000     0.000      0.000        0.000
+OCIO_1   ON OCIO_3        558.154     0.205      0.205        0.205
+OCIO_1   ON OCIO_4         54.813    -0.075     -0.075       -0.075
+OCIO_1   ON OCIO_6        101.575    -0.105     -0.105       -0.105
+OCIO_1   ON OCIO_7         39.485    -0.067     -0.067       -0.067
+OCIO_3   ON OCIO_1        558.086     0.205      0.205        0.205
+OCIO_3   ON OCIO_4         12.645    -0.031     -0.031       -0.031
+OCIO_3   ON OCIO_5        278.183     0.132      0.132        0.132
+OCIO_3   ON OCIO_6        189.910    -0.127     -0.127       -0.127
+OCIO_3   ON OCIO_7        185.208    -0.133     -0.133       -0.133
+OCIO_4   ON OCIO_1         54.857    -0.075     -0.075       -0.075
+OCIO_4   ON OCIO_3         12.653    -0.031     -0.031       -0.031
+OCIO_4   ON OCIO_5         32.197    -0.048     -0.048       -0.048
+OCIO_4   ON OCIO_6        118.146     0.094      0.094        0.094
+OCIO_5   ON OCIO_3        278.171     0.132      0.132        0.132
+OCIO_5   ON OCIO_4         32.189    -0.048     -0.048       -0.048
+OCIO_5   ON OCIO_6         80.641    -0.078     -0.078       -0.078
+OCIO_6   ON OCIO_1        101.641    -0.105     -0.105       -0.105
+OCIO_6   ON OCIO_3        189.952    -0.127     -0.127       -0.127
+OCIO_6   ON OCIO_4        118.138     0.094      0.094        0.094
+OCIO_6   ON OCIO_5         80.660    -0.078     -0.078       -0.078
+OCIO_6   ON OCIO_7        147.038     0.104      0.104        0.104
+OCIO_7   ON OCIO_1         39.523    -0.067     -0.067       -0.067
+OCIO_7   ON OCIO_3        185.244    -0.133     -0.133       -0.133
+OCIO_7   ON OCIO_6        147.044     0.104      0.104        0.104
+
+WITH Statements
+
+OCIO_3   WITH OCIO_1      558.108     0.205      0.205        0.308
+OCIO_4   WITH OCIO_1       54.834    -0.075     -0.075       -0.152
+OCIO_4   WITH OCIO_3       12.639    -0.031     -0.031       -0.076
+OCIO_5   WITH OCIO_3      278.206     0.132      0.132        0.259
+OCIO_5   WITH OCIO_4       32.173    -0.048     -0.048       -0.126
+OCIO_6   WITH OCIO_1      101.604    -0.105     -0.105       -0.216
+OCIO_6   WITH OCIO_3      189.884    -0.127     -0.127       -0.316
+OCIO_6   WITH OCIO_4      118.200     0.094      0.094        0.315
+OCIO_6   WITH OCIO_5       80.615    -0.078     -0.078       -0.207
+OCIO_7   WITH OCIO_1       39.503    -0.067     -0.067       -0.125
+OCIO_7   WITH OCIO_3      185.182    -0.133     -0.133       -0.301
+OCIO_7   WITH OCIO_6      147.104     0.104      0.104        0.321
+
+
+     Beginning Time:  23:42:09
+        Ending Time:  23:42:09
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen

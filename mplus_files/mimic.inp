@@ -1,0 +1,70 @@
+TITLE: Modelo MIMIC determinantes de Autoeficacia General y Especializada
+
+DATA: 
+  FILE = "mplus_files/mimic.dat";
+
+VARIABLE: 
+  NAMES = SENWT sex ESCS ICTENQ ICTHOME ICTWKEND SDLEFF 
+          gen1 gen2 gen3 gen4 gen5 gen6
+          spec1 spec2 spec3; 
+
+  USEVARIABLES = SENWT sex ESCS ICTENQ ICTHOME ICTWKEND SDLEFF 
+                 gen1-gen6 spec1-spec3;
+
+  CATEGORICAL = gen1-gen6 spec1-spec3;
+
+  WEIGHT = SENWT;
+
+  MISSING = .;
+
+ANALYSIS:
+  ESTIMATOR = WLSMV;
+
+MODEL:
+  ! ------------------------------------------------------------------
+  ! 1. MODELO DE MEDIDA
+  ! ------------------------------------------------------------------
+  gen_dse BY gen1* gen2 
+             gen3@1  ! Métrica al ítem con mayor loading
+             gen4-gen6;
+
+  spec_dse BY spec1* spec2@1 ! Métrica al ítem con mayor loading
+              spec3;
+
+  gen1 WITH gen2;
+  
+  gen_dse WITH spec_dse;
+
+  ! ------------------------------------------------------------------
+  ! 2. MODELO ESTRUCTURAL
+  ! ------------------------------------------------------------------
+
+  ICTWKEND ON sex; ! efecto sexo en el ocio
+  SDLEFF ON ESCS; ! efecto estatus en autonomía
+
+  ! (Opcional: Controlar mediadores por otras variables si tu teoría lo pide, 
+  ! por ahora dejamos lo estricto de tus hipótesis)
+  
+  gen_dse ON SDLEFF; ! efecto autonomía en ADG
+  spec_dse ON ICTWKEND; ! efecto ocio en ADE
+  gen_dse spec_dse ON ICTHOME; ! efecto acceso en AD
+  gen_dse spec_dse ON ICTENQ; ! efecto aprendizaje en ambos (hipótesis no significancia)
+  gen_dse ON ESCS sex; ! efecto directo sexo y estatus en ADG
+  spec_dse ON sex ESCS; ! efecto directo sexo y estatus en ADE
+! controles (no relacionados con las hipótesis)
+  gen_dse ON ICTWKEND;
+  spec_dse ON SDLEFF;
+
+  ! ------------------------------------------------------------------
+  ! 3. EFECTOS INDIRECTOS
+  ! ------------------------------------------------------------------
+MODEL INDIRECT:
+
+  spec_dse IND sex; ! h1
+  gen_dse IND ESCS; ! h2
+
+OUTPUT:
+  SAMPSTAT;
+  STDY;
+  MODINDICES (10);
+  RESIDUAL;
