@@ -41,9 +41,6 @@ MODEL:
 
   ICTWKEND ON sex; ! efecto sexo en el ocio
   SDLEFF ON ESCS; ! efecto estatus en autonomía
-
-  ! (Opcional: Controlar mediadores por otras variables si tu teoría lo pide, 
-  ! por ahora dejamos lo estricto de tus hipótesis)
   
   gen_dse ON SDLEFF; ! efecto autonomía en ADG
   spec_dse ON ICTWKEND; ! efecto ocio en ADE
